@@ -1,0 +1,211 @@
+@use "sass:color";
+@import "../../../styles/variables.scss";
+@import "../../../styles/typography.scss";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $nav-margin-bottom;
+  padding: 0.5rem 0;
+  box-shadow: $header-shadow;
+  position: relative;
+  z-index: 10;
+}
+
+.logo {
+  width: 180px;
+  height: auto;
+
+  @media (max-width: $mobile-breakpoint) {
+    width: 140px;
+  }
+}
+
+// Mobile menu button - hamburger icon
+.mobileMenuButton {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 20;
+  padding: 15px 10px;
+  position: relative;
+
+  @media (max-width: $mobile-breakpoint) {
+    display: block;
+  }
+
+  .hamburgerIcon {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: $text-color;
+    border-radius: 2px;
+    position: relative;
+    transition: all 0.3s ease;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      width: 25px;
+      height: 3px;
+      background-color: $text-color;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+      left: 0;
+    }
+
+    &::before {
+      top: -8px;
+    }
+
+    &::after {
+      bottom: -8px;
+    }
+  }
+
+  &.open {
+    .hamburgerIcon {
+      background-color: transparent;
+
+      &::before {
+        transform: rotate(45deg);
+        top: 0;
+      }
+
+      &::after {
+        transform: rotate(-45deg);
+        bottom: 0;
+      }
+    }
+  }
+}
+
+// Mobile menu container
+.mobileMenuContainer {
+  display: none;
+
+  @media (max-width: $mobile-breakpoint) {
+    &.active {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: white;
+      z-index: 10;
+      padding-top: 80px;
+      padding-bottom: 60px;
+    }
+  }
+}
+
+// Overlay for mobile menu
+.overlay {
+  display: none;
+
+  @media (max-width: $mobile-breakpoint) {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9;
+  }
+}
+
+.navLinks {
+  display: flex;
+  gap: 2.5rem;
+  margin-right: auto;
+  margin-left: 3rem;
+
+  a {
+    @include base-text;
+    color: $text-color;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+
+  @media (max-width: $mobile-breakpoint) {
+    display: none;
+    position: static;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 2rem;
+
+    &.active {
+      display: flex;
+    }
+
+    a {
+      padding: 1rem 0;
+      font-size: 1.25rem;
+    }
+  }
+}
+
+.accountSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .loginLink {
+    @include base-text;
+    color: $gray-500;
+    text-decoration: none;
+  }
+
+  @media (max-width: $mobile-breakpoint) {
+    display: none;
+    flex-direction: column;
+    position: static;
+    gap: 1.5rem;
+    padding: 2rem;
+    align-items: center;
+    margin-top: auto;
+    margin-bottom: 4rem;
+
+    &.active {
+      display: flex;
+    }
+
+    .loginLink {
+      font-size: 1rem;
+    }
+  }
+}
+
+.signInBtn {
+  @include base-text;
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: color.adjust($primary-color, $lightness: -10%);
+  }
+
+  @media (max-width: $mobile-breakpoint) {
+    padding: 0.75rem 2rem;
+    width: 200px;
+  }
+}
