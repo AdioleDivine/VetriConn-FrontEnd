@@ -1,0 +1,238 @@
+@use "sass:color";
+@import "../../../../styles/variables.scss";
+@import "../../../../styles/typography.scss";
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  // font-family: 'Inter', sans-serif;
+  @include base-text
+}
+
+// === LEFT SIDE ===
+.left {
+  flex: 1;
+  background-color: #f9f9f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: left;
+
+  h1 {
+    @include heading-2;
+    margin-bottom: 1rem;
+    color: $text-color;
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 1.2; 
+
+    span {
+      color: $primary-color;
+    }
+  }
+  .dottedBox7 {
+    position: absolute;
+    top: 15rem;
+    left: 24rem;
+    width: 120px;
+    height: auto;
+    z-index: 0;
+    opacity: 0.6;
+  }
+  .dottedBox9 {
+    position: absolute;
+    top: 40rem;
+    left: 13rem;
+    width: 120px;
+    height: auto;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+}
+
+// === RIGHT SIDE ===
+.right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  background-color: #fff;
+
+  .dottedBox4 {
+    position: absolute;
+    top: 2rem;
+    left: 72rem;
+    // width: 120px;
+    height: auto;
+    z-index: 0;
+    opacity: 0.6;
+  }
+  .dottedBox3 {
+    position: absolute;
+    top: 40rem;
+    left: 74rem;
+    // width: 120px;
+    height: auto;
+    z-index: 0;
+    opacity: 0.6;
+  }
+}
+
+// === FORM BOX ===
+.formBox {
+  width: 100%;
+  max-width: 500px;
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+
+    a {
+      color: $primary-color;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  }
+    form label {
+    display: block;
+    font-size: 0.85rem;
+    color: #666; 
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+  }
+
+}
+
+
+// === ROLE SELECTION ===
+.roleText {
+  font-weight: 600;
+  margin: 1rem 0 0.5rem;
+}
+
+.roleButtons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.roleButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; // gap between radio circle and text
+  border: 2px solid #ccc;
+  background-color: #fff;
+  padding: 1rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem; // reduced font size
+  color: #333;
+  transition: all 0.3s ease;
+  width: 100%;
+
+  input[type='radio'] {
+    accent-color: $primary-color;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+  }
+
+  span {
+    font-size: 0.9rem; // slightly smaller text
+  }
+
+  &:hover {
+    border-color: $primary-color;
+  }
+}
+
+.active {
+  border-color: $primary-color;
+  background-color: #fff0f0;
+  color: $primary-color;
+}
+
+// === INPUTS ===
+.input {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  outline: none;
+
+  &:focus {
+    border-color: $primary-color;
+  }
+}
+
+// === CHECKBOX ===
+.checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+
+  input {
+    appearance: none;
+    width: 1.2rem;
+    height: 1.2rem;
+    border: 2px solid $primary-color;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+
+    &:checked::before {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 4px;
+      width: 4px;
+      height: 8px;
+      border: solid $primary-color;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+  }
+
+  label {
+    a {
+      color: $primary-color;
+      text-decoration: none;
+    }
+  }
+}
+
+// === SUBMIT BUTTON ===
+.button {
+  background-color: $primary-color;
+  color: white;
+  padding: 0.8rem 1.8rem; // smaller size
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: inline-block;
+  margin-left: auto; // push to the right
+  margin-top: 0.5rem;
+
+  &:hover {
+    background-color: #d32f2f;
+  }
+}
+
+
