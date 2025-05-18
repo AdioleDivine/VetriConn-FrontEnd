@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import styles from "./index.module.scss";
 import DottedBox7 from "@/public/images/dotted_box_7.svg";
@@ -26,7 +25,7 @@ export default function SignIn() {
           <h2>Sign In</h2>
           <p>
             <b>
-              Don't have an account? <a href="/signup">Sign up</a>
+              Don&apos;t have an account? <a href="/signup">Sign up</a>
             </b>
           </p>
           <p className={styles.roleText}>Who are you?</p>
@@ -86,7 +85,7 @@ export default function SignIn() {
               </label>
             </div>
 
-            <button type="submit" className={styles.button}>
+            <button type="submit" className={styles.button  }>
               Sign In
             </button>
           </form>

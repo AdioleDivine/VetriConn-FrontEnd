@@ -1,0 +1,160 @@
+@import "../../../styles/variables.scss";
+@import "../../../styles/typography.scss";
+
+.card {
+  background: #f4f4f4;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logoRow {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.logo {
+  border-radius: 16px !important;
+  overflow: visible;
+  background: #f2f2f2;
+
+  :global(.image) {
+    object-fit: cover;
+    border-radius: 16px !important;
+  }
+
+  :global(.initials) {
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+}
+
+.bookmark {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background 0.2s;
+  z-index: 2;
+
+  &:hover {
+    background: #f2f2f2;
+    .star {
+      color: #e53e3e;
+    }
+  }
+}
+
+.star {
+  font-size: 22px;
+  color: #bdbdbd;
+  transition: color 0.2s;
+}
+
+.role {
+  @include heading-2;
+  text-align: center;
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+}
+
+.tagsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.tag {
+  padding: 4px 14px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  background: #e0e0e0;
+  color: $text-color;
+}
+
+// Example tag color variants
+.flutter {
+  background: #e7f5ff;
+  color: #1c7ed6;
+}
+.mobile {
+  background: #f3f0ff;
+  color: #7950f2;
+}
+.ios {
+  background: #e6fcf5;
+  color: #12b886;
+}
+.android {
+  background: #fff9db;
+  color: #fab005;
+}
+.dart {
+  background: #e3fafc;
+  color: #15aabf;
+}
+
+.section {
+  width: 100%;
+  margin-bottom: 1.2rem;
+}
+
+.sectionTitle {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 0.3rem;
+  color: $text-color;
+}
+
+.description {
+  font-family: Arial;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: $text-color;
+  margin-bottom: 0.5rem;
+}
+
+.list {
+  margin: 0 0 0 1.2rem;
+  padding: 0;
+  font-family: Arial;
+  font-size: 15px;
+  color: $text-color;
+  line-height: 1.4;
+}
+
+.cta {
+  margin: 1.5rem auto 0 auto;
+  display: block;
+  background: #e53e3e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 2.5rem;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: darken(#e53e3e, 10%);
+  }
+}

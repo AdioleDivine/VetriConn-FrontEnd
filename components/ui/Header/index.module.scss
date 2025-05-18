@@ -199,7 +199,7 @@
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s;
-
+  display: inline-block;
   &:hover {
     background-color: color.adjust($primary-color, $lightness: -10%);
   }

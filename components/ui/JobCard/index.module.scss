@@ -25,17 +25,20 @@
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
-  background-color: #f0f0f0;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  color: #666;
-  font-size: 16px;
+  border-radius: 8px !important;
   margin-right: 12px;
+  flex-shrink: 0;
+  overflow: visible;
+
+  :global(.image) {
+    border-radius: 8px !important;
+  }
+
+  :global(.initials) {
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+  }
 }
 
 .info {
@@ -71,7 +74,7 @@
     background-color: rgba(0, 0, 0, 0.05);
 
     .star {
-      color: #ffd700;
+      color: $primary-color;
     }
   }
 }
@@ -113,23 +116,22 @@
 
 // Tag color variants
 .flutter {
-  background-color: #1FA2FF80;
+  background-color: #1fa2ff80;
   // background-color: #1c7ed6;
- 
 }
 
 .mobile {
-  background-color: #A985FF80;
+  background-color: #a985ff80;
   // background-color: #7950f2;
 }
 
 .ios {
-  background-color: #ABF7B180;
+  background-color: #abf7b180;
   //background-color: #12b886;
 }
 
 .android {
-  background-color: #FFD70080;
+  background-color: #ffd70080;
   // background-color: #fab005;
 }
 
@@ -141,5 +143,76 @@
   background-color: #f88282;
 }
 .dart {
-   background-color: #4E9AD480;
+  background-color: #4e9ad480;
+}
+
+.tagsRowWithArrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.sidebar {
+  max-width: 340px;
+  box-shadow: none;
+  transition: background 0.2s;
+  cursor: pointer;
+  position: relative;
+  border-left: none;
+  &:hover {
+    background: color.scale($primary-color, $lightness: 95%);
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 12px;
+      bottom: 12px;
+      width: 4px;
+      height: calc(100% - 24px);
+      background: color.scale($primary-color, $lightness: 25%);
+    }
+  }
+  &.selected {
+    background: color.scale($primary-color, $lightness: 95%);
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 12px;
+      bottom: 12px;
+      width: 4px;
+      height: calc(100% - 24px);
+      background: color.scale($primary-color, $lightness: 25%);
+    }
+  }
+}
+
+.selected {
+  border-left: none;
+}
+
+.arrowBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-left: 8px;
+  transition: background 0.2s;
+  &:hover {
+    background: #f0f0f0;
+    .arrowIcon {
+      color: $primary-color;
+    }
+  }
+}
+
+.arrowIcon {
+  font-size: 18px;
+  color: #bbb;
+  transition: color 0.2s;
 }

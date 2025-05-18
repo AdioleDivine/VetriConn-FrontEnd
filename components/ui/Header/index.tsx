@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import styles from "./index.module.scss";
 import Logo from "@/public/images/logo_1.svg";
+import Link from "next/link";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,17 +41,19 @@ export const Header = () => {
 
       {/* Desktop navigation */}
       <div className={styles.navLinks}>
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Jobs</a>
+        <Link href="/">Home</Link>
+        <Link href="/about">About</Link>
+        <Link href="/jobs">Jobs</Link>
       </div>
 
       {/* Account section for desktop */}
       <div className={styles.accountSection}>
-        <a href="#" className={styles.loginLink}>
+        <Link href="/signin" className={styles.loginLink}>
           Already have an account?
-        </a>
-        <button className={styles.signInBtn}>Sign In</button>
+        </Link>
+        <Link href="/signin" className={styles.signInBtn}>
+          Sign In
+        </Link>
       </div>
 
       {/* Mobile menu container */}
@@ -62,9 +65,9 @@ export const Header = () => {
         <div
           className={`${styles.navLinks} ${isMenuOpen ? styles.active : ""}`}
         >
-          <a href="#">Home</a>
-          <a href="#">About</a>
-          <a href="#">Jobs</a>
+          <Link href="/">Home</Link>
+          <Link href="/about">About</Link>
+          <Link href="/jobs">Jobs</Link>
         </div>
 
         <div
@@ -72,10 +75,12 @@ export const Header = () => {
             isMenuOpen ? styles.active : ""
           }`}
         >
-          <a href="#" className={styles.loginLink}>
+          <Link href="/signin" className={styles.loginLink}>
             Already have an account?
-          </a>
-          <button className={styles.signInBtn}>Sign In</button>
+          </Link>
+          <Link href="/signin" className={styles.signInBtn}>
+            Sign In
+          </Link>
         </div>
       </div>
 

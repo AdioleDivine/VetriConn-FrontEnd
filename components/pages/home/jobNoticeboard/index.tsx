@@ -1,4 +1,4 @@
-import { JobCard } from "@/components/ui/JobCard";
+import JobCard from "@/components/ui/JobCard";
 import styles from "./index.module.scss";
 
  const JobNoticeboard = () => {
