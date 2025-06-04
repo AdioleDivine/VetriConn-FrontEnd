@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState, useMemo } from "react";
 import JobCard from "@/components/ui/JobCard";
 import jobs from "@/lib/jobs";
