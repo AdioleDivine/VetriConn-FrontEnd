@@ -1,0 +1,93 @@
+"use client";
+import { useState, useEffect } from "react";
+import styles from "./index.module.scss";
+import Logo from "@/public/images/logo_1.svg";
+import Link from "next/link";
+
+export const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Prevent scrolling when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isMenuOpen]);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  return (
+    <nav className={styles.header}>
+      <Logo className={styles.logo} />
+
+      {/* Mobile hamburger menu */}
+      <button
+        className={`${styles.mobileMenuButton} ${
+          isMenuOpen ? styles.open : ""
+        }`}
+        onClick={toggleMenu}
+        aria-label="Toggle menu"
+      >
+        <span className={styles.hamburgerIcon}></span>
+      </button>
+
+      {/* Desktop navigation */}
+      <div className={styles.navLinks}>
+        <Link href="/">Home</Link>
+        <Link href="/about">About</Link>
+        <Link href="/jobs">Jobs</Link>
+      </div>
+
+      {/* Account section for desktop */}
+      <div className={styles.accountSection}>
+        <Link href="/signin" className={styles.loginLink}>
+          Already have an account?
+        </Link>
+        <Link href="/signin" className={styles.signInBtn}>
+          Sign In
+        </Link>
+      </div>
+
+      {/* Mobile menu container */}
+      <div
+        className={`${styles.mobileMenuContainer} ${
+          isMenuOpen ? styles.active : ""
+        }`}
+      >
+        <div
+          className={`${styles.navLinks} ${isMenuOpen ? styles.active : ""}`}
+        >
+          <Link href="/">Home</Link>
+          <Link href="/about">About</Link>
+          <Link href="/jobs">Jobs</Link>
+        </div>
+
+        <div
+          className={`${styles.accountSection} ${
+            isMenuOpen ? styles.active : ""
+          }`}
+        >
+          <Link href="/signin" className={styles.loginLink}>
+            Already have an account?
+          </Link>
+          <Link href="/signin" className={styles.signInBtn}>
+            Sign In
+          </Link>
+        </div>
+      </div>
+
+      {/* Overlay for mobile menu */}
+      {isMenuOpen && (
+        <div className={styles.overlay} onClick={toggleMenu}></div>
+      )}
+    </nav>
+  );
+};

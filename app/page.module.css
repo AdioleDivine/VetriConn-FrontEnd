@@ -34,6 +34,24 @@
   grid-row-start: 2;
 }
 
+.infoSections {
+  padding: 0.5rem 5% 2rem;
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 3rem 0;
+}
+
+@media (max-width: 900px) {
+  .infoSections {
+    flex-direction: column;
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+}
+
 .main ol {
   font-family: var(--font-geist-mono);
   padding-left: 0;
@@ -68,10 +86,7 @@
   padding: 0 20px;
   border: none;
   border: 1px solid transparent;
-  transition:
-    background 0.2s,
-    color 0.2s,
-    border-color 0.2s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
   cursor: pointer;
   display: flex;
   align-items: center;

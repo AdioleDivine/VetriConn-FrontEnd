@@ -1,0 +1,21 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: transparent;
+  z-index: 1000;
+}
+.popover {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+  padding: 1.2rem 1rem 1rem 1rem;
+  min-width: 220px;
+  max-width: 90vw;
+  position: absolute;
+  z-index: 1001;
+}
+.close {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+}

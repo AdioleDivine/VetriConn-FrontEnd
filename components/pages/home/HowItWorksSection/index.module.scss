@@ -1,0 +1,47 @@
+.howItWorksContainer {
+  min-width: 360px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+}
+
+.benefitItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  margin-bottom: 2.2rem;
+
+  .icon {
+    font-size: 2rem;
+    margin-top: 0.2rem;
+    color: #111;
+  }
+  strong {
+    font-size: 1.35rem;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  p {
+    color: #666;
+    font-size: 1.08rem;
+    line-height: 1.7;
+    margin: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .howItWorksContainer {
+    max-width: 100%;
+    padding: 2rem 1rem;
+  }
+  .benefitItem {
+    flex-direction: row;
+    gap: 1rem;
+  }
+}
