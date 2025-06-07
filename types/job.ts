@@ -12,4 +12,4 @@ export interface Job {
 }
 
 // Re-export Tag for backward compatibility
-export { Tag };
+export type { Tag };

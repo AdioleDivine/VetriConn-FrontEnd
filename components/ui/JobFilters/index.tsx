@@ -1,10 +1,17 @@
-import React from "react";
+import React, { SetStateAction } from "react";
 import styles from "./index.module.scss";
 import { FaSearch, FaMapMarkerAlt, FaBriefcase } from "react-icons/fa";
+import { Job } from "@/types/job";
 
-function getUniqueTagValues(jobs, key) {
-  // For demo, infer by tag name (in real app, use explicit fields)
-  const values = new Set();
+interface Filters {
+  location: string;
+  experience: string;
+  remote: string;
+  search: string;
+}
+
+function getUniqueTagValues(jobs: Job[], key: string): string[] {
+  const values = new Set<string>();
   jobs.forEach((job) => {
     job.tags.forEach((tag) => {
       if (tag.name.toLowerCase().includes(key)) {
@@ -17,7 +24,15 @@ function getUniqueTagValues(jobs, key) {
 
 const remoteOptions = ["Remote", "Onsite", "Hybrid"];
 
-const JobFilters = ({ jobs, filters, setFilters }) => {
+const JobFilters = ({
+  jobs,
+  filters,
+  setFilters,
+}: {
+  jobs: Job[];
+  filters: Filters;
+  setFilters: React.Dispatch<SetStateAction<Filters>>;
+}) => {
   const locationOptions = getUniqueTagValues(jobs, "ottawa"); // Example: location
   const experienceOptions = getUniqueTagValues(jobs, "full-time"); // Example: experience
 

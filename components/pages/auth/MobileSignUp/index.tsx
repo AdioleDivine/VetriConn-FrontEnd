@@ -76,7 +76,7 @@ export default function MobileSignUp() {
       ) : (
         <div className={styles.signupForm}>
           <h1 className={styles.title}>Sign Up</h1>
-          <p className={styles.subtitle}>Let's get you started</p>
+          <p className={styles.subtitle}>Let&apos;s get you started</p>
 
           <form className={styles.form}>
             <div className={styles.inputGroup}>
