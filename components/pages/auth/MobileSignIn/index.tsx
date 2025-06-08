@@ -21,7 +21,7 @@ export default function MobileSignIn() {
       <DottedBox7 className={styles.dottedBox7} />
 
         <div className={styles.signinForm}>
-          <h1 className={styles.title}>Let's Sign You In</h1>
+          <h1 className={styles.title}>Let&apos;s Sign You In</h1>
           <p className={styles.subtitle}>Welcome back</p>
 
           <form className={styles.form}>

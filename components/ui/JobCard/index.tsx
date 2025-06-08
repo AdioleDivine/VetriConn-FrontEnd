@@ -84,7 +84,6 @@ const JobCard: React.FC<JobCardProps> = ({
             className={styles.arrowBtn}
             onClick={(e) => {
               e.stopPropagation();
-              onSelect && onSelect();
             }}
             aria-label="Select job"
           >

@@ -1,12 +1,12 @@
 @use "sass:color";
-@import "../../../../styles/variables.scss";
-@import "../../../../styles/typography.scss";
+@use "../../../../styles/variables.scss" as vars;
+@use "../../../../styles/typography.scss" as typo;
 
 .container {
   display: flex;
   min-height: 100vh;
   // font-family: 'Inter', sans-serif;
-  @include base-text
+  @include typo.base-text;
 }
 
 // === LEFT SIDE ===
@@ -20,15 +20,15 @@
   text-align: left;
 
   h1 {
-    @include heading-2;
+    @include typo.heading-2;
     margin-bottom: 1rem;
-    color: $text-color;
+    color: vars.$text-color;
     font-size: 2.5rem;
     font-weight: 600;
-    line-height: 1.2; 
+    line-height: 1.2;
 
     span {
-      color: $primary-color;
+      color: vars.$primary-color;
     }
   }
   .dottedBox7 {
@@ -49,7 +49,6 @@
     z-index: 0;
     opacity: 0.6;
   }
-
 }
 
 // === RIGHT SIDE ===
@@ -96,21 +95,19 @@
     margin-bottom: 1rem;
 
     a {
-      color: $primary-color;
+      color: vars.$primary-color;
       text-decoration: none;
       font-weight: bold;
     }
   }
-    form label {
+  form label {
     display: block;
     font-size: 0.85rem;
-    color: #666; 
+    color: #666;
     margin-bottom: 0.3rem;
     font-weight: 500;
   }
-
 }
-
 
 // === ROLE SELECTION ===
 .roleText {
@@ -139,8 +136,8 @@
   transition: all 0.3s ease;
   width: 100%;
 
-  input[type='radio'] {
-    accent-color: $primary-color;
+  input[type="radio"] {
+    accent-color: vars.$primary-color;
     width: 14px;
     height: 14px;
     cursor: pointer;
@@ -151,14 +148,14 @@
   }
 
   &:hover {
-    border-color: $primary-color;
+    border-color: vars.$primary-color;
   }
 }
 
 .active {
-  border-color: $primary-color;
+  border-color: vars.$primary-color;
   background-color: #fff0f0;
-  color: $primary-color;
+  color: vars.$primary-color;
 }
 
 // === INPUTS ===
@@ -173,7 +170,7 @@
   outline: none;
 
   &:focus {
-    border-color: $primary-color;
+    border-color: vars.$primary-color;
   }
 }
 
@@ -189,7 +186,7 @@
     appearance: none;
     width: 1.2rem;
     height: 1.2rem;
-    border: 2px solid $primary-color;
+    border: 2px solid vars.$primary-color;
     border-radius: 4px;
     cursor: pointer;
     position: relative;
@@ -201,7 +198,7 @@
       left: 4px;
       width: 4px;
       height: 8px;
-      border: solid $primary-color;
+      border: solid vars.$primary-color;
       border-width: 0 2px 2px 0;
       transform: rotate(45deg);
     }
@@ -209,7 +206,7 @@
 
   label {
     a {
-      color: $primary-color;
+      color: vars.$primary-color;
       text-decoration: none;
     }
   }
@@ -217,7 +214,7 @@
 
 // === SUBMIT BUTTON ===
 .button {
-  background-color: $primary-color;
+  background-color: vars.$primary-color;
   color: white;
   padding: 0.8rem 1.8rem; // smaller size
   border: none;
@@ -234,5 +231,3 @@
     background-color: #d32f2f;
   }
 }
-
-

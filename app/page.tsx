@@ -1,8 +1,8 @@
-import { HeroSection } from "@/components/pages/home/HeroSection";
+// import JobNoticeboard from "@/components/pages/home/jobNoticeboard";
+// import TestimonialsSection from "@/components/pages/home/TestimonialsSection";
 import styles from "./page.module.css";
-import JobNoticeboard from "@/components/pages/home/jobNoticeboard";
+import { HeroSection } from "@/components/pages/home/HeroSection";
 import Footer from "@/components/ui/Footer";
-import TestimonialsSection from "@/components/pages/home/TestimonialsSection";
 import { AboutSection } from "@/components/pages/home/AboutSection";
 import { HowItWorksSection } from "@/components/pages/home/HowItWorksSection";
 import  ContactSection  from "@/components/pages/home/ContactSection";

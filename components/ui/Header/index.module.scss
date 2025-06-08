@@ -1,14 +1,14 @@
 @use "sass:color";
-@import "../../../styles/variables.scss";
-@import "../../../styles/typography.scss";
+@use "../../../styles/variables.scss" as vars;
+@use "../../../styles/typography.scss" as typo;
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: $nav-margin-bottom;
+  margin-bottom: vars.$nav-margin-bottom;
   padding: 0.5rem 0;
-  box-shadow: $header-shadow;
+  box-shadow: vars.$header-shadow;
   position: relative;
   z-index: 10;
 }
@@ -17,7 +17,7 @@
   width: 180px;
   height: auto;
 
-  @media (max-width: $mobile-breakpoint) {
+  @media (max-width: vars.$mobile-breakpoint) {
     width: 140px;
   }
 }
@@ -32,7 +32,7 @@
   padding: 15px 10px;
   position: relative;
 
-  @media (max-width: $mobile-breakpoint) {
+  @media (max-width: vars.$mobile-breakpoint) {
     display: block;
   }
 
@@ -40,7 +40,7 @@
     display: block;
     width: 25px;
     height: 3px;
-    background-color: $text-color;
+    background-color: vars.$text-color;
     border-radius: 2px;
     position: relative;
     transition: all 0.3s ease;
@@ -51,7 +51,7 @@
       position: absolute;
       width: 25px;
       height: 3px;
-      background-color: $text-color;
+      background-color: vars.$text-color;
       border-radius: 2px;
       transition: all 0.3s ease;
       left: 0;
@@ -87,7 +87,7 @@
 .mobileMenuContainer {
   display: none;
 
-  @media (max-width: $mobile-breakpoint) {
+  @media (max-width: vars.$mobile-breakpoint) {
     &.active {
       display: flex;
       flex-direction: column;
@@ -110,7 +110,7 @@
 .overlay {
   display: none;
 
-  @media (max-width: $mobile-breakpoint) {
+  @media (max-width: vars.$mobile-breakpoint) {
     display: block;
     position: fixed;
     top: 0;
@@ -125,21 +125,21 @@
 .navLinks {
   display: flex;
   gap: 2.5rem;
-  margin-right: auto;
-  margin-left: 3rem;
+  margin-left: auto;
+  margin-right: 2rem;
 
   a {
-    @include base-text;
-    color: $text-color;
+    @include typo.base-text;
+    color: vars.$text-color;
     text-decoration: none;
     transition: color 0.2s;
 
     &:hover {
-      color: $primary-color;
+      color: vars.$primary-color;
     }
   }
 
-  @media (max-width: $mobile-breakpoint) {
+  @media (max-width: vars.$mobile-breakpoint) {
     display: none;
     position: static;
     flex-direction: column;
@@ -163,14 +163,16 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  // display: none;
+  //remove this section probably
 
   .loginLink {
-    @include base-text;
-    color: $gray-500;
+    @include typo.base-text;
+    color: vars.$gray-500;
     text-decoration: none;
   }
 
-  @media (max-width: $mobile-breakpoint) {
+  @media (max-width: vars.$mobile-breakpoint) {
     display: none;
     flex-direction: column;
     position: static;
@@ -191,8 +193,8 @@
 }
 
 .signInBtn {
-  @include base-text;
-  background-color: $primary-color;
+  @include typo.base-text;
+  background-color: vars.$primary-color;
   color: white;
   border: none;
   padding: 0.5rem 1.5rem;
@@ -201,10 +203,10 @@
   transition: all 0.2s;
   display: inline-block;
   &:hover {
-    background-color: color.adjust($primary-color, $lightness: -10%);
+    background-color: color.adjust(vars.$primary-color, vars.$lightness: -10%);
   }
 
-  @media (max-width: $mobile-breakpoint) {
+  @media (max-width: vars.$mobile-breakpoint) {
     padding: 0.75rem 2rem;
     width: 200px;
   }

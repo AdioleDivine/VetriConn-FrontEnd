@@ -47,14 +47,14 @@ export const Header = () => {
       </div>
 
       {/* Account section for desktop */}
-      <div className={styles.accountSection}>
+      {/* <div className={styles.accountSection}>
         <Link href="/signin" className={styles.loginLink}>
           Already have an account?
         </Link>
         <Link href="/signin" className={styles.signInBtn}>
           Sign In
         </Link>
-      </div>
+      </div> */}
 
       {/* Mobile menu container */}
       <div
@@ -68,19 +68,6 @@ export const Header = () => {
           <Link href="/">Home</Link>
           <Link href="/about">About</Link>
           <Link href="/jobs">Jobs</Link>
-        </div>
-
-        <div
-          className={`${styles.accountSection} ${
-            isMenuOpen ? styles.active : ""
-          }`}
-        >
-          <Link href="/signin" className={styles.loginLink}>
-            Already have an account?
-          </Link>
-          <Link href="/signin" className={styles.signInBtn}>
-            Sign In
-          </Link>
         </div>
       </div>
 
