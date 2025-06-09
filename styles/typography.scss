@@ -1,7 +1,7 @@
 // Typography mixins for reuse across components
 
 @mixin base-text {
-  font-family: Arial;
+  font-family: var(--font-open-sans), "Open Sans", sans-serif;
   font-weight: 400;
   font-size: 17px;
   line-height: 100%;
@@ -17,7 +17,7 @@
 }
 
 @mixin heading-2 {
-  font-family: var(--font-open-sans), "Open Sans", sans-serif;
+  font-family: var(--font-lato), "Lato", sans-serif;
   font-weight: 700;
   font-size: 25px;
   line-height: 100%;
@@ -25,7 +25,7 @@
 }
 
 @mixin subtitle {
-  font-family: var(--font-lato), "Lato", sans-serif;
+  font-family: var(--font-open-sans), "Open Sans", sans-serif;
   font-weight: 400;
   font-size: 1.25rem;
   line-height: 150%;

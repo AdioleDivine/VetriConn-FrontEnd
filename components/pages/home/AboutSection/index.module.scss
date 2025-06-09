@@ -1,18 +1,21 @@
+@use "../../../../styles/typography.scss" as typo;
+
 .aboutContainer {
   background: #fcfcfc;
   border-radius: 16px;
   padding: 2.5rem 2rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-  max-width: 800px;
+  max-width: 560px;
   margin: 0 auto;
 
   h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
+    @include typo.heading-1;
     margin-bottom: 1.5rem;
   }
+
   p {
-    font-size: 1.1rem;
+    @include typo.base-text;
+    color: #666;
     line-height: 1.7;
     margin-bottom: 1.2rem;
   }
