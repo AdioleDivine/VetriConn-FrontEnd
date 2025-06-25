@@ -1,11 +1,12 @@
+@use "../../../../styles/typography.scss" as typo;
+
 .howItWorksContainer {
   min-width: 360px;
   margin: 0 auto;
   padding: 1.5rem 1rem;
 
   h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
+    @include typo.heading-1;
     margin-bottom: 2rem;
   }
 }
@@ -22,14 +23,13 @@
     color: #111;
   }
   strong {
-    font-size: 1.35rem;
-    font-weight: 700;
+    @include typo.heading-2;
     display: block;
     margin-bottom: 0.5rem;
   }
   p {
+    @include typo.base-text;
     color: #666;
-    font-size: 1.08rem;
     line-height: 1.7;
     margin: 0;
   }
