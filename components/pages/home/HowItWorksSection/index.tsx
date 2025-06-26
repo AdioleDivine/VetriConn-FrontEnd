@@ -5,17 +5,17 @@ const benefits = [
   {
     title: "More Convenient",
     description:
-      "Life is complicated. We use innovation to simplify it. From using artificial intelligence to learn property dimensions to adding a 3D property interface that lets you select which areas to shovel, forstix was designed to make snow removal simpler. By doing more, the app lets you do less.",
+      "VetriConn’s user-friendly platform makes it easy to create a profile and apply for jobs, saving time and simplifying the entire process.",
   },
   {
     title: "More Connected",
     description:
-      "Our provider app – Forstix – unlocks the true potential of an on-demand platform. Job requests are sent to a central server and offered to Forstixers based on their availability, real-time location, and other factors. So don't worry about finding an optimal provider – the app does it for you.",
+      "Our provider app, Forstix, enhances the on-demand experience by automatically matching job requests with available Forstixers based on real-time location, availability, and other smart criteria—so you don’t have to search; the app finds the right match for you.",
   },
   {
     title: "Stronger Communities",
     description:
-      "We love technology. But people are our true passion. The app brings local communities together to overcome snow. By using the app, you gain back valuable time. Your neighbors serving as Forstix gain additional income. Neighbors helping neighbors – we call that a win-win.",
+      "At VetriConn, people come first. Connecting retirees and veterans with meaningful work and volunteer opportunities, we help strengthen communities. Organizations benefit from experienced support, our users gain purpose, income, and connection—neighbors supporting neighbors, creating a true win-win.",
   },
 ];
 
