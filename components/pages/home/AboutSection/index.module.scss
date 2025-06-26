@@ -19,6 +19,27 @@
     line-height: 1.7;
     margin-bottom: 1.2rem;
   }
+
+  ol {
+    @include typo.base-text;
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+    list-style-type: decimal;
+    margin: 0;
+    padding-left: 25px;
+  }
+  ul {
+    @include typo.base-text;
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+    margin: 0;
+    padding-left: 25px;
+  }
+  li {
+    padding-left: 16px;
+  }
 }
 
 @media (max-width: 900px) {

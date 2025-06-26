@@ -5,24 +5,29 @@ export const AboutSection = () => (
   <div className={styles.aboutContainer}>
     <h1>About VetriConn</h1>
     <p>
-      Lorem ipsum dolor sit amet consectetur. Urna vulputate neque arcu eget.
-      Senectus scelerisque egestas quisque tortor elit eget bibendum amet
-      aliquam. Pellentesque consectetur non non imperdiet. Sed tincidunt viverra
-      a aliquet placerat porta tortor. Adipiscing tortor eu commodo sem in enim
-      sit libero. Odio volutpat nunc tortor felis nibh sodales id. Vestibulum
-      tristique convallis nec pulvinar etiam nullam elit neque. Massa faucibus
-      mattis pulvinar sit mollis lorem ullamcorper odio faucibus. Nulla varius
-      porttitor pellentesque tristique gravida massa cursus eros semper. Nunc
-      suspendisse quis dui fames. Cras ridiculus in fringilla arcu interdum
-      ultrices laoreet. A tristique orci venenatis lorem. Nisl tortor ligula
-      tristique nam suspendisse elit.
+      At Vetriconn, our mission is to strengthen the Canadian workforce and economy by reconnecting Canadian retirees and veterans with flexible work, volunteer, and remote opportunities. We believe in offering renewed purpose, engagement, and community for those transitioning from full-time service into retirement.
     </p>
     <p>
-      Pharetra id ipsum elit ac maecenas aliquet vulputate. Dui blandit vitae ac
-      risus commodo orci. Quis felis ipsum volutpat enim proin. Tellus faucibus
-      pretium nascetur placerat at. Ultrices purus imperdiet ultrices consequat.
-      Ornare erat habitant posuere leo massa id nunc senectus risus. Elit ornare
-      viverra sagittis risus malesuada euismod risus vitae sit.
+      Our streamlined platform makes it easy for retirees and veterans to explore and access:
+    </p>
+    <ol>
+      <li><strong>Part-time positions</strong></li>
+      <li><strong>Full-time roles</strong></li>
+      <li><strong>Volunteer opportunities</strong></li>
+    </ol>
+    <br />
+    <p>
+      Vetriconn is committed to making workforce re-entry smooth and fulfilling by:
+    </p>
+    <ul>
+      <li>Featuring job postings tailored specifically for retirees and veterans.</li>
+      <li>Automating job matches based on individual experience and interests.</li>
+      <li>Offering hands-on support with resume building and application processes.</li>
+      <li>Promoting opportunities for community involvement and volunteer work.</li>
+    </ul>
+    <br />
+    <p>
+      By helping retirees and veterans find purpose, income, and connection, Vetriconn contributes to closing labour gaps and building a stronger, more inclusive Canadian workforce.
     </p>
   </div>
 );
