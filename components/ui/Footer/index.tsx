@@ -13,8 +13,7 @@ const Footer = () => {
             <Logo className={styles.logo} />
           </div>
           <p className={styles.description}>
-            &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut labore et dolore magna aliqua.&quot;
+            &quot;Reconnecting retirees and veterans through purposeful work.&quot;
           </p>
         </div>
         <div className={styles.linksSection}>

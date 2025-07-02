@@ -40,21 +40,20 @@ const ContactSection = () => (
             <LocationIcon />
           </span>
           <span>
-            ui fames Cras Street, ridiculus in fringilla arcu interdum ultrices
-            Canada
+            Ottawa, Ontario.
           </span>
         </div>
         <div className={styles.infoItem}>
           <span className={styles.infoIcon}>
             <CallCallingIcon />
           </span>
-          <span>+447 093 3773 373, +447 8363 733 333</span>
+          <span>English - 1(647)-889-9542 <br/><br/> French - 1(613)-501-9162</span>
         </div>
         <div className={styles.infoItem}>
           <span className={styles.infoIcon}>
             <SmsIcon />
           </span>
-          <span>forstix@gmail.com</span>
+          <span>vetriconn.inc@gmail.com</span>
         </div>
         <div className={styles.socials}>
           <a href="#" aria-label="Facebook">
