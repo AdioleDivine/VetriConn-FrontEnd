@@ -3,9 +3,11 @@ import { useState, useEffect } from "react";
 import styles from "./index.module.scss";
 import Logo from "@/public/images/logo_1.svg";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   // Prevent scrolling when menu is open
   useEffect(() => {
@@ -41,9 +43,21 @@ export const Header = () => {
 
       {/* Desktop navigation */}
       <div className={styles.navLinks}>
-        <Link href="/">Home</Link>
-        <Link href="/about">About</Link>
-        <Link href="/jobs">Jobs</Link>
+        <Link href="/" className={pathname === "/" ? styles.active : ""}>
+          Home
+        </Link>
+        <Link
+          href="/about"
+          className={pathname === "/about" ? styles.active : ""}
+        >
+          About
+        </Link>
+        <Link
+          href="/jobs"
+          className={pathname === "/jobs" ? styles.active : ""}
+        >
+          Jobs
+        </Link>
       </div>
 
       {/* Account section for desktop */}
@@ -65,9 +79,21 @@ export const Header = () => {
         <div
           className={`${styles.navLinks} ${isMenuOpen ? styles.active : ""}`}
         >
-          <Link href="/">Home</Link>
-          <Link href="/about">About</Link>
-          <Link href="/jobs">Jobs</Link>
+          <Link href="/" className={pathname === "/" ? styles.active : ""}>
+            Home
+          </Link>
+          <Link
+            href="/about"
+            className={pathname === "/about" ? styles.active : ""}
+          >
+            About
+          </Link>
+          <Link
+            href="/jobs"
+            className={pathname === "/jobs" ? styles.active : ""}
+          >
+            Jobs
+          </Link>
         </div>
       </div>
 

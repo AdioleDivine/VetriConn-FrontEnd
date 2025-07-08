@@ -2,13 +2,13 @@ import Image from "next/image";
 import styles from "./index.module.scss";
 import DottedBox from "@/public/images/dotted_box.svg";
 import { Header } from "@/components/ui/Header";
-
+import Advert from "@/components/ui/Advert";
 export const HeroSection = () => {
   return (
     <header className={styles.hero}>
       {/* Navigation */}
       <Header />
-
+      <Advert />
       {/* Hero Content */}
       <div className={styles.heroContent}>
         <div className={styles.textContent}>
