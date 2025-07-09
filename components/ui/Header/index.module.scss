@@ -133,9 +133,43 @@
     color: vars.$text-color;
     text-decoration: none;
     transition: color 0.2s;
+    position: relative;
+    padding-bottom: 6px;
 
-    &:hover {
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: vars.$primary-color;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 8px;
+      bottom: 1px;
+      width: 85%;
+      height: 1px;
+      background: vars.$primary-color;
+      border-radius: 1px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    &:hover,
+    &.active {
       color: vars.$primary-color;
+      &::before,
+      &::after {
+        opacity: 1;
+      }
     }
   }
 
@@ -203,7 +237,7 @@
   transition: all 0.2s;
   display: inline-block;
   &:hover {
-    background-color: color.adjust(vars.$primary-color, vars.$lightness: -10%);
+    background-color: color.adjust(vars.$primary-color, $lightness: -10%);
   }
 
   @media (max-width: vars.$mobile-breakpoint) {

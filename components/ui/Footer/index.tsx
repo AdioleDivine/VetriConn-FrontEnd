@@ -19,7 +19,7 @@ const Footer = () => {
         <div className={styles.linksSection}>
           <div className={styles.linkColumn}>
             <div className={styles.linkTitle}>Privacy & Policies</div>
-            <a href="#">Terms & Conditions</a>
+            <a target="_blank" href="https://vetriconntandc.notion.site/VETRICONN-INC-TERMS-AND-CONDITIONS-22ac6380202c807fa63ef48c7ca69815">Terms & Conditions</a>
             <a href="#">Privacy Guide</a>
           </div>
           <div className={styles.linkColumn}>

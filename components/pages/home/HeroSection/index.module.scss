@@ -7,7 +7,7 @@
   background-color: white;
   min-height: 90vh;
   position: relative;
-
+  
   @media (max-width: vars.$mobile-breakpoint) {
     padding: 0.5rem 5% 1rem;
     min-height: auto;
@@ -19,11 +19,13 @@
   align-items: center;
   gap: 4rem;
   position: relative;
+  
 
   @media (max-width: vars.$mobile-breakpoint) {
     flex-direction: column;
     text-align: center;
     gap: 2rem;
+    margin-top: 4rem;
   }
 
   .textContent {
@@ -62,7 +64,7 @@
 
     .dottedBoxTop {
       position: absolute;
-      top: -60px;
+      top: 0px;
       left: -70px;
       z-index: 0;
       width: 100px;
@@ -216,13 +218,15 @@
     z-index: 0;
     width: 100%;
     height: auto;
+    @media (max-width: vars.$mobile-breakpoint) {
+      display: none;
+    }
   }
 
   .dottedBoxBottom {
-    display: none;
     position: absolute;
     bottom: -30px;
-    left: -20px;
+    right: -35px;
     z-index: 0;
     width: 100px;
     height: auto;
