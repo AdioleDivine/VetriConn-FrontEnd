@@ -73,6 +73,7 @@
   flex: 1 1 0;
   background: #fcfcfc;
   border-radius: 24px;
+  width: 100%;
   padding: 2.5rem 2rem 2rem 2rem;
   max-width: 420px;
   display: flex;
@@ -148,9 +149,17 @@
     flex-direction: column;
     gap: 2.5rem;
     align-items: stretch;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
   }
   .infoCard {
-    max-width: 100%;
+    max-width: 90%;
+    margin: auto;
     padding: 2rem 1rem;
+  }
+  .form {
+    margin: 0 auto;
+    min-width: 90%;
   }
 }
