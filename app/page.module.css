@@ -35,20 +35,34 @@
 }
 
 .infoSections {
-  padding: 0.5rem 5% 2rem;
+  padding: 2rem 5% 4rem;
   display: flex;
   flex-direction: row;
-  gap: 3rem;
-  justify-content: center;
+  gap: 4rem;
+  justify-content: space-between;
   align-items: flex-start;
-  margin: 3rem 0;
+  margin: 4rem 0;
+  max-width: 1500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 1250px) {
+  .infoSections {
+    flex-direction: column;
+    gap: 3rem;
+    margin: 3rem 0;
+    padding: 2rem 5% 3rem;
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 900px) {
   .infoSections {
     flex-direction: column;
-    gap: 2rem;
-    margin: 2rem 0;
+    gap: 3rem;
+    margin: 3rem 0;
+    padding: 2rem 5% 3rem;
   }
 }
 

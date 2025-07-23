@@ -1,3 +1,5 @@
+@use "sass:color";
+@use "../../../../styles/variables.scss" as vars;
 @use "../../../../styles/typography.scss" as typo;
 
 .contactSection {
@@ -54,7 +56,7 @@
 }
 
 .submitBtn {
-  background: #e03a4e;
+  background: vars.$primary-color; // Use the correct red
   color: #fff;
   @include typo.base-text;
   font-weight: 600;
@@ -66,7 +68,7 @@
   transition: background 0.2s;
 }
 .submitBtn:hover {
-  background: #c72f41;
+  background: vars.$primary-hover; // Use consistent hover color
 }
 
 .infoCard {

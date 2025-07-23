@@ -36,8 +36,12 @@ const aboutContent = [
 ];
 
 
-export const AboutSection = () => (
-  <div className={styles.aboutContainer}>
+interface AboutSectionProps {
+  id?: string;
+}
+
+export const AboutSection = ({ id }: AboutSectionProps) => (
+  <div className={styles.aboutContainer} id={id}>
     <h1>About VetriConn</h1>
     {aboutContent.map((block, index) => {
       if (block.type === "paragraph") {
