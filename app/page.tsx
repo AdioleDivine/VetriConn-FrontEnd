@@ -18,8 +18,8 @@ export default function Home() {
       </div>
 
       <HowItWorksStepsSection />
-      <FaqSection />
-      <ContactSection />
+      <FaqSection id="faq-section" />
+      <ContactSection id="contact-section" />
       <Footer />
     </main>
   );
