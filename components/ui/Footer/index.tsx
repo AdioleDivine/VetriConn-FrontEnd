@@ -36,7 +36,7 @@ const Footer = () => {
       </div>
       <div className={styles.bottomSection}>
         <div className={styles.copyright}>
-          © 2024 All rights Reserved. Vetriconn
+         Vetriconn © 2025 All rights Reserved.
         </div>
         <div className={styles.socials}>
           <a href="#" aria-label="Instagram">

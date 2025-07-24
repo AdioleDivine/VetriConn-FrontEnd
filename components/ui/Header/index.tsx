@@ -59,10 +59,29 @@ export const Header = () => {
           About
         </a>
         <Link
-          href="/jobs"
-          className={pathname === "/jobs" ? styles.active : ""}
+          href="#faq-section"
+          className={styles.scrollLink}
+          onClick={(e) => {
+            e.preventDefault();
+            document.getElementById("faq-section")?.scrollIntoView({
+              behavior: "smooth",
+            });
+          }}
         >
-          Jobs
+          FAQ
+        </Link>
+
+        <Link
+          href="#contact-section"
+          className={styles.scrollLink}
+          onClick={(e) => {
+            e.preventDefault();
+            document.getElementById("contact-section")?.scrollIntoView({
+              behavior: "smooth",
+            });
+          }}
+        >
+          Contact Us
         </Link>
       </div>
 
@@ -101,12 +120,33 @@ export const Header = () => {
           >
             About
           </a>
-          <Link
-            href="/jobs"
-            className={pathname === "/jobs" ? styles.active : ""}
-          >
-            Jobs
-          </Link>
+         <Link
+          href="#faq-section"
+          className={styles.scrollLink}
+          onClick={(e) => {
+            e.preventDefault();
+              setIsMenuOpen(false);
+            document.getElementById("faq-section")?.scrollIntoView({
+              behavior: "smooth",
+            });
+          }}
+        >
+          FAQ
+        </Link>
+
+        <Link
+          href="#contact-section"
+          className={styles.scrollLink}
+          onClick={(e) => {
+            e.preventDefault();
+              setIsMenuOpen(false);
+            document.getElementById("contact-section")?.scrollIntoView({
+              behavior: "smooth",
+            });
+          }}
+        >
+          Contact Us
+        </Link>
         </div>
       </div>
 

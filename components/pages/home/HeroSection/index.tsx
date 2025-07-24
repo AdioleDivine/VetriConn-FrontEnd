@@ -57,10 +57,9 @@ export const HeroSection = () => {
       <div className={styles.heroContent}>
         <div className={styles.textContent}>
           <DottedBox className={styles.dottedBoxTop} />
-          <h1>Connecting talent to meaningful causes</h1>
+          <h1>Reconnecting retirees and veterans through purposeful work</h1>
           <p className={styles.subtitle}>
-            Work for a cause you love. Make an impact. Use your skills to get
-            hired
+            From careers to causes, we connect you to purposeful opportunities quickly, easily, and on your terms
           </p>
 
           <div className={styles.ctaButtons}>

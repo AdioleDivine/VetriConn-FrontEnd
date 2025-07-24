@@ -7,8 +7,12 @@ import CallCallingIcon from "@/public/images/call-calling.svg";
 import SmsIcon from "@/public/images/sms.svg";
 import SmsTrackingIcon from "@/public/images/sms-tracking.svg";
 
-const ContactSection = () => (
-  <section className={styles.contactSection}>
+interface ContactSectionProps {
+  id?: string;
+}
+
+const ContactSection = ({ id }: ContactSectionProps) => (
+  <section className={styles.contactSection} id={id}>
     <h1 className={styles.heading}>Get In Touch</h1>
     <div className={styles.contentWrapper}>
       <form className={styles.form}>
