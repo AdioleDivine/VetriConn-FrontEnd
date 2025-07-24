@@ -46,12 +46,18 @@ export const Header = () => {
         <Link href="/" className={pathname === "/" ? styles.active : ""}>
           Home
         </Link>
-        <Link
-          href="/about"
-          className={pathname === "/about" ? styles.active : ""}
+        <a
+          href="#about-section"
+          className={styles.scrollLink}
+          onClick={(e) => {
+            e.preventDefault();
+            document.getElementById("about-section")?.scrollIntoView({
+              behavior: "smooth",
+            });
+          }}
         >
           About
-        </Link>
+        </a>
         <Link
           href="/jobs"
           className={pathname === "/jobs" ? styles.active : ""}
@@ -82,12 +88,19 @@ export const Header = () => {
           <Link href="/" className={pathname === "/" ? styles.active : ""}>
             Home
           </Link>
-          <Link
-            href="/about"
-            className={pathname === "/about" ? styles.active : ""}
+          <a
+            href="#about-section"
+            className={styles.scrollLink}
+            onClick={(e) => {
+              e.preventDefault();
+              setIsMenuOpen(false);
+              document.getElementById("about-section")?.scrollIntoView({
+                behavior: "smooth",
+              });
+            }}
           >
             About
-          </Link>
+          </a>
           <Link
             href="/jobs"
             className={pathname === "/jobs" ? styles.active : ""}
