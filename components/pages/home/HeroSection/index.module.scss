@@ -236,7 +236,8 @@
     bottom: -8px;
     right: -16px;
     border-radius: 10px;
-    background: vars.$primary-color;
+    background: vars.$primary-color url("/favicon-white.svg") no-repeat center;
+    background-size: 200px 200px;
     opacity: 1;
     z-index: 1;
 
