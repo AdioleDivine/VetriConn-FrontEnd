@@ -17,7 +17,7 @@ const JobDescriptor: React.FC<JobDescriptorProps> = ({
 }) => {
   return (
     <div className={styles.card}>
-      <div className={styles.logoRow}>
+      <div className={styles.centeredHeader}>
         <Avatar
           src={company_logo}
           alt={`${company_name} logo`}
@@ -25,20 +25,23 @@ const JobDescriptor: React.FC<JobDescriptorProps> = ({
           size={90}
           className={styles.logo}
         />
+        <div className={styles.titleSection}>
+          <h2 className={styles.role}>{role}</h2>
+          <p className={styles.companyName}>{company_name}</p>
+        </div>
+        <div className={styles.tagsRow}>
+          {tags.map((tag, i) => (
+            <span
+              key={i}
+              className={`${styles.tag} ${tag.color ? styles[tag.color] : ""}`}
+            >
+              {tag.name}
+            </span>
+          ))}
+        </div>
         <button className={styles.bookmark}>
           <FaRegStar className={styles.star} />
         </button>
-      </div>
-      <h2 className={styles.role}>{role}</h2>
-      <div className={styles.tagsRow}>
-        {tags.map((tag, i) => (
-          <span
-            key={i}
-            className={`${styles.tag} ${tag.color ? styles[tag.color] : ""}`}
-          >
-            {tag.name}
-          </span>
-        ))}
       </div>
       <div className={styles.section}>
         <div className={styles.sectionTitle}>Job Description</div>

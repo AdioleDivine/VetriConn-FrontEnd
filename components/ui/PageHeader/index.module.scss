@@ -1,0 +1,116 @@
+@use "../../../styles/typography.scss" as typo;
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0;
+  padding: 0.5rem 2rem 1.5rem 2rem;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.titleSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.title {
+  @include typo.heading-1;
+  color: #111827;
+  margin: 0;
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+
+.count {
+  background: #f3f4f6;
+  color: #6b7280;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.sortSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sortLabel {
+  color: #6b7280;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.sortOptions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sortButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: #6b7280;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: #f9fafb;
+    color: #374151;
+  }
+
+  &.active {
+    color: #dc2626;
+    background-color: #fef2f2;
+    font-weight: 600;
+  }
+}
+
+.sortIcon {
+  display: flex;
+  align-items: center;
+  font-size: 0.75rem;
+  opacity: 0.7;
+
+  .active & {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .pageHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.5rem 1rem 1rem 1rem;
+  }
+
+  .sortSection {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .sortOptions {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .sortButton {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.6rem;
+  }
+}

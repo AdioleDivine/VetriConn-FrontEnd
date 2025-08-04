@@ -13,7 +13,11 @@ const aboutContent = [
   {
     type: "list",
     ordered: true,
-    items: ["Part-time positions", "Full-time roles", "Volunteer opportunities"],
+    items: [
+      "Part-time positions",
+      "Full-time roles",
+      "Volunteer opportunities",
+    ],
   },
   {
     type: "paragraph",
@@ -35,7 +39,6 @@ const aboutContent = [
   },
 ];
 
-
 interface AboutSectionProps {
   id?: string;
 }
@@ -53,11 +56,9 @@ export const AboutSection = ({ id }: AboutSectionProps) => (
         return (
           <ListTag key={index}>
             {block.items?.map((item, i) => (
-              <li key={i}>
-                {block.ordered ? <strong>{item}</strong> : item}
-              </li>
+              <li key={i}>{block.ordered ? <strong>{item}</strong> : item}</li>
             ))}
-            <br/>
+            <br />
           </ListTag>
         );
       }
@@ -66,4 +67,3 @@ export const AboutSection = ({ id }: AboutSectionProps) => (
     })}
   </div>
 );
-

@@ -15,13 +15,13 @@ const geistMono = Geist_Mono({
 });
 
 const lato = Lato({
-  weight: ["400", "700"],
+  weight: ["300", "400", "700", "900"],
   subsets: ["latin"],
   variable: "--font-lato",
 });
 
 const openSans = Open_Sans({
-  weight: ["400", "700"],
+  weight: ["300", "400", "600", "700"],
   subsets: ["latin"],
   variable: "--font-open-sans",
 });
