@@ -1,5 +1,7 @@
+import Image from "next/image";
 import styles from "./index.module.scss";
 import Logo from "@/public/images/logo_1.svg";
+// import Pipeda from "@/public/images/pipedasvg.svg";
 import { FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FiLinkedin } from "react-icons/fi";
@@ -12,9 +14,8 @@ const Footer = () => {
           <div className={styles.logoRow}>
             <Logo className={styles.logo} />
           </div>
-          <p className={styles.description}>
-            &quot;Reconnecting retirees and veterans through purposeful work.&quot;
-          </p>
+          {/* <Pipeda className={styles.logo} /> */}
+         <Image src="/badge.svg" alt="Pipeda Certification Badge" height={40} width={140} />
         </div>
         <div className={styles.linksSection}>
           <div className={styles.linkColumn}>

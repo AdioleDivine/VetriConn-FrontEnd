@@ -17,6 +17,7 @@ export default function SignIn() {
           Join the <br /> <span>VetriConn</span> community
         </h1>
         <DottedBox7 className={styles.dottedBox7} />
+        
       </div>
 
       <div className={styles.right}>

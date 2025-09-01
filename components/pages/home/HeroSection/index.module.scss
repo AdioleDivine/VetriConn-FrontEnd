@@ -2,8 +2,23 @@
 @use "../../../../styles/variables.scss" as vars;
 @use "../../../../styles/typography.scss" as typo;
 
-.hero {
+.heroBgLogo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 180px;
+  height: 180px;
+  z-index: 0;
+  opacity: 0.12;
+  pointer-events: none;
+  @media (max-width: 600px) {
+    width: 110px;
+    height: 110px;
+  }
+}
 
+.hero {
   padding: vars.$standard-padding;
   padding-bottom: 0;
   background-color: white;
@@ -221,7 +236,8 @@
     bottom: -8px;
     right: -16px;
     border-radius: 10px;
-    background: vars.$primary-color;
+    background: vars.$primary-color url("/favicon-white.svg") no-repeat center;
+    background-size: 200px 200px;
     opacity: 1;
     z-index: 1;
 
@@ -229,8 +245,6 @@
       display: none; // Hide on mobile
     }
   }
-
-
 
   .dottedBoxBottom {
     position: absolute;
@@ -250,14 +264,14 @@
     border-radius: 10px;
     overflow: hidden;
     z-index: 2; // Above the red background
-    
+
     @media (max-width: vars.$mobile-breakpoint) {
       width: 100%;
       max-width: 450px;
       height: 300px;
     }
   }
-  
+
   .carouselImage {
     position: absolute;
     top: 0; // Reset to normal positioning
@@ -268,7 +282,7 @@
     align-items: center;
     justify-content: center;
   }
-  
+
   .imageWrapper {
     position: relative;
     width: 100%;
@@ -276,7 +290,7 @@
     border-radius: 10px;
     overflow: hidden;
   }
-  
+
   .heroImage {
     object-fit: cover;
     border-radius: 10px; // Match Figma border radius

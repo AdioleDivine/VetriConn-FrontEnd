@@ -14,11 +14,7 @@
 }
 
 .text {
-  font-family: Arial;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 100%;
-  letter-spacing: 0%;
+  @include body-text;
   color: $text-color;
   margin-bottom: 0.5rem;
 }
@@ -73,4 +69,3 @@
 .role {
   color: $text-color;
 }
- 
