@@ -8,8 +8,8 @@ const Advert = () => {
   return (
     <div className={`${styles.container}  ${isOpen ? styles.open : ""}`}>
       <p className={styles.advertText}>
-        <span>Product Research |</span>
-        <Link href={"/"}>Help us launch better</Link>
+        <span>We are conducting Product Research |</span>
+        <Link href={"https://forms.gle/Bdwab4EUHJ2eAUu88"}>Take the survey to help us launch better</Link>
       </p>
 
       <IoIosClose title="close"
