@@ -4,6 +4,7 @@ import { FaRegStar } from "react-icons/fa";
 import { Avatar } from "../Avatar";
 import { Tag } from "@/types/tag";
 import { FaArrowRight } from "react-icons/fa6";
+import { BsBuildings } from "react-icons/bs";
 
 interface JobCardProps {
   role: string;
@@ -51,7 +52,9 @@ const JobCard: React.FC<JobCardProps> = ({
         : {})}
     >
       <div className={styles.header}>
-        <Avatar name={name} src={logo} size={45} className={styles.avatar} />
+        {/* <Avatar name={name} src={logo} size={45} className={styles.avatar} />
+         */}
+        <BsBuildings className={styles.avatar} />
         <div className={styles.info}>
           <h3 className={styles.role}>{role}</h3>
           <p className={styles.name}>{name}</p>
