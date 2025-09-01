@@ -182,6 +182,61 @@
   }
 }
 
+.inputError {
+  border-color: vars.$primary-color !important;
+}
+
+.inputFilled {
+  border-color: vars.$primary-color;
+}
+
+.error {
+  color: vars.$primary-color;
+  font-size: 0.85rem;
+  margin-top: -0.75rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+// === PASSWORD REQUIREMENTS ===
+.passwordRequirements {
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.65rem; // Even smaller font size
+}
+
+.requirement {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem; // Reduced gap further
+  margin-bottom: 0.15rem; // Reduced margin further
+  color: #999;
+  transition: color 0.2s ease;
+
+  &.satisfied {
+    color: #000; // Black text when satisfied
+
+    .checkmark {
+      background-color: vars.$primary-color;
+      color: white;
+    }
+  }
+}
+
+.checkmark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px; // Even smaller checkmark
+  height: 12px; // Even smaller checkmark
+  border-radius: 50%;
+  background-color: #ccc;
+  color: #ccc;
+  font-size: 8px; // Smaller font for checkmark
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
 // === CHECKBOX ===
 .checkbox {
   display: flex;
@@ -237,5 +292,15 @@
 
   &:hover {
     background-color: #d32f2f;
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: #ccc;
+    }
   }
 }
