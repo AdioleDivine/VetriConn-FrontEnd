@@ -1,14 +1,98 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./index.module.scss";
 import DottedBox7 from "@/public/images/dotted_box_7.svg";
 import DottedBox9 from "@/public/images/dotted_box_9.svg";
 import DottedBox4 from "@/public/images/dotted_box_4.svg";
 import DottedBox3 from "@/public/images/dotted_box_3.svg";
+import { signUpSchema, type SignUpFormData } from "@/lib/validation";
+import { useToaster } from "@/components/ui/Toaster";
 
 export default function SignUp() {
-  const [role, setRole] = useState("jobseeker");
+  const [role, setRole] = useState<"jobseeker" | "employer" | "">(""); // Start with no selection
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [terms, setTerms] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const router = useRouter();
+  const { showToast } = useToaster();
+
+  // Check if required fields are empty (all fields are required for signup)
+  const isButtonDisabled =
+    isSubmitting ||
+    !firstName.trim() ||
+    !lastName.trim() ||
+    !email.trim() ||
+    !password.trim() ||
+    !role ||
+    !terms;
+
+  // Password requirement checks
+  const passwordRequirements = {
+    hasSpecialChar: /[^A-Za-z0-9]/.test(password),
+    hasUppercase: /[A-Z]/.test(password),
+    hasLowercase: /[a-z]/.test(password),
+    hasNumber: /[0-9]/.test(password),
+    hasMinLength: password.length >= 8,
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setErrors({});
+
+    const formData: SignUpFormData = {
+      firstName,
+      lastName,
+      email,
+      password,
+      role,
+      terms,
+    };
+
+    try {
+      // Validate form data
+      signUpSchema.parse(formData);
+
+      // Show success toast
+      showToast({
+        type: "success",
+        title: "Account creation successful",
+        description: "Please check email within 24hrs to confirm your account",
+      });
+
+      // Simulate API call delay
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 1500);
+    } catch (error) {
+      if (error instanceof Error && "issues" in error) {
+        const zodError = error as any;
+        const errorMessages: Record<string, string> = {};
+        zodError.issues?.forEach((err: any) => {
+          if (err.path && err.path.length > 0) {
+            errorMessages[err.path[0]] = err.message;
+          }
+        });
+        setErrors(errorMessages);
+
+        // Show error toast for validation failures
+        showToast({
+          type: "error",
+          title: "Validation Error",
+          description: "Please fix the errors below and try again",
+        });
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -62,44 +146,146 @@ export default function SignUp() {
               <span>Employer</span>
             </label>
           </div>
+          {errors.role && <span className={styles.error}>{errors.role}</span>}
 
-          <form>
+          <form onSubmit={handleSubmit}>
             <label htmlFor="first-name">First Name</label>
             <input
               type="text"
-              // placeholder="First name"
-              className={styles.input}
+              id="first-name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              className={`${styles.input} ${
+                errors.firstName
+                  ? styles.inputError
+                  : firstName.trim()
+                  ? styles.inputFilled
+                  : ""
+              }`}
             />
+            {errors.firstName && (
+              <span className={styles.error}>{errors.firstName}</span>
+            )}
+
             <label htmlFor="last-name">Last Name</label>
             <input
               type="text"
-              // placeholder="Last name"
-              className={styles.input}
+              id="last-name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              className={`${styles.input} ${
+                errors.lastName
+                  ? styles.inputError
+                  : lastName.trim()
+                  ? styles.inputFilled
+                  : ""
+              }`}
             />
+            {errors.lastName && (
+              <span className={styles.error}>{errors.lastName}</span>
+            )}
+
             <label htmlFor="email">Email</label>
             <input
               type="email"
-              // placeholder="Email"
-              className={styles.input}
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className={`${styles.input} ${
+                errors.email
+                  ? styles.inputError
+                  : email.trim()
+                  ? styles.inputFilled
+                  : ""
+              }`}
             />
+            {errors.email && (
+              <span className={styles.error}>{errors.email}</span>
+            )}
+
             <label htmlFor="password">Password</label>
             <input
               type="password"
-              // placeholder="Password"
-              className={styles.input}
               id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className={`${styles.input} ${
+                errors.password
+                  ? styles.inputError
+                  : password.trim()
+                  ? styles.inputFilled
+                  : ""
+              }`}
             />
+            {errors.password && (
+              <span className={styles.error}>{errors.password}</span>
+            )}
+
+            <div className={styles.passwordRequirements}>
+              <div
+                className={`${styles.requirement} ${
+                  passwordRequirements.hasMinLength ? styles.satisfied : ""
+                }`}
+              >
+                <span className={styles.checkmark}>✓</span>
+                <span>At least 8 characters</span>
+              </div>
+              <div
+                className={`${styles.requirement} ${
+                  passwordRequirements.hasSpecialChar ? styles.satisfied : ""
+                }`}
+              >
+                <span className={styles.checkmark}>✓</span>
+                <span>At least one special character</span>
+              </div>
+              <div
+                className={`${styles.requirement} ${
+                  passwordRequirements.hasUppercase ? styles.satisfied : ""
+                }`}
+              >
+                <span className={styles.checkmark}>✓</span>
+                <span>At least one uppercase letter</span>
+              </div>
+              <div
+                className={`${styles.requirement} ${
+                  passwordRequirements.hasLowercase ? styles.satisfied : ""
+                }`}
+              >
+                <span className={styles.checkmark}>✓</span>
+                <span>At least one lowercase letter</span>
+              </div>
+              <div
+                className={`${styles.requirement} ${
+                  passwordRequirements.hasNumber ? styles.satisfied : ""
+                }`}
+              >
+                <span className={styles.checkmark}>✓</span>
+                <span>At least one number</span>
+              </div>
+            </div>
 
             <div className={styles.checkbox}>
-              <input type="checkbox" id="terms" />
+              <input
+                type="checkbox"
+                id="terms"
+                checked={terms}
+                onChange={(e) => setTerms(e.target.checked)}
+              />
               <label htmlFor="terms">
                 I agree to the <a href="#">Terms of Service</a> and{" "}
                 <a href="#">Privacy Policy</a>
               </label>
             </div>
+            {errors.terms && (
+              <span className={styles.error}>{errors.terms}</span>
+            )}
 
-            <button type="submit" className={styles.button}>
-              Create account
+            <button
+              type="submit"
+              className={styles.button}
+              disabled={isButtonDisabled}
+            >
+              {isSubmitting ? "Creating Account..." : "Create account"}
             </button>
           </form>
         </div>

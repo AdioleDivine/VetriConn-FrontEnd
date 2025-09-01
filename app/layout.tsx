@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Lato, Open_Sans } from "next/font/google";
 import "./globals.scss";
+import { ToasterProvider } from "@/components/ui/Toaster";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -51,7 +52,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${lato.variable} ${openSans.variable}`}
       >
-        {children}
+        <ToasterProvider>{children}</ToasterProvider>
       </body>
     </html>
   );

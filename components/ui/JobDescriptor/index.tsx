@@ -3,7 +3,7 @@ import styles from "./index.module.scss";
 import { FaRegStar } from "react-icons/fa";
 import { Avatar } from "../Avatar";
 import { Job } from "@/types/job";
-
+import {BsBuildings} from "react-icons/bs"
 type JobDescriptorProps = Job;
 
 const JobDescriptor: React.FC<JobDescriptorProps> = ({
@@ -18,13 +18,14 @@ const JobDescriptor: React.FC<JobDescriptorProps> = ({
   return (
     <div className={styles.card}>
       <div className={styles.centeredHeader}>
-        <Avatar
+        {/* <Avatar
           src={company_logo}
           alt={`${company_name} logo`}
           name={company_name}
           size={90}
           className={styles.logo}
-        />
+        /> */}
+        <BsBuildings className={styles.logo} fontSize={50}/>
         <div className={styles.titleSection}>
           <h2 className={styles.role}>{role}</h2>
           <p className={styles.companyName}>{company_name}</p>
