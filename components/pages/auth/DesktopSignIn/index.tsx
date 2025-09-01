@@ -6,7 +6,7 @@ import DottedBox7 from "@/public/images/dotted_box_7.svg";
 import DottedBox9 from "@/public/images/dotted_box_9.svg";
 import DottedBox4 from "@/public/images/dotted_box_4.svg";
 import DottedBox3 from "@/public/images/dotted_box_3.svg";
-import { signInSchema, type SignInFormData } from "@/lib/validation";
+import { signInSchema } from "@/lib/validation";
 import { useToaster } from "@/components/ui/Toaster";
 
 export default function SignIn() {

@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./index.module.scss";
 import { FaRegStar } from "react-icons/fa";
-import { Avatar } from "../Avatar";
 import { Tag } from "@/types/tag";
 import { FaArrowRight } from "react-icons/fa6";
 import { BsBuildings } from "react-icons/bs";
@@ -22,7 +21,7 @@ const JobCard: React.FC<JobCardProps> = ({
   name,
   description,
   tags,
-  logo,
+  logo: _logo,
   variant = "default",
   onSelect,
   selected = false,
