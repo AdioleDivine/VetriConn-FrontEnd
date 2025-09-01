@@ -6,7 +6,7 @@
   display: flex;
   min-height: 100vh;
   // font-family: 'Inter', sans-serif;
-  @include typo.base-text
+  @include typo.base-text;
 }
 
 // === LEFT SIDE ===
@@ -18,6 +18,14 @@
   justify-content: center;
   padding: 2rem;
   text-align: left;
+  background-image: linear-gradient(
+      70deg,
+      rgba(0, 0, 0, 0.6),
+      rgba(0, 0, 0, 0.3)
+    ),
+    url("/images/Hero/1.svg");
+  background-position: left center;
+  background-size: cover;
 
   h1 {
     @include typo.heading-2;
@@ -25,7 +33,7 @@
     color: vars.$text-color;
     font-size: 2.5rem;
     font-weight: 600;
-    line-height: 1.2; 
+    line-height: 1.2;
 
     span {
       color: vars.$primary-color;
@@ -49,7 +57,6 @@
     z-index: 0;
     opacity: 0.6;
   }
-
 }
 
 // === RIGHT SIDE ===
@@ -101,16 +108,14 @@
       font-weight: bold;
     }
   }
-    form label {
+  form label {
     display: block;
     font-size: 0.85rem;
-    color: #666; 
+    color: #666;
     margin-bottom: 0.3rem;
     font-weight: 500;
   }
-
 }
-
 
 // === ROLE SELECTION ===
 .roleText {
@@ -139,7 +144,7 @@
   transition: all 0.3s ease;
   width: 100%;
 
-  input[type='radio'] {
+  input[type="radio"] {
     accent-color: vars.$primary-color;
     width: 14px;
     height: 14px;
@@ -234,5 +239,3 @@
     background-color: #d32f2f;
   }
 }
-
-
