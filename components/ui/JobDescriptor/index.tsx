@@ -1,15 +1,14 @@
 import React from "react";
 import styles from "./index.module.scss";
 import { FaRegStar } from "react-icons/fa";
-import { Avatar } from "../Avatar";
 import { Job } from "@/types/job";
-import {BsBuildings} from "react-icons/bs"
+import { BsBuildings } from "react-icons/bs";
 type JobDescriptorProps = Job;
 
 const JobDescriptor: React.FC<JobDescriptorProps> = ({
   role,
   company_name,
-  company_logo,
+  company_logo: _company_logo,
   tags,
   full_description,
   responsibilities,
@@ -25,7 +24,7 @@ const JobDescriptor: React.FC<JobDescriptorProps> = ({
           size={90}
           className={styles.logo}
         /> */}
-        <BsBuildings className={styles.logo} fontSize={50}/>
+        <BsBuildings className={styles.logo} fontSize={50} />
         <div className={styles.titleSection}>
           <h2 className={styles.role}>{role}</h2>
           <p className={styles.companyName}>{company_name}</p>
