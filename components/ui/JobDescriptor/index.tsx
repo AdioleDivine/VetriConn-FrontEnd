@@ -8,7 +8,7 @@ type JobDescriptorProps = Job;
 const JobDescriptor: React.FC<JobDescriptorProps> = ({
   role,
   company_name,
-  company_logo: _company_logo,
+  // company_logo: _company_logo,
   tags,
   full_description,
   responsibilities,

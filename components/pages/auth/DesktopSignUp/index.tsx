@@ -9,6 +9,7 @@ import DottedBox4 from "@/public/images/dotted_box_4.svg";
 import DottedBox3 from "@/public/images/dotted_box_3.svg";
 import { signUpSchema, type SignUpFormData } from "@/lib/validation";
 import { useToaster } from "@/components/ui/Toaster";
+import { ZodError, ZodIssue } from "zod";
 
 export default function SignUp() {
   const [role, setRole] = useState<"jobseeker" | "employer" | "">(""); // Start with no selection
@@ -73,11 +74,12 @@ export default function SignUp() {
       }, 1500);
     } catch (error) {
       if (error instanceof Error && "issues" in error) {
-        const zodError = error as any;
+        const zodError = error as ZodError;
         const errorMessages: Record<string, string> = {};
-        zodError.issues?.forEach((err: any) => {
+        zodError.issues?.forEach((err: ZodIssue) => {
           if (err.path && err.path.length > 0) {
-            errorMessages[err.path[0]] = err.message;
+            const fieldName = String(err.path[0]);
+            errorMessages[fieldName] = err.message;
           }
         });
         setErrors(errorMessages);
