@@ -21,7 +21,7 @@ const JobCard: React.FC<JobCardProps> = ({
   name,
   description,
   tags,
-  logo: _logo,
+  // logo: _logo,
   variant = "default",
   onSelect,
   selected = false,
