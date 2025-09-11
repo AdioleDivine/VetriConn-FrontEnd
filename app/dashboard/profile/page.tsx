@@ -15,10 +15,10 @@ const ProfilePage = () => {
     name: "Richmond Adiole",
     title: "Electrical Engineer",
     location: "Ottawa, Ontario",
-    experience: "10 years",
+    experience: "5 years",
     current: "Director at VetriConn",
     lookingFor: "Full time, Part time",
-    bio: "Experienced Electrical Engineer with over 10 years of expertise in power systems, telecommunications, and industrial automation. Currently serving as Director at VetriConn, where I lead technical initiatives to connect veterans with meaningful career opportunities. Passionate about leveraging technology to create sustainable solutions and bridge the gap between military experience and civilian careers.",
+    bio: "Experienced Electrical Engineer with over 10 years of expertise in power systems, telecommunications, and industrial automation. Currently serving as Director at VetriConn, where I lead technical initiatives to connect veterans with meaningful career opportunities. Passionate about leveraging technology to create sustainable solutions.",
     avatar: "/images/richmond.svg", // placeholder
   });
 
