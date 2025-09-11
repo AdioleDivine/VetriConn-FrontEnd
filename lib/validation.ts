@@ -1,6 +1,5 @@
 import { z } from "zod";
 
-
 // Password validation schema for sign up (strict)
 const passwordSchema = z
   .string()

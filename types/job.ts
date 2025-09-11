@@ -9,6 +9,7 @@ export interface Job {
   full_description: string;
   responsibilities: string[];
   qualifications: string[];
+  applicationLink?: string; // Optional application link
 }
 
 // Re-export Tag for backward compatibility

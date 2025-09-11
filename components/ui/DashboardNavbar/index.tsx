@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./index.module.scss";
@@ -15,10 +15,12 @@ const navLinks: NavLink[] = [
   { name: "Home", href: "/dashboard" },
   { name: "Community", href: "/dashboard/community" },
   { name: "Inbox", href: "/dashboard/inbox" },
+  { name: "Profile", href: "/dashboard/profile" },
 ];
 
 const DashboardNavbar = () => {
   const pathname = usePathname();
+  const [avatarError, setAvatarError] = useState(false);
 
   return (
     <nav className={styles.navbar}>
@@ -56,9 +58,26 @@ const DashboardNavbar = () => {
           <button className={styles.iconButton}>
             <FaCog />
           </button>
-          <button className={styles.profileButton}>
-            <FaUser />
-          </button>
+          <Link
+            href="/dashboard/profile"
+            className={`${styles.profileButton} ${
+              avatarError ? styles.withPadding : styles.withoutPadding
+            }`}
+          >
+            {!avatarError ? (
+              <div className={styles.avatar}>
+                <Image
+                  src="/images/richmond.svg"
+                  alt="Richmond Adiole"
+                  width={32}
+                  height={32}
+                  onError={() => setAvatarError(true)}
+                />
+              </div>
+            ) : (
+              <FaUser />
+            )}
+          </Link>
         </div>
       </div>
     </nav>

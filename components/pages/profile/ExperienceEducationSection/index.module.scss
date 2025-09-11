@@ -1,0 +1,33 @@
+.experienceEducationContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-top: 2.5rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  padding: 2rem 0;
+}
+
+.leftColumn,
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .experienceEducationContainer {
+    gap: 2rem;
+    padding: 1.5rem 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .experienceEducationContainer {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 1.5rem 1rem;
+    padding: 1.5rem 0;
+  }
+}

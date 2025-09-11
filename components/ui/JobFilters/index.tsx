@@ -1,7 +1,103 @@
-import React, { SetStateAction } from "react";
+import React, { SetStateAction, useState, useRef, useEffect } from "react";
 import styles from "./index.module.scss";
-import { FaSearch, FaMapMarkerAlt, FaBriefcase } from "react-icons/fa";
+import {
+  FaSearch,
+  FaMapMarkerAlt,
+  FaBriefcase,
+  FaChevronDown,
+} from "react-icons/fa";
 import { Job } from "@/types/job";
+
+interface Filters {
+  location: string;
+  experience: string;
+  remote: string;
+  search: string;
+}
+
+interface CustomSelectProps {
+  value: string;
+  onChange: (value: string) => void;
+  options: string[];
+  placeholder: string;
+  icon?: React.ReactNode;
+}
+
+const CustomSelect: React.FC<CustomSelectProps> = ({
+  value,
+  onChange,
+  options,
+  placeholder,
+  icon,
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const selectRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        selectRef.current &&
+        !selectRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleOptionClick = (optionValue: string) => {
+    onChange(optionValue);
+    setIsOpen(false);
+  };
+
+  const displayValue = value || placeholder;
+
+  return (
+    <div className={styles.filterGroup}>
+      {icon && <span className={styles.icon}>{icon}</span>}
+      <div className={styles.customSelect} ref={selectRef}>
+        <button
+          className={`${styles.selectButton} ${value ? styles.active : ""}`}
+          onClick={() => setIsOpen(!isOpen)}
+          type="button"
+        >
+          <span>{displayValue}</span>
+          <FaChevronDown
+            className={`${styles.selectArrow} ${isOpen ? styles.open : ""}`}
+          />
+        </button>
+
+        {isOpen && (
+          <div className={styles.selectDropdown}>
+            <button
+              className={`${styles.selectOption} ${
+                !value ? styles.selected : ""
+              }`}
+              onClick={() => handleOptionClick("")}
+              type="button"
+            >
+              {placeholder}
+            </button>
+            {options.map((option) => (
+              <button
+                key={option}
+                className={`${styles.selectOption} ${
+                  value === option ? styles.selected : ""
+                }`}
+                onClick={() => handleOptionClick(option)}
+                type="button"
+              >
+                {option}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
 interface Filters {
   location: string;
@@ -43,6 +139,7 @@ const JobFilters = ({
       tag.toLowerCase().includes("toronto") ||
       tag.toLowerCase().includes("vancouver") ||
       tag.toLowerCase().includes("montreal") ||
+      tag.toLowerCase().includes("edmonton") ||
       tag.toLowerCase().includes("remote") ||
       tag.toLowerCase().includes("onsite") ||
       tag.toLowerCase().includes("hybrid")
@@ -60,62 +157,42 @@ const JobFilters = ({
     (tag) =>
       tag.toLowerCase().includes("remote") ||
       tag.toLowerCase().includes("onsite") ||
-      tag.toLowerCase().includes("hybrid")
+      tag.toLowerCase().includes("hybrid") ||
+      tag.toLowerCase().includes("on-site")
   );
 
   return (
     <div className={styles.filtersContainer}>
       <div className={styles.filtersBar}>
-        <div className={styles.filterGroup}>
-          <FaMapMarkerAlt className={styles.icon} />
-          <select
-            value={filters.location}
-            onChange={(e) =>
-              setFilters((f) => ({ ...f, location: e.target.value }))
-            }
-          >
-            <option value="">All Locations</option>
-            {locationTags.map((loc) => (
-              <option key={loc} value={loc}>
-                {loc}
-              </option>
-            ))}
-          </select>
-        </div>
+        <CustomSelect
+          value={filters.location}
+          onChange={(value) => setFilters((f) => ({ ...f, location: value }))}
+          options={locationTags}
+          placeholder="All Locations"
+          icon={<FaMapMarkerAlt />}
+        />
+
         <span className={styles.divider} />
-        <div className={styles.filterGroup}>
-          <FaBriefcase className={styles.icon} />
-          <select
-            value={filters.experience}
-            onChange={(e) =>
-              setFilters((f) => ({ ...f, experience: e.target.value }))
-            }
-          >
-            <option value="">All Experience</option>
-            {experienceTags.map((exp) => (
-              <option key={exp} value={exp}>
-                {exp}
-              </option>
-            ))}
-          </select>
-        </div>
+
+        <CustomSelect
+          value={filters.experience}
+          onChange={(value) => setFilters((f) => ({ ...f, experience: value }))}
+          options={experienceTags}
+          placeholder="All Experience"
+          icon={<FaBriefcase />}
+        />
+
         <span className={styles.divider} />
-        <div className={styles.filterGroup}>
-          <select
-            value={filters.remote}
-            onChange={(e) =>
-              setFilters((f) => ({ ...f, remote: e.target.value }))
-            }
-          >
-            <option value="">All Types</option>
-            {workTypeTags.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
-        </div>
+
+        <CustomSelect
+          value={filters.remote}
+          onChange={(value) => setFilters((f) => ({ ...f, remote: value }))}
+          options={workTypeTags}
+          placeholder="All Types"
+        />
+
         <span className={styles.divider} />
+
         <div className={styles.searchGroup}>
           <input
             type="text"
