@@ -132,33 +132,43 @@ const JobFilters = ({
   // Get all unique tag values for different categories
   const allTags = getUniqueTagValues(jobs);
 
-  // Separate tags by likely categories
+  // Define actual locations based on our current job data
   const locationTags = allTags.filter(
     (tag) =>
-      tag.toLowerCase().includes("ottawa") ||
-      tag.toLowerCase().includes("toronto") ||
-      tag.toLowerCase().includes("vancouver") ||
-      tag.toLowerCase().includes("montreal") ||
       tag.toLowerCase().includes("edmonton") ||
-      tag.toLowerCase().includes("remote") ||
-      tag.toLowerCase().includes("onsite") ||
-      tag.toLowerCase().includes("hybrid")
+      tag.toLowerCase().includes("mississauga") ||
+      tag.toLowerCase().includes("alberta") ||
+      tag.toLowerCase().includes("ontario") ||
+      tag.toLowerCase().includes("ab") ||
+      tag.toLowerCase().includes("on")
   );
 
+  // Define actual experience/employment types from our job data
   const experienceTags = allTags.filter(
     (tag) =>
       tag.toLowerCase().includes("full-time") ||
       tag.toLowerCase().includes("part-time") ||
-      tag.toLowerCase().includes("contract") ||
-      tag.toLowerCase().includes("internship")
+      tag.toLowerCase().includes("will train") ||
+      tag.toLowerCase().includes("entry level")
   );
 
+  // Define actual work arrangement types from our job data
   const workTypeTags = allTags.filter(
     (tag) =>
+      tag.toLowerCase().includes("on-site") ||
       tag.toLowerCase().includes("remote") ||
-      tag.toLowerCase().includes("onsite") ||
-      tag.toLowerCase().includes("hybrid") ||
-      tag.toLowerCase().includes("on-site")
+      tag.toLowerCase().includes("hybrid")
+  );
+
+  // Define job categories based on our actual job types
+  const jobCategoryTags = allTags.filter(
+    (tag) =>
+      tag.toLowerCase().includes("management") ||
+      tag.toLowerCase().includes("administration") ||
+      tag.toLowerCase().includes("technical sales") ||
+      tag.toLowerCase().includes("communications") ||
+      tag.toLowerCase().includes("trucking") ||
+      tag.toLowerCase().includes("food service")
   );
 
   return (
@@ -177,8 +187,8 @@ const JobFilters = ({
         <CustomSelect
           value={filters.experience}
           onChange={(value) => setFilters((f) => ({ ...f, experience: value }))}
-          options={experienceTags}
-          placeholder="All Experience"
+          options={[...experienceTags, ...jobCategoryTags]}
+          placeholder="All Categories"
           icon={<FaBriefcase />}
         />
 
