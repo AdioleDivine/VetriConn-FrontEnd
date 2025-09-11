@@ -106,6 +106,14 @@ interface Filters {
   search: string;
 }
 
+function getUniqueLocations(jobs: Job[]): string[] {
+  const locations = new Set<string>();
+  jobs.forEach((job) => {
+    locations.add(job.location);
+  });
+  return Array.from(locations);
+}
+
 function getUniqueTagValues(jobs: Job[], category?: string): string[] {
   const values = new Set<string>();
   jobs.forEach((job) => {
@@ -132,16 +140,8 @@ const JobFilters = ({
   // Get all unique tag values for different categories
   const allTags = getUniqueTagValues(jobs);
 
-  // Define actual locations based on our current job data
-  const locationTags = allTags.filter(
-    (tag) =>
-      tag.toLowerCase().includes("edmonton") ||
-      tag.toLowerCase().includes("mississauga") ||
-      tag.toLowerCase().includes("alberta") ||
-      tag.toLowerCase().includes("ontario") ||
-      tag.toLowerCase().includes("ab") ||
-      tag.toLowerCase().includes("on")
-  );
+  // Get unique locations from the dedicated location field
+  const locationTags = getUniqueLocations(jobs);
 
   // Define actual experience/employment types from our job data
   const experienceTags = allTags.filter(
@@ -168,7 +168,9 @@ const JobFilters = ({
       tag.toLowerCase().includes("technical sales") ||
       tag.toLowerCase().includes("communications") ||
       tag.toLowerCase().includes("trucking") ||
-      tag.toLowerCase().includes("food service")
+      tag.toLowerCase().includes("food service") ||
+      tag.toLowerCase().includes("healthcare") ||
+      tag.toLowerCase().includes("beauty")
   );
 
   return (

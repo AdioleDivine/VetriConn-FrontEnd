@@ -5,6 +5,7 @@ export interface Job {
   role: string;
   company_name: string;
   company_logo: string;
+  location: string; // Dedicated location field for filtering
   tags: Tag[];
   full_description: string;
   responsibilities: string[];

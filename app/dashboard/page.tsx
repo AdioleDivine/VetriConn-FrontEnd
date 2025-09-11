@@ -22,8 +22,7 @@ const Dashboard = () => {
   const filteredAndSortedJobs = useMemo(() => {
     const filtered = jobs.filter((job) => {
       const matchesLocation =
-        !filters.location ||
-        job.tags.some((tag) => tag.name === filters.location);
+        !filters.location || job.location === filters.location;
       const matchesExperience =
         !filters.experience ||
         job.tags.some((tag) => tag.name === filters.experience);
