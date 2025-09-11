@@ -13,6 +13,7 @@ const JobDescriptor: React.FC<JobDescriptorProps> = ({
   full_description,
   responsibilities,
   qualifications,
+  applicationLink,
 }) => {
   return (
     <div className={styles.card}>
@@ -63,7 +64,18 @@ const JobDescriptor: React.FC<JobDescriptorProps> = ({
           ))}
         </ol>
       </div>
-      <button className={styles.cta}>Send Resume</button>
+      {applicationLink ? (
+        <a
+          href={applicationLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.cta}
+        >
+          Apply Now
+        </a>
+      ) : (
+        <button className={styles.cta}>Apply Now</button>
+      )}
     </div>
   );
 };

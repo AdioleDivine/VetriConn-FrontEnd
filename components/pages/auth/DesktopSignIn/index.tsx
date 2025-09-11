@@ -66,7 +66,7 @@ export default function SignIn() {
         showToast({
           type: "error",
           title: "Validation Error",
-          description: "Please fix the errors below and try again",
+          description: "Please fix the errors and try again",
         });
       }
     } finally {

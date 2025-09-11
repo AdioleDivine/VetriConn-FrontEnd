@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-// Password validation schema
+// Password validation schema for sign up (strict)
 const passwordSchema = z
   .string()
   .min(8, "Password must be at least 8 characters long")
@@ -8,10 +8,13 @@ const passwordSchema = z
   .regex(/[0-9]/, "Password must contain at least one digit")
   .regex(/[^A-Za-z0-9]/, "Password must contain at least one symbol");
 
+// Password validation schema for sign in (only non-empty)
+const signInPasswordSchema = z.string().min(1, "Password is required");
+
 // Sign in validation schema
 export const signInSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
-  password: passwordSchema,
+  password: signInPasswordSchema,
   terms: z.boolean().refine((val) => val === true, {
     message: "You must agree to the terms and conditions",
   }),

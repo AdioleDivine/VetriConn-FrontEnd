@@ -1,0 +1,161 @@
+// Professional Summary Section
+.summarySection {
+  margin-top: 2.5rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  padding: 2rem;
+}
+
+.summaryHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.summaryTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.summaryEditBtn {
+  background: none;
+  border: none;
+  color: #222;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.summaryText {
+  font-size: 1rem;
+  color: #444;
+  margin-top: 0.5rem;
+}
+
+// Attachments Section
+.attachmentsSection {
+  margin-top: 2.5rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  padding: 2rem;
+}
+
+.attachmentsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.attachmentsTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.attachmentsUploadBtn {
+  background: none;
+  border: none;
+  color: #222;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.attachmentsGrid {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.attachmentCard {
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 0.5rem;
+  width: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+}
+
+.attachmentImage {
+  border-radius: 4px;
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+
+.attachmentLabel {
+  font-size: 0.95rem;
+  color: #333;
+  text-align: center;
+  margin-top: 0.25rem;
+}
+.profileContainer {
+  width: 100%;
+  padding: 2rem;
+}
+
+.profileCard {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profileContainer {
+    padding: 1rem;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profileContainer {
+    padding: 1rem;
+  }
+
+  .profileHeader {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .profileInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .editBtn {
+    position: static;
+    margin-top: 1rem;
+  }
+
+  .name {
+    font-size: 2rem;
+  }
+
+  .profileStats {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .statItem {
+    justify-content: center;
+    text-align: center;
+  }
+}

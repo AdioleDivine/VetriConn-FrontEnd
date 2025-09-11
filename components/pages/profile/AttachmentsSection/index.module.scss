@@ -1,0 +1,64 @@
+.attachmentsSection {
+  margin-top: 2.5rem;
+  background: white;
+  border-radius: 10px;
+  padding: 2rem;
+}
+
+.attachmentsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.attachmentsTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.attachmentsUploadBtn {
+  background: none;
+  border: none;
+  color: #222;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.attachmentsGrid {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.attachmentCard {
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 0.5rem;
+  width: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+}
+
+.attachmentImage {
+  border-radius: 4px;
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+
+.attachmentLabel {
+  font-size: 0.95rem;
+  color: #333;
+  text-align: center;
+  margin-top: 0.25rem;
+}
