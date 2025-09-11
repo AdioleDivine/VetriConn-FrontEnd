@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import styles from "./page.module.scss";
 import { ProfileHeader } from "@/components/pages/profile/ProfileHeader";
 import { ProfileStats } from "@/components/pages/profile/ProfileStats";
-import { AboutSection } from "@/components/pages/profile/AboutSection";
 import { ProfessionalSummary } from "@/components/pages/profile/ProfessionalSummary";
 import { AttachmentsSection } from "@/components/pages/profile/AttachmentsSection";
 import { ExperienceEducationSection } from "@/components/pages/profile/ExperienceEducationSection";
