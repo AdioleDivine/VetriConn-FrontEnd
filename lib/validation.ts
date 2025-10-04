@@ -26,8 +26,8 @@ export const signUpSchema = z.object({
   lastName: z.string().min(1, "Last name is required"),
   email: z.string().email("Please enter a valid email address"),
   password: passwordSchema,
-  role: z.string().refine((val) => val === "jobseeker" || val === "employer", {
-    message: "Please select a role",
+  role: z.string().refine((val) => val === "jobseeker", {
+    message: "Please select job seeker role",
   }),
   terms: z.boolean().refine((val) => val === true, {
     message: "You must agree to the terms and conditions",

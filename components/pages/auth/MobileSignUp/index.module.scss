@@ -102,6 +102,22 @@
     border-color: vars.$primary-color;
     background-color: #fff0f0;
   }
+
+  &.disabled {
+    background-color: #f5f5f5;
+    border-color: #ddd;
+    cursor: not-allowed;
+    opacity: 0.6;
+
+    &:hover {
+      border-color: #ddd;
+    }
+
+    .roleTitle,
+    .roleDescription {
+      color: #999;
+    }
+  }
 }
 
 .roleTitle {
@@ -182,6 +198,16 @@
   &:focus {
     border-color: vars.$primary-color;
   }
+
+  &.inputError {
+    border-color: #dc3545;
+  }
+}
+
+.error {
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 4px;
 }
 
 // === CHECKBOX ===

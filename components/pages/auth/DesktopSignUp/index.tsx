@@ -10,9 +10,10 @@ import DottedBox3 from "@/public/images/dotted_box_3.svg";
 import { signUpSchema, type SignUpFormData } from "@/lib/validation";
 import { useToaster } from "@/components/ui/Toaster";
 import { ZodError, ZodIssue } from "zod";
+import { signupUser, storeAuthToken } from "@/lib/api";
 
 export default function SignUp() {
-  const [role, setRole] = useState<"jobseeker" | "employer" | "">(""); // Start with no selection
+  const [role, setRole] = useState<"jobseeker" | "employer" | "">("jobseeker"); // Default to jobseeker
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -61,19 +62,40 @@ export default function SignUp() {
       // Validate form data
       signUpSchema.parse(formData);
 
-      // Show success toast
-      showToast({
-        type: "success",
-        title: "Account creation successful",
-        description: "Please check email within 24hrs to confirm your account",
+      console.log("Attempting signup for:", email, "with role:", role);
+
+      // Call the signup API
+      const response = await signupUser({
+        firstName,
+        lastName,
+        email,
+        password,
+        role,
       });
 
-      // Simulate API call delay
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 1500);
+      if (response.success && response.data) {
+        // Store the authentication token
+        storeAuthToken(response.data.token);
+
+        // Show success toast
+        showToast({
+          type: "success",
+          title: "Account creation successful",
+          description: "Welcome to VetriConn! Redirecting to dashboard...",
+        });
+
+        // Redirect to dashboard
+        setTimeout(() => {
+          router.push("/dashboard");
+        }, 1500);
+      } else {
+        throw new Error(response.message || "Account creation failed");
+      }
     } catch (error) {
+      console.error("Signup error details:", error);
+
       if (error instanceof Error && "issues" in error) {
+        // Handle validation errors
         const zodError = error as ZodError;
         const errorMessages: Record<string, string> = {};
         zodError.issues?.forEach((err: ZodIssue) => {
@@ -89,6 +111,36 @@ export default function SignUp() {
           type: "error",
           title: "Validation Error",
           description: "Please fix the errors below and try again",
+        });
+      } else {
+        // Handle API errors
+        const errorMessage =
+          error instanceof Error ? error.message : "Account creation failed";
+
+        let description = errorMessage;
+
+        // Provide more helpful error messages for common issues
+        if (errorMessage.includes("fetch")) {
+          description =
+            "Unable to connect to server. Please check if the backend is running on localhost:5000";
+        } else if (
+          errorMessage.includes("NetworkError") ||
+          errorMessage.includes("Failed to fetch")
+        ) {
+          description =
+            "Network error. Please check your connection and ensure the backend server is running.";
+        } else if (
+          errorMessage.includes("already exists") ||
+          errorMessage.includes("duplicate")
+        ) {
+          description =
+            "An account with this email already exists. Please try signing in instead.";
+        }
+
+        showToast({
+          type: "error",
+          title: "Account Creation Failed",
+          description: description,
         });
       }
     } finally {
@@ -134,18 +186,18 @@ export default function SignUp() {
             </label>
 
             <label
-              className={`${styles.roleButton} ${
-                role === "employer" ? styles.active : ""
-              }`}
+              className={`${styles.roleButton} ${styles.disabled}`}
+              title="Coming soon"
             >
               <input
                 type="radio"
                 name="role"
                 value="employer"
-                checked={role === "employer"}
-                onChange={() => setRole("employer")}
+                checked={false}
+                disabled={true}
+                onChange={() => {}}
               />
-              <span>Employer</span>
+              <span>Employer (Coming Soon)</span>
             </label>
           </div>
           {errors.role && <span className={styles.error}>{errors.role}</span>}

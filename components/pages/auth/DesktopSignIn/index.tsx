@@ -9,6 +9,7 @@ import DottedBox3 from "@/public/images/dotted_box_3.svg";
 import { signInSchema } from "@/lib/validation";
 import { useToaster } from "@/components/ui/Toaster";
 import { ZodError, ZodIssue } from "zod";
+import { loginUser, storeAuthToken } from "@/lib/api";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -39,19 +40,34 @@ export default function SignIn() {
       // Validate form data
       signInSchema.parse(formData);
 
-      // Show success toast
-      showToast({
-        type: "success",
-        title: "Login successful",
-        description: "You will be redirected shortly",
-      });
+      console.log('Attempting login for:', email);
+      
+      // Call the login API
+      const response = await loginUser(email, password);
 
-      // Simulate API call delay
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 1500);
+      if (response.success && response.data) {
+        // Store the authentication token
+        storeAuthToken(response.data.token);
+
+        // Show success toast
+        showToast({
+          type: "success",
+          title: "Login successful",
+          description: "Welcome back! Redirecting to dashboard...",
+        });
+
+        // Redirect to dashboard
+        setTimeout(() => {
+          router.push("/dashboard");
+        }, 1500);
+      } else {
+        throw new Error(response.error || "Login failed");
+      }
     } catch (error) {
+      console.error('Login error details:', error);
+      
       if (error instanceof Error && "issues" in error) {
+        // Handle validation errors
         const zodError = error as ZodError;
         const errorMessages: Record<string, string> = {};
         zodError.issues?.forEach((err: ZodIssue) => {
@@ -68,6 +84,31 @@ export default function SignIn() {
           title: "Validation Error",
           description: "Please fix the errors and try again",
         });
+      } else {
+        // Handle API errors
+        const errorMessage = error instanceof Error ? error.message : "Login failed";
+        
+        let description = errorMessage;
+        
+        // Provide more helpful error messages for common issues
+        if (errorMessage.includes('fetch')) {
+          description = "Unable to connect to server. Please check if the backend is running on localhost:5000";
+        } else if (errorMessage.includes('NetworkError') || errorMessage.includes('Failed to fetch')) {
+          description = "Network error. Please check your connection and ensure the backend server is running.";
+        }
+        
+        showToast({
+          type: "error",
+          title: "Login Failed",
+          description: description,
+        });
+
+        // If it's an authentication error, clear the form
+        if (errorMessage.toLowerCase().includes('invalid') || 
+            errorMessage.toLowerCase().includes('incorrect') ||
+            errorMessage.toLowerCase().includes('not found')) {
+          setPassword("");
+        }
       }
     } finally {
       setIsSubmitting(false);
