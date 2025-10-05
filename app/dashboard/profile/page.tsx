@@ -77,13 +77,13 @@ const ProfilePage = () => {
 
   const handleSave = async () => {
     if (!editingData || !userProfile) return;
-    
+
     setIsSaving(true);
-    
+
     try {
       // Prepare the data to send to the backend
       const profileUpdateData: any = {};
-      
+
       const nameParts = editingData.name.trim().split(" ");
       if (nameParts.length > 0) {
         profileUpdateData.first_name = nameParts[0];
@@ -91,64 +91,112 @@ const ProfilePage = () => {
           profileUpdateData.last_name = nameParts.slice(1).join(" ");
         }
       }
-      
+
       if (editingData.bio && editingData.bio.trim()) {
         profileUpdateData.bio = editingData.bio.trim();
       } else {
         profileUpdateData.bio = "";
       }
-      
+
       if (editingData.title && editingData.title.trim()) {
         profileUpdateData.profession = editingData.title.trim();
       }
-      
+
       if (editingData.current && editingData.current.trim()) {
         profileUpdateData.current_job = editingData.current.trim();
       }
-      
+
       if (editingData.experience && editingData.experience.trim()) {
         profileUpdateData.experience = editingData.experience.trim();
       }
-      
+
       if (editingData.location && editingData.location.trim()) {
         profileUpdateData.location = editingData.location.trim();
       }
-      
+
       if (editingData.lookingFor && editingData.lookingFor.length > 0) {
         profileUpdateData.looking_for = editingData.lookingFor.filter(
           (item: string) => item.trim()
         );
       }
-      
+
       if (editingData.avatar && editingData.avatar.trim()) {
         profileUpdateData.picture = editingData.avatar.trim();
       } else {
         profileUpdateData.picture = "";
       }
-      
+
+      // Validate URLs for social links
+      const isValidUrl = (url: string) => {
+        try {
+          new URL(url);
+          return true;
+        } catch {
+          return false;
+        }
+      };
+
       profileUpdateData.socials = {};
       if (editingData.socials.linkedin && editingData.socials.linkedin.trim()) {
-        profileUpdateData.socials.linkedin = editingData.socials.linkedin.trim();
+        const linkedinUrl = editingData.socials.linkedin.trim();
+        if (isValidUrl(linkedinUrl)) {
+          profileUpdateData.socials.linkedin = linkedinUrl;
+        } else {
+          showToast({
+            type: "error",
+            title: "Invalid URL",
+            description: "Please enter a valid LinkedIn URL.",
+          });
+          return;
+        }
       }
       if (editingData.socials.twitter && editingData.socials.twitter.trim()) {
-        profileUpdateData.socials.twitter = editingData.socials.twitter.trim();
+        const twitterUrl = editingData.socials.twitter.trim();
+        if (isValidUrl(twitterUrl)) {
+          profileUpdateData.socials.twitter = twitterUrl;
+        } else {
+          showToast({
+            type: "error",
+            title: "Invalid URL",
+            description: "Please enter a valid X (Twitter) URL.",
+          });
+          return;
+        }
       }
       if (editingData.socials.github && editingData.socials.github.trim()) {
-        profileUpdateData.socials.github = editingData.socials.github.trim();
-      }
-      
-      if (editingData.professionalSummary && editingData.professionalSummary.trim()) {
-        profileUpdateData.professional_summary = editingData.professionalSummary.trim();
+        const githubUrl = editingData.socials.github.trim();
+        if (isValidUrl(githubUrl)) {
+          profileUpdateData.socials.github = githubUrl;
+        } else {
+          showToast({
+            type: "error",
+            title: "Invalid URL",
+            description: "Please enter a valid GitHub URL.",
+          });
+          return;
+        }
       }
 
+      if (
+        editingData.professionalSummary &&
+        editingData.professionalSummary.trim()
+      ) {
+        profileUpdateData.professional_summary =
+          editingData.professionalSummary.trim();
+      }
+
+      // Debug: Log what we're sending to the backend
+      console.log("Profile update data being sent:", profileUpdateData);
+      console.log("Fields being sent:", Object.keys(profileUpdateData));
+
       const response = await updateUserProfile(profileUpdateData);
-      
+
       if (response.success) {
         // Exit edit mode and refresh data
         setIsEditing(false);
         setEditingData(null);
         mutateProfile();
-        
+
         showToast({
           type: "success",
           title: "Profile Updated",
@@ -173,26 +221,32 @@ const ProfilePage = () => {
 
   const handleInputChange = (field: string, value: string | string[]) => {
     if (!editingData) return;
-    
+
     if (field.includes(".")) {
       const [parentField, childField] = field.split(".");
-      setEditingData(prev => {
+      setEditingData((prev) => {
         if (!prev) return null;
-        
+
         const parentValue = prev[parentField as keyof EditingProfile];
         return {
           ...prev,
           [parentField]: {
-            ...(typeof parentValue === 'object' && parentValue !== null ? parentValue : {}),
+            ...(typeof parentValue === "object" && parentValue !== null
+              ? parentValue
+              : {}),
             [childField]: value,
           },
         };
       });
     } else {
-      setEditingData(prev => prev ? {
-        ...prev,
-        [field]: value,
-      } : null);
+      setEditingData((prev) =>
+        prev
+          ? {
+              ...prev,
+              [field]: value,
+            }
+          : null
+      );
     }
   };
 
@@ -206,7 +260,7 @@ const ProfilePage = () => {
       </div>
     );
   }
-  
+
   if (isError || !userProfile) {
     return (
       <div className={styles.profileContainer}>

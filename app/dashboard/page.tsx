@@ -3,12 +3,15 @@ import JobCard from "@/components/ui/JobCard";
 import JobFilters from "@/components/ui/JobFilters";
 import PageHeader from "@/components/ui/PageHeader";
 import React from "react";
-import jobs from "@/lib/jobs";
+import { useJobs } from "@/hooks/useJobs";
 import styles from "./page.module.scss";
 import { useState, useMemo } from "react";
 import JobDescriptor from "@/components/ui/JobDescriptor";
 
 const Dashboard = () => {
+  // Fetch jobs from database
+  const { jobs, isLoading, isError } = useJobs({ limit: 50 });
+
   const [filters, setFilters] = useState({
     location: "",
     experience: "",
@@ -17,9 +20,18 @@ const Dashboard = () => {
   });
   const [sortBy, setSortBy] = useState("updated");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
-  const [selectedJobId, setSelectedJobId] = useState(jobs[0].id);
+  const [selectedJobId, setSelectedJobId] = useState<string>("");
+  // Initialize selectedJobId when jobs are loaded
+  React.useEffect(() => {
+    if (jobs.length > 0 && !selectedJobId) {
+      setSelectedJobId(jobs[0].id);
+    }
+  }, [jobs, selectedJobId]);
+
   // Filtering and sorting logic
   const filteredAndSortedJobs = useMemo(() => {
+    if (!jobs.length) return [];
+
     const filtered = jobs.filter((job) => {
       const matchesLocation =
         !filters.location || job.location === filters.location;
@@ -58,10 +70,12 @@ const Dashboard = () => {
 
       return sortOrder === "asc" ? comparison : -comparison;
     });
-  }, [filters, sortBy, sortOrder]);
+  }, [jobs, filters, sortBy, sortOrder]);
 
   // Update selected job if it's filtered out
   const selectedJob = useMemo(() => {
+    if (!filteredAndSortedJobs.length) return null;
+
     const currentSelected = filteredAndSortedJobs.find(
       (job) => job.id === selectedJobId
     );
@@ -73,8 +87,8 @@ const Dashboard = () => {
       setSelectedJobId(filteredAndSortedJobs[0].id);
       return filteredAndSortedJobs[0];
     }
-    // Fallback to first job if no filtered jobs
-    return jobs[0];
+    // No jobs available
+    return null;
   }, [filteredAndSortedJobs, selectedJobId]);
 
   const handleSortChange = (
@@ -84,6 +98,77 @@ const Dashboard = () => {
     setSortBy(newSortBy);
     setSortOrder(newSortOrder);
   };
+
+  if (isLoading) {
+    return (
+      <div className={styles.dashboardContainer}>
+        {/* Skeleton for filters */}
+        <div className={styles.filtersSkeleton}>
+          <div className={styles.skeletonFilterBar}>
+            <div className={styles.skeletonFilter}></div>
+            <div className={styles.skeletonFilter}></div>
+            <div className={styles.skeletonFilter}></div>
+            <div className={styles.skeletonSearch}></div>
+          </div>
+        </div>
+
+        {/* Skeleton for page header */}
+        <div className={styles.headerSkeleton}>
+          <div className={styles.skeletonTitle}></div>
+          <div className={styles.skeletonControls}></div>
+        </div>
+
+        <main className={styles.container}>
+          <aside className={styles.sidebar}>
+            {/* Loading skeleton for job cards */}
+            {[...Array(6)].map((_, index) => (
+              <div key={index} className={styles.skeleton}>
+                <div className={styles.skeletonCard}>
+                  <div className={styles.skeletonHeader}>
+                    <div className={styles.skeletonAvatar}></div>
+                    <div className={styles.skeletonInfo}>
+                      <div className={styles.skeletonTitle}></div>
+                      <div className={styles.skeletonCompany}></div>
+                    </div>
+                    <div className={styles.skeletonBookmark}></div>
+                  </div>
+                  <div className={styles.skeletonDescription}></div>
+                  <div className={styles.skeletonTags}>
+                    <div className={styles.skeletonTag}></div>
+                    <div className={styles.skeletonTag}></div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </aside>
+          <section className={styles.main}>
+            <div className={styles.skeletonJobDescriptor}>
+              <div className={styles.skeletonDescriptorHeader}>
+                <div className={styles.skeletonDescriptorAvatar}></div>
+                <div className={styles.skeletonDescriptorTitle}></div>
+                <div className={styles.skeletonDescriptorCompany}></div>
+              </div>
+              <div className={styles.skeletonDescriptorContent}>
+                <div className={styles.skeletonDescriptorLine}></div>
+                <div className={styles.skeletonDescriptorLine}></div>
+                <div className={styles.skeletonDescriptorLine}></div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className={styles.dashboardContainer}>
+        <div className={styles.errorState}>
+          <p>Unable to load jobs at the moment. Please try again later.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.dashboardContainer}>
@@ -117,7 +202,13 @@ const Dashboard = () => {
           ))}
         </aside>
         <section className={styles.main}>
-          <JobDescriptor {...selectedJob} />
+          {selectedJob ? (
+            <JobDescriptor {...selectedJob} />
+          ) : (
+            <div className={styles.noJobSelected}>
+              <p>Select a job to view details</p>
+            </div>
+          )}
         </section>
       </main>
     </div>

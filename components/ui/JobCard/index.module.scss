@@ -161,8 +161,10 @@
   cursor: pointer;
   position: relative;
   border-left: none;
+
   &:hover {
-    background: color.scale(vars.$primary-color, vars.$lightness: 95%);
+    background: color.scale(vars.$primary-color, $lightness: 95%);
+
     &::before {
       content: "";
       position: absolute;
@@ -171,11 +173,13 @@
       bottom: 12px;
       width: 4px;
       height: calc(100% - 24px);
-      background: color.scale(vars.$primary-color, vars.$lightness: 25%);
+      background: color.scale(vars.$primary-color, $lightness: 25%);
     }
   }
+
   &.selected {
-    background: color.scale(vars.$primary-color, vars.$lightness: 95%);
+    background: color.scale(vars.$primary-color, $lightness: 95%);
+
     &::before {
       content: "";
       position: absolute;
@@ -184,7 +188,7 @@
       bottom: 12px;
       width: 4px;
       height: calc(100% - 24px);
-      background: color.scale(vars.$primary-color, vars.$lightness: 25%);
+      background: color.scale(vars.$primary-color, $lightness: 25%);
     }
   }
 }

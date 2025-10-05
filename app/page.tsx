@@ -8,6 +8,7 @@ import { HowItWorksSection } from "@/components/pages/home/BenefitsSection";
 import ContactSection from "@/components/pages/home/ContactSection";
 import HowItWorksStepsSection from "@/components/pages/home/HowItWorksStepsSection";
 import { FaqSection } from "@/components/pages/home/FaqSection";
+
 export default function Home() {
   return (
     <main className={styles.Container}>

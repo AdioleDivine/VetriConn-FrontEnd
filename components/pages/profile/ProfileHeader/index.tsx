@@ -98,7 +98,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
                       onInputChange("socials.linkedin", e.target.value)
                     }
                     className={styles.socialInput}
-                    placeholder="LinkedIn URL"
+                    placeholder="https://linkedin.com/in/yourprofile"
                   />
                 </div>
                 <div className={styles.socialInputGroup}>
@@ -110,7 +110,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
                       onInputChange("socials.twitter", e.target.value)
                     }
                     className={styles.socialInput}
-                    placeholder="X (Twitter) URL"
+                    placeholder="https://x.com/yourusername"
                   />
                 </div>
                 <div className={styles.socialInputGroup}>
@@ -122,7 +122,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
                       onInputChange("socials.github", e.target.value)
                     }
                     className={styles.socialInput}
-                    placeholder="GitHub URL"
+                    placeholder="https://github.com/yourusername"
                   />
                 </div>
               </div>
@@ -131,7 +131,9 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
         ) : (
           <>
             <h1 className={styles.name}>{userProfile.name}</h1>
-            <p className={styles.title}>{userProfile.title || "Professional"}</p>
+            <p className={styles.title}>
+              {userProfile.title || "Professional"}
+            </p>
             {userProfile.bio && <p className={styles.bio}>{userProfile.bio}</p>}
             <div className={styles.socialIcons}>
               {userProfile.socials?.linkedin && (
@@ -188,10 +190,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
             </button>
           </div>
         ) : (
-          <button
-            className={styles.editBtn}
-            onClick={onEditToggle}
-          >
+          <button className={styles.editBtn} onClick={onEditToggle}>
             Edit <FaEdit className={styles.editIcon} />
           </button>
         )}

@@ -50,7 +50,9 @@ export const ProfileStats: React.FC<ProfileStatsProps> = ({
               placeholder="Enter your current job"
             />
           ) : (
-            <span className={styles.statValue}>{userProfile.current || "Not specified"}</span>
+            <span className={styles.statValue}>
+              {userProfile.current || "Not specified"}
+            </span>
           )}
         </div>
       </div>
@@ -66,7 +68,9 @@ export const ProfileStats: React.FC<ProfileStatsProps> = ({
               className={styles.editInput}
             />
           ) : (
-            <span className={styles.statValue}>{userProfile.experience || "Not specified"}</span>
+            <span className={styles.statValue}>
+              {userProfile.experience || "Not specified"}
+            </span>
           )}
         </div>
       </div>
@@ -82,7 +86,9 @@ export const ProfileStats: React.FC<ProfileStatsProps> = ({
               className={styles.editInput}
             />
           ) : (
-            <span className={styles.statValue}>{userProfile.location || "Not specified"}</span>
+            <span className={styles.statValue}>
+              {userProfile.location || "Not specified"}
+            </span>
           )}
         </div>
       </div>
@@ -108,10 +114,9 @@ export const ProfileStats: React.FC<ProfileStatsProps> = ({
             />
           ) : (
             <span className={styles.statValue}>
-              {(userProfile.lookingFor ?? []).length > 0 
+              {(userProfile.lookingFor ?? []).length > 0
                 ? (userProfile.lookingFor ?? []).join(", ")
-                : "Not specified"
-              }
+                : "Not specified"}
             </span>
           )}
         </div>

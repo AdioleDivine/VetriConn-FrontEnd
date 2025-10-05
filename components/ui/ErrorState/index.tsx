@@ -1,6 +1,6 @@
-import React from 'react';
-import styles from './index.module.scss';
-import { FaExclamationTriangle, FaRedo } from 'react-icons/fa';
+import React from "react";
+import styles from "./index.module.scss";
+import { FaExclamationTriangle, FaRedo } from "react-icons/fa";
 
 interface ErrorStateProps {
   title?: string;
@@ -24,10 +24,7 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
         <h2 className={styles.errorTitle}>{title}</h2>
         <p className={styles.errorMessage}>{message}</p>
         {showRetry && onRetry && (
-          <button 
-            className={styles.retryButton}
-            onClick={onRetry}
-          >
+          <button className={styles.retryButton} onClick={onRetry}>
             <FaRedo className={styles.retryIcon} />
             Try Again
           </button>

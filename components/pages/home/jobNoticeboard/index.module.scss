@@ -9,7 +9,7 @@
 }
 
 .title {
-  @include heading-2;
+  @include typo.heading-2;
   margin-bottom: 2rem;
   color: vars.$text-color;
   text-align: center;
@@ -24,6 +24,83 @@
     grid-template-columns: 1fr;
     justify-items: center;
   }
+}
+
+// Loading skeleton styles
+.skeleton {
+  width: 100%;
+}
+
+.skeletonCard {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid #e9ecef;
+}
+
+.skeletonTitle {
+  height: 24px;
+  background: linear-gradient(90deg, #e9ecef 25%, #f8f9fa 50%, #e9ecef 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.skeletonCompany {
+  height: 16px;
+  width: 60%;
+  background: linear-gradient(90deg, #e9ecef 25%, #f8f9fa 50%, #e9ecef 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.skeletonDescription {
+  height: 14px;
+  background: linear-gradient(90deg, #e9ecef 25%, #f8f9fa 50%, #e9ecef 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.skeletonTags {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.skeletonTag {
+  height: 20px;
+  width: 60px;
+  background: linear-gradient(90deg, #e9ecef 25%, #f8f9fa 50%, #e9ecef 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 12px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+// Error and empty states
+.errorState,
+.noJobs {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem 1rem;
+  color: vars.$text-color;
+  font-size: 1.1rem;
+}
+
+.errorState {
+  color: #dc3545;
 }
 
 @media (max-width: vars.$mobile-breakpoint) {

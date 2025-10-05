@@ -3,15 +3,48 @@
 import React from "react";
 import { useParams } from "next/navigation";
 import JobDescriptor from "@/components/ui/JobDescriptor";
-import jobs from "@/lib/jobs";
+import { useJob } from "@/hooks/useJob";
 import styles from "./page.module.scss";
 
 export default function JobDetailPage() {
   const params = useParams();
   const jobId = params.id as string;
 
-  // Find the job with the matching ID, or default to the first job if not found
-  const job = jobs.find((job) => job.id === jobId) || jobs[0];
+  const { job, isLoading, isError } = useJob(jobId);
+
+  if (isLoading) {
+    return (
+      <main className={styles.container}>
+        <div className={styles.loading}>
+          <div className={styles.skeleton}>
+            <div className={styles.skeletonHeader}>
+              <div className={styles.skeletonTitle}></div>
+              <div className={styles.skeletonCompany}></div>
+            </div>
+            <div className={styles.skeletonContent}>
+              <div className={styles.skeletonLine}></div>
+              <div className={styles.skeletonLine}></div>
+              <div className={styles.skeletonLine}></div>
+            </div>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  if (isError || !job) {
+    return (
+      <main className={styles.container}>
+        <div className={styles.errorState}>
+          <h1>Job Not Found</h1>
+          <p>The job you're looking for doesn't exist or has been removed.</p>
+          <a href="/jobs" className={styles.backLink}>
+            ← Back to Jobs
+          </a>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className={styles.container}>
