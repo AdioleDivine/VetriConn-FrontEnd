@@ -1,4 +1,7 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_URL_DEV || 'http://localhost:5000/api/v1';
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  process.env.NEXT_PUBLIC_API_URL_DEV ||
+  "http://localhost:5000/api/v1";
 
 // API Response types
 export interface LoginResponse {
@@ -33,25 +36,78 @@ export interface SignupResponse {
   error?: string;
 }
 
+// Complete User Profile Interface (Backend)
+export interface UserProfile {
+  first_name: string;
+  last_name: string;
+  role: string;
+  picture?: string;
+  email: string;
+  password: string;
+  profession?: string;
+  bio?: string;
+  current_job?: string;
+  experience?: string;
+  location?: string;
+  looking_for?: string[];
+  socials?: {
+    linkedin?: string;
+    twitter?: string;
+    github?: string;
+  };
+  professional_summary?: string;
+  work_experience?: Array<{
+    company: string;
+    position: string;
+    start_date?: string;
+    end_date?: string;
+    description?: string;
+  }>;
+  education?: Array<{
+    institution: string;
+    degree: string;
+    field_of_study: string;
+    start_year?: string;
+    end_year?: string;
+    description?: string;
+    location?: string;
+  }>;
+  certifications?: Array<{
+    name: string;
+    issuing_organization: string;
+    issue_date: string;
+    expiration_date?: string;
+    credential_id?: string;
+    credential_url?: string;
+  }>;
+  saved_jobs?: string[];
+  attachments?: string[];
+}
+
 // Login API call
-export async function loginUser(email: string, password: string): Promise<LoginResponse> {
-  console.log('Environment variables:', {
+export async function loginUser(
+  email: string,
+  password: string
+): Promise<LoginResponse> {
+  console.log("Environment variables:", {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
-    NEXT_PUBLIC_API_URL_DEV: process.env.NEXT_PUBLIC_API_URL_DEV
+    NEXT_PUBLIC_API_URL_DEV: process.env.NEXT_PUBLIC_API_URL_DEV,
   });
-  console.log('API_BASE_URL:', API_BASE_URL);
-  console.log('Making login request to:', `${API_BASE_URL}/auth/login`);
-  
+  console.log("API_BASE_URL:", API_BASE_URL);
+  console.log("Making login request to:", `${API_BASE_URL}/auth/login`);
+
   // Additional check for undefined API_BASE_URL
   if (!API_BASE_URL) {
-    throw new Error('API_BASE_URL is not defined. Please check your environment variables.');
+    throw new Error(
+      "API_BASE_URL is not defined. Please check your environment variables."
+    );
   }
-  
+
   try {
     const response = await fetch(`${API_BASE_URL}/auth/login`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email,
@@ -59,33 +115,44 @@ export async function loginUser(email: string, password: string): Promise<LoginR
       }),
     });
 
-    console.log('Login response status:', response.status);
-    console.log('Login response headers:', Object.fromEntries(response.headers.entries()));
+    console.log("Login response status:", response.status);
+    console.log(
+      "Login response headers:",
+      Object.fromEntries(response.headers.entries())
+    );
 
     // Check if the response is JSON
-    const contentType = response.headers.get('content-type');
-    if (!contentType || !contentType.includes('application/json')) {
+    const contentType = response.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
       const textResponse = await response.text();
-      console.log('Non-JSON response:', textResponse);
-      throw new Error(`Server returned non-JSON response: ${response.status} ${response.statusText}`);
+      console.log("Non-JSON response:", textResponse);
+      throw new Error(
+        `Server returned non-JSON response: ${response.status} ${response.statusText}`
+      );
     }
 
     const data = await response.json();
-    console.log('Login response data:', data);
+    console.log("Login response data:", data);
 
     if (!response.ok) {
-      throw new Error(data.message || data.error || `HTTP ${response.status}: ${response.statusText}`);
+      throw new Error(
+        data.message ||
+          data.error ||
+          `HTTP ${response.status}: ${response.statusText}`
+      );
     }
 
     return data;
   } catch (error) {
-    console.error('Login error:', error);
-    
+    console.error("Login error:", error);
+
     // Handle network errors specifically
-    if (error instanceof TypeError && error.message.includes('fetch')) {
-      throw new Error(`Network error: Unable to connect to ${API_BASE_URL}. Please ensure the backend server is running.`);
+    if (error instanceof TypeError && error.message.includes("fetch")) {
+      throw new Error(
+        `Network error: Unable to connect to ${API_BASE_URL}. Please ensure the backend server is running.`
+      );
     }
-    
+
     throw error;
   }
 }
@@ -98,8 +165,8 @@ export async function signupUser(userData: {
   password: string;
   role?: string;
 }): Promise<SignupResponse> {
-  console.log('Making signup request to:', `${API_BASE_URL}/auth/register`);
-  
+  console.log("Making signup request to:", `${API_BASE_URL}/auth/register`);
+
   try {
     const requestBody: any = {
       first_name: userData.firstName,
@@ -111,16 +178,16 @@ export async function signupUser(userData: {
     // Map frontend role values to backend format
     if (userData.role) {
       const roleMapping: Record<string, string> = {
-        'jobseeker': 'job_seeker',
-        'employer': 'employer'
+        jobseeker: "job_seeker",
+        employer: "employer",
       };
       requestBody.role = roleMapping[userData.role] || userData.role;
     }
 
     const response = await fetch(`${API_BASE_URL}/auth/register`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(requestBody),
     });
@@ -128,35 +195,35 @@ export async function signupUser(userData: {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.message || data.error || 'Signup failed');
+      throw new Error(data.message || data.error || "Signup failed");
     }
 
     return data;
   } catch (error) {
-    console.error('Signup error:', error);
+    console.error("Signup error:", error);
     throw error;
   }
 }
 
 // Store authentication token
 export function storeAuthToken(token: string) {
-  if (typeof window !== 'undefined') {
-    localStorage.setItem('authToken', token);
+  if (typeof window !== "undefined") {
+    localStorage.setItem("authToken", token);
   }
 }
 
 // Get authentication token
 export function getAuthToken(): string | null {
-  if (typeof window !== 'undefined') {
-    return localStorage.getItem('authToken');
+  if (typeof window !== "undefined") {
+    return localStorage.getItem("authToken");
   }
   return null;
 }
 
 // Remove authentication token
 export function removeAuthToken() {
-  if (typeof window !== 'undefined') {
-    localStorage.removeItem('authToken');
+  if (typeof window !== "undefined") {
+    localStorage.removeItem("authToken");
   }
 }
 
@@ -168,29 +235,77 @@ export function isAuthenticated(): boolean {
 // Get user profile
 export async function getUserProfile(): Promise<any> {
   const token = getAuthToken();
-  
+
   if (!token) {
-    throw new Error('No authentication token found');
+    throw new Error("No authentication token found");
   }
 
   try {
     const response = await fetch(`${API_BASE_URL}/auth/profile`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     });
 
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.message || data.error || 'Failed to fetch profile');
+      throw new Error(data.message || data.error || "Failed to fetch profile");
     }
 
     return data;
   } catch (error) {
-    console.error('Profile fetch error:', error);
+    console.error("Profile fetch error:", error);
+    throw error;
+  }
+}
+
+// Update user profile
+export async function updateUserProfile(profileData: any): Promise<any> {
+  const token = getAuthToken();
+
+  if (!token) {
+    throw new Error("No authentication token found");
+  }
+
+  console.log(
+    "Making profile update request to:",
+    `${API_BASE_URL}/auth/profile`
+  );
+  console.log("Profile data:", profileData);
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/auth/profile`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(profileData),
+    });
+
+    console.log("Profile update response status:", response.status);
+
+    const data = await response.json();
+    console.log("Profile update response data:", data);
+
+    if (!response.ok) {
+      throw new Error(data.message || data.error || "Failed to update profile");
+    }
+
+    return data;
+  } catch (error) {
+    console.error("Profile update error:", error);
+
+    // Handle network errors specifically
+    if (error instanceof TypeError && error.message.includes("fetch")) {
+      throw new Error(
+        `Network error: Unable to connect to server. Please ensure the backend server is running.`
+      );
+    }
+
     throw error;
   }
 }

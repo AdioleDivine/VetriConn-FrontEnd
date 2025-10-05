@@ -109,16 +109,67 @@
   padding: 2rem;
 }
 
+
+
 .profileCard {
   background: white;
   border-radius: 12px;
   overflow: hidden;
 }
 
+.loadingState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  text-align: center;
+  
+  p {
+    margin-top: 1rem;
+    color: #666;
+    font-size: 1.1rem;
+  }
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #dc2626;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Skeleton styles
+.skeletonSection {
+  margin-top: 2rem;
+  
+  .skeletonCard {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .profileContainer {
     padding: 1rem;
+  }
+  
+  .skeletonSection {
+    margin-top: 1rem;
+    
+    .skeletonCard {
+      padding: 1rem;
+    }
   }
 }
 

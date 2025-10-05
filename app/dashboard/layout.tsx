@@ -1,4 +1,3 @@
-import Footer from "@/components/ui/Footer";
 import DashboardNavbar from "@/components/ui/DashboardNavbar";
 
 import React from "react";
@@ -17,7 +16,6 @@ const layout = ({ children }: LayoutProps) => {
         {/* This is where the main content will be rendered */}
         {children}
       </div>
-      <Footer />
     </div>
   );
 };
