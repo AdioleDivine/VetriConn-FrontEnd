@@ -150,7 +150,7 @@ export default function MobileSignUp() {
             >
               <h2 className={styles.roleTitle}>I am an employer</h2>
               <p className={styles.roleDescription}>
-                Coming soon - We're preparing this feature for employers.
+                Coming soon - We&apos;re preparing this feature for employers.
               </p>
             </div>
           </div>

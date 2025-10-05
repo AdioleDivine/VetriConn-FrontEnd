@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useParams } from "next/navigation";
+import Link from "next/link";
 import JobDescriptor from "@/components/ui/JobDescriptor";
 import { useJob } from "@/hooks/useJob";
 import styles from "./page.module.scss";
@@ -37,10 +38,13 @@ export default function JobDetailPage() {
       <main className={styles.container}>
         <div className={styles.errorState}>
           <h1>Job Not Found</h1>
-          <p>The job you're looking for doesn't exist or has been removed.</p>
-          <a href="/jobs" className={styles.backLink}>
+          <p>
+            The job you&apos;re looking for doesn&apos;t exist or has been
+            removed.
+          </p>
+          <Link href="/jobs" className={styles.backLink}>
             ← Back to Jobs
-          </a>
+          </Link>
         </div>
       </main>
     );

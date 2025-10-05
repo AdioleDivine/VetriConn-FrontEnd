@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./index.module.scss";
@@ -20,7 +20,6 @@ const navLinks: NavLink[] = [
 
 const DashboardNavbar = () => {
   const pathname = usePathname();
-  const [avatarError, setAvatarError] = useState(false);
 
   return (
     <nav className={styles.navbar}>

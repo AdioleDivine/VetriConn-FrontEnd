@@ -82,7 +82,9 @@ const ProfilePage = () => {
 
     try {
       // Prepare the data to send to the backend
-      const profileUpdateData: any = {};
+      const profileUpdateData: Record<string, unknown> & {
+        socials?: Record<string, string>;
+      } = {};
 
       const nameParts = editingData.name.trim().split(" ");
       if (nameParts.length > 0) {
@@ -186,8 +188,6 @@ const ProfilePage = () => {
       }
 
       // Debug: Log what we're sending to the backend
-      console.log("Profile update data being sent:", profileUpdateData);
-      console.log("Fields being sent:", Object.keys(profileUpdateData));
 
       const response = await updateUserProfile(profileUpdateData);
 
@@ -203,10 +203,12 @@ const ProfilePage = () => {
           description: "Your profile has been successfully updated.",
         });
       } else {
-        throw new Error(response.message || "Failed to update profile");
+        throw new Error(
+          (response as { message?: string }).message ||
+            "Failed to update profile"
+        );
       }
     } catch (error) {
-      console.error("Profile save error:", error);
       const errorMessage =
         error instanceof Error ? error.message : "Failed to update profile";
       showToast({
