@@ -21,8 +21,8 @@ interface NavLink {
 
 const navLinks: NavLink[] = [
   { name: "Home", href: "/dashboard" },
-  { name: "Community", href: "/dashboard/community" },
-  { name: "Inbox", href: "/dashboard/inbox" },
+  // { name: "Community", href: "/dashboard/community" },
+  // { name: "Inbox", href: "/dashboard/inbox" },
   { name: "Profile", href: "/dashboard/profile" },
 ];
 
