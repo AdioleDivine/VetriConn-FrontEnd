@@ -1,10 +1,18 @@
 "use client";
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import styles from "./index.module.scss";
-import { FaBell, FaCog, FaUserCircle } from "react-icons/fa";
+import {
+  FaBell,
+  FaCog,
+  FaUserCircle,
+  FaBookmark,
+  FaSignOutAlt,
+} from "react-icons/fa";
 import Image from "next/image";
+import { logoutUser } from "@/lib/api";
+import { useToaster } from "@/components/ui/Toaster";
 
 interface NavLink {
   name: string;
@@ -20,6 +28,52 @@ const navLinks: NavLink[] = [
 
 const DashboardNavbar = () => {
   const pathname = usePathname();
+  const router = useRouter();
+  const { showToast } = useToaster();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+
+      showToast({
+        type: "success",
+        title: "Logged out successfully",
+        description: "Redirecting to homepage...",
+      });
+
+      // Redirect to homepage after a brief delay
+      setTimeout(() => {
+        router.push("/");
+      }, 1500);
+    } catch (error) {
+      console.error("Logout error:", error);
+
+      showToast({
+        type: "error",
+        title: "Logout failed",
+        description: "Please try again",
+      });
+    }
+
+    setIsDropdownOpen(false);
+  };
 
   return (
     <nav className={styles.navbar}>
@@ -54,15 +108,33 @@ const DashboardNavbar = () => {
           <button className={styles.iconButton}>
             <FaBell />
           </button>
-          <button className={styles.iconButton}>
+          <Link href="/dashboard/settings" className={styles.iconButton}>
             <FaCog />
-          </button>
-          <Link
-            href="/dashboard/profile"
-            className={`${styles.profileButton} ${styles.withPadding}`}
-          >
-            <FaUserCircle className={styles.avatarFallbackIcon} size={32} />
           </Link>
+          <div className={styles.profileDropdown} ref={dropdownRef}>
+            <button
+              className={`${styles.profileButton} ${styles.withPadding}`}
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              <FaUserCircle className={styles.avatarFallbackIcon} size={32} />
+            </button>
+            {isDropdownOpen && (
+              <div className={styles.dropdownMenu}>
+                <Link
+                  href="/dashboard/saved-jobs"
+                  className={styles.dropdownItem}
+                  onClick={() => setIsDropdownOpen(false)}
+                >
+                  <FaBookmark className={styles.dropdownIcon} />
+                  Saved Jobs
+                </Link>
+                <button className={styles.dropdownItem} onClick={handleLogout}>
+                  <FaSignOutAlt className={styles.dropdownIcon} />
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </nav>

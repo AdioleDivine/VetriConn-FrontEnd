@@ -183,33 +183,44 @@ const Dashboard = () => {
       />
 
       <main className={styles.container}>
-        <aside className={styles.sidebar}>
-          {filteredAndSortedJobs.length === 0 && (
-            <div className={styles.noJobs}>No jobs found.</div>
-          )}
-          {filteredAndSortedJobs.map((job) => (
-            <JobCard
-              key={job.id}
-              role={job.role}
-              name={job.company_name}
-              description={job.full_description}
-              tags={job.tags}
-              logo={job.company_logo}
-              variant="sidebar"
-              selected={selectedJobId === job.id}
-              onSelect={() => setSelectedJobId(job.id)}
-            />
-          ))}
-        </aside>
-        <section className={styles.main}>
-          {selectedJob ? (
-            <JobDescriptor {...selectedJob} />
-          ) : (
-            <div className={styles.noJobSelected}>
-              <p>Select a job to view details</p>
+        {filteredAndSortedJobs.length === 0 ? (
+          <div className={styles.noJobsContainer}>
+            <div className={styles.noJobsCenter}>
+              <h2>No jobs found</h2>
+              <p>
+                Please try adjusting your search criteria or check back later
+                for new opportunities.
+              </p>
             </div>
-          )}
-        </section>
+          </div>
+        ) : (
+          <>
+            <aside className={styles.sidebar}>
+              {filteredAndSortedJobs.map((job) => (
+                <JobCard
+                  key={job.id}
+                  role={job.role}
+                  name={job.company_name}
+                  description={job.full_description}
+                  tags={job.tags}
+                  logo={job.company_logo}
+                  variant="sidebar"
+                  selected={selectedJobId === job.id}
+                  onSelect={() => setSelectedJobId(job.id)}
+                />
+              ))}
+            </aside>
+            <section className={styles.main}>
+              {selectedJob ? (
+                <JobDescriptor {...selectedJob} />
+              ) : (
+                <div className={styles.noJobSelected}>
+                  <p>Select a job to view details</p>
+                </div>
+              )}
+            </section>
+          </>
+        )}
       </main>
     </div>
   );

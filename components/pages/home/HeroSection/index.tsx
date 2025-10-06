@@ -6,6 +6,7 @@ import { Header } from "@/components/ui/Header";
 import Advert from "@/components/ui/Advert";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 // Carousel images array - using the same image 8 times for now
 const carouselImages = [
@@ -22,6 +23,10 @@ const carouselImages = [
 export const HeroSection = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [email, setEmail] = useState("");
+  const [promotionalEmails, setPromotionalEmails] = useState(false);
+  const [emailError, setEmailError] = useState("");
+  const router = useRouter();
 
   // Auto-switch images every 10 seconds, pause on hover
   useEffect(() => {
@@ -35,6 +40,37 @@ export const HeroSection = () => {
 
     return () => clearInterval(interval);
   }, [isHovered]);
+
+  // Email validation
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // Handle form submission
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setEmailError("");
+
+    if (!email.trim()) {
+      setEmailError("Email is required");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setEmailError("Please enter a valid email address");
+      return;
+    }
+
+    // Navigate to signup page with query params
+    const params = new URLSearchParams();
+    params.set("email", email);
+    if (promotionalEmails) {
+      params.set("promotional_emails", "true");
+    }
+
+    router.push(`/signup?${params.toString()}`);
+  };
 
   // Animation variants for seamless crossfade
   const imageVariants = {
@@ -59,7 +95,8 @@ export const HeroSection = () => {
           <DottedBox className={styles.dottedBoxTop} />
           <h1>Reconnecting retirees and veterans through purposeful work</h1>
           <p className={styles.subtitle}>
-            From careers to causes, we connect you to purposeful opportunities quickly, easily, and on your terms
+            From careers to causes, we connect you to purposeful opportunities
+            quickly, easily, and on your terms
           </p>
 
           <div className={styles.ctaButtons}>
@@ -70,7 +107,7 @@ export const HeroSection = () => {
               I&apos;m here to hire
             </button>
             */}
-            <form className={styles.newsletterForm}>
+            <form className={styles.newsletterForm} onSubmit={handleSubmit}>
               <label
                 htmlFor="newsletter-email"
                 className={styles.newsletterLabel}
@@ -81,14 +118,26 @@ export const HeroSection = () => {
                 id="newsletter-email"
                 type="email"
                 placeholder=""
-                className={styles.newsletterInput}
+                className={`${styles.newsletterInput} ${
+                  emailError ? styles.inputError : ""
+                }`}
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (emailError) setEmailError(""); // Clear error on input
+                }}
                 required
               />
+              {emailError && (
+                <span className={styles.errorMessage}>{emailError}</span>
+              )}
               <div className={styles.newsletterCheckboxRow}>
                 <input
                   id="newsletter-checkbox"
                   type="checkbox"
                   className={styles.newsletterCheckbox}
+                  checked={promotionalEmails}
+                  onChange={(e) => setPromotionalEmails(e.target.checked)}
                 />
                 <label
                   htmlFor="newsletter-checkbox"
