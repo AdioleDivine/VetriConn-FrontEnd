@@ -145,6 +145,17 @@ export const Header = () => {
             Contact Us
           </Link>
         </div>
+
+        {/* Mobile account section */}
+        <div className={styles.mobileAccountSection}>
+          <Link
+            href="/signin"
+            className={styles.signInBtn}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Login
+          </Link>
+        </div>
       </div>
 
       {/* Overlay for mobile menu */}
