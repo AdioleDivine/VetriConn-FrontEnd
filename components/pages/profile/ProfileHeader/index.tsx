@@ -63,28 +63,30 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
 
         <div className={styles.profileInfo}>
           {isEditing ? (
-            <>
-              <input
-                type="text"
-                value={userProfile.name}
-                onChange={(e) => onInputChange("name", e.target.value)}
-                className={styles.editInput}
-                placeholder="Enter your full name"
-              />
-              <input
-                type="text"
-                value={userProfile.title}
-                onChange={(e) => onInputChange("title", e.target.value)}
-                className={styles.editInput}
-                placeholder="Enter your profession"
-              />
-              <textarea
-                value={userProfile.bio || ""}
-                onChange={(e) => onInputChange("bio", e.target.value)}
-                className={styles.editTextarea}
-                placeholder="Enter your bio..."
-                rows={3}
-              />
+            <div className={styles.editForm}>
+              <div className={styles.basicInfoSection}>
+                <input
+                  type="text"
+                  value={userProfile.name}
+                  onChange={(e) => onInputChange("name", e.target.value)}
+                  className={styles.editInput}
+                  placeholder="Enter your full name"
+                />
+                <input
+                  type="text"
+                  value={userProfile.title}
+                  onChange={(e) => onInputChange("title", e.target.value)}
+                  className={styles.editInput}
+                  placeholder="Enter your profession"
+                />
+                <textarea
+                  value={userProfile.bio || ""}
+                  onChange={(e) => onInputChange("bio", e.target.value)}
+                  className={styles.editTextarea}
+                  placeholder="Tell others about yourself..."
+                  rows={3}
+                />
+              </div>
 
               {/* Social Links Edit Section */}
               <div className={styles.socialEditSection}>
@@ -128,7 +130,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
                   </div>
                 </div>
               </div>
-            </>
+            </div>
           ) : (
             <>
               <h1 className={styles.name}>{userProfile.name}</h1>
@@ -175,30 +177,13 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
         </div>
       </div>
 
-      <div className={styles.editSection}>
-        {isEditing ? (
-          <div className={styles.editButtons}>
-            <button
-              className={styles.cancelBtn}
-              onClick={onCancel}
-              disabled={isSaving}
-            >
-              Cancel
-            </button>
-            <button
-              className={styles.saveBtn}
-              onClick={onSave}
-              disabled={isSaving}
-            >
-              {isSaving ? "Saving..." : "Save"}
-            </button>
-          </div>
-        ) : (
+      {!isEditing && (
+        <div className={styles.editSection}>
           <button className={styles.editBtn} onClick={onEditToggle}>
             Edit <FaEdit className={styles.editIcon} />
           </button>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

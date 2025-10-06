@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./page.module.scss";
 import { ProfileHeader } from "@/components/pages/profile/ProfileHeader";
 import { ProfileStats } from "@/components/pages/profile/ProfileStats";
+import { EditActions } from "@/components/pages/profile/EditActions";
 
 // import { ProfessionalSummary } from "@/components/pages/profile/ProfessionalSummary";
 import { AttachmentsSection } from "@/components/pages/profile/AttachmentsSection";
@@ -298,6 +299,13 @@ const ProfilePage = () => {
           onInputChange={handleInputChange}
         />
       </div>
+
+      <EditActions
+        isEditing={isEditing}
+        isSaving={isSaving}
+        onSave={handleSave}
+        onCancel={handleCancel}
+      />
 
       {/* <ProfessionalSummary /> */}
       <AttachmentsSection />
