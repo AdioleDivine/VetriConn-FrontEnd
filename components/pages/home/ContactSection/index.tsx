@@ -1,11 +1,10 @@
 import styles from "./index.module.scss";
 import FacebookIcon from "@/public/images/facebook.svg";
-import InstagramIcon from "@/public/images/instagram.svg";
-import XIcon from "@/public/images/X.svg";
 import LocationIcon from "@/public/images/location.svg";
 import CallCallingIcon from "@/public/images/call-calling.svg";
 import SmsIcon from "@/public/images/sms.svg";
 import SmsTrackingIcon from "@/public/images/sms-tracking.svg";
+import { LiaLinkedinIn } from "react-icons/lia";
 
 interface ContactSectionProps {
   id?: string;
@@ -43,32 +42,39 @@ const ContactSection = ({ id }: ContactSectionProps) => (
           <span className={styles.infoIcon}>
             <LocationIcon />
           </span>
-          <span>
-            Ottawa, Ontario.
-          </span>
+          <span>Ottawa, Ontario.</span>
         </div>
         <div className={styles.infoItem}>
           <span className={styles.infoIcon}>
             <CallCallingIcon />
           </span>
-          <span>English - 1(647)-889-9542 <br/><br/> French - 1(613)-501-9162</span>
+          <span>
+            English - 1(647)-889-9542 <br />
+            <br /> French - 1(613)-501-9162
+          </span>
         </div>
         <div className={styles.infoItem}>
           <span className={styles.infoIcon}>
             <SmsIcon />
           </span>
-          <span>vetriconn.inc@gmail.com</span>
+          <span>richmonda@vetriconn.ca</span>
         </div>
         <div className={styles.socials}>
-          <a href="#" aria-label="Facebook">
+          <a
+            href="https://www.facebook.com/profile.php?id=61580233844003"
+            aria-label="Facebook"
+          >
             <FacebookIcon />
           </a>
-          <a href="#" aria-label="Instagram">
-            <InstagramIcon />
+          <a
+            href="https://www.linkedin.com/company/vetriconn-inc/?viewAsMember=true"
+            aria-label="LinkedIn"
+          >
+            <LiaLinkedinIn />
           </a>
-          <a href="#" aria-label="X">
+          {/* <a href="#" aria-label="X">
             <XIcon />
-          </a>
+          </a> */}
         </div>
       </div>
     </div>

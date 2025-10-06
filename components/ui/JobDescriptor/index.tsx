@@ -8,6 +8,9 @@ type JobDescriptorProps = Job;
 const JobDescriptor: React.FC<JobDescriptorProps> = ({
   role,
   company_name,
+  location,
+  salary,
+  salary_range,
   // company_logo: _company_logo,
   tags,
   full_description,
@@ -15,6 +18,19 @@ const JobDescriptor: React.FC<JobDescriptorProps> = ({
   qualifications,
   applicationLink,
 }) => {
+  // Format salary for display using symbol from backend
+  const formatSalary = (salaryObj: {
+    symbol: string;
+    number?: number;
+    currency: string;
+  }) => {
+    if (!salaryObj.number) {
+      return `${salaryObj.symbol}0 ${salaryObj.currency}`;
+    }
+    return `${salaryObj.symbol}${salaryObj.number.toLocaleString()} ${
+      salaryObj.currency
+    }`;
+  };
   return (
     <div className={styles.card}>
       <div className={styles.centeredHeader}>
@@ -29,6 +45,7 @@ const JobDescriptor: React.FC<JobDescriptorProps> = ({
         <div className={styles.titleSection}>
           <h2 className={styles.role}>{role}</h2>
           <p className={styles.companyName}>{company_name}</p>
+          {location && <p className={styles.location}>{location}</p>}
         </div>
         <div className={styles.tagsRow}>
           {tags.map((tag, i) => (
@@ -48,6 +65,22 @@ const JobDescriptor: React.FC<JobDescriptorProps> = ({
         <div className={styles.sectionTitle}>Job Description</div>
         <div className={styles.description}>{full_description}</div>
       </div>
+      {(salary_range || salary) && (
+        <div className={styles.section}>
+          <div className={styles.salaryOffer}>
+            Salary/Offer:{" "}
+            {salary_range &&
+            salary_range.start_salary?.number &&
+            salary_range.end_salary?.number
+              ? `${formatSalary(
+                  salary_range.start_salary
+                )} - ${formatSalary(salary_range.end_salary)}`
+              : salary
+              ? formatSalary(salary)
+              : "Not specified"}
+          </div>
+        </div>
+      )}
       <div className={styles.section}>
         <div className={styles.sectionTitle}>Responsibilities</div>
         <ol className={styles.list}>

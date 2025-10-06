@@ -1,7 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import styles from "./index.module.scss";
-import { FaEdit, FaLinkedin } from "react-icons/fa";
+import {
+  FaEdit,
+  FaLinkedin,
+  FaTwitter,
+  FaGithub,
+  FaUserCircle,
+} from "react-icons/fa";
 import Image from "next/image";
 
 interface ProfileHeaderProps {
@@ -9,19 +15,28 @@ interface ProfileHeaderProps {
     name: string;
     title: string;
     avatar: string;
-    bio: string;
+    bio: string | null;
+    socials?: {
+      linkedin?: string;
+      twitter?: string;
+      github?: string;
+    };
   };
   isEditing: boolean;
+  isSaving?: boolean;
   onEditToggle: () => void;
   onSave: () => void;
-  onInputChange: (field: string, value: string) => void;
+  onCancel?: () => void;
+  onInputChange: (field: string, value: string | string[]) => void;
 }
 
 export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   userProfile,
   isEditing,
+  isSaving = false,
   onEditToggle,
   onSave,
+  onCancel,
   onInputChange,
 }) => {
   const [imageError, setImageError] = useState(false);
@@ -30,7 +45,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
     <div className={styles.profileHeader}>
       <div className={styles.avatarSection}>
         <div className={styles.avatar}>
-          {!imageError ? (
+          {userProfile.avatar && userProfile.avatar.trim() && !imageError ? (
             <Image
               src={userProfile.avatar}
               alt={userProfile.name}
@@ -40,12 +55,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
               onError={() => setImageError(true)}
             />
           ) : (
-            <div className={styles.avatarFallback}>
-              {userProfile.name
-                .split(" ")
-                .map((n) => n[0])
-                .join("")}
-            </div>
+            <FaUserCircle className={styles.avatarIcon} size={100} />
           )}
         </div>
       </div>
@@ -58,40 +68,132 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
               value={userProfile.name}
               onChange={(e) => onInputChange("name", e.target.value)}
               className={styles.editInput}
+              placeholder="Enter your full name"
             />
             <input
               type="text"
               value={userProfile.title}
               onChange={(e) => onInputChange("title", e.target.value)}
               className={styles.editInput}
+              placeholder="Enter your profession"
             />
             <textarea
-              value={userProfile.bio}
+              value={userProfile.bio || ""}
               onChange={(e) => onInputChange("bio", e.target.value)}
               className={styles.editTextarea}
               placeholder="Enter your bio..."
               rows={3}
             />
+
+            {/* Social Links Edit Section */}
+            <div className={styles.socialEditSection}>
+              <h4 className={styles.socialEditTitle}>Social Links</h4>
+              <div className={styles.socialInputs}>
+                <div className={styles.socialInputGroup}>
+                  <FaLinkedin className={styles.socialIcon} />
+                  <input
+                    type="url"
+                    value={userProfile.socials?.linkedin || ""}
+                    onChange={(e) =>
+                      onInputChange("socials.linkedin", e.target.value)
+                    }
+                    className={styles.socialInput}
+                    placeholder="https://linkedin.com/in/yourprofile"
+                  />
+                </div>
+                <div className={styles.socialInputGroup}>
+                  <FaTwitter className={styles.socialIcon} />
+                  <input
+                    type="url"
+                    value={userProfile.socials?.twitter || ""}
+                    onChange={(e) =>
+                      onInputChange("socials.twitter", e.target.value)
+                    }
+                    className={styles.socialInput}
+                    placeholder="https://x.com/yourusername"
+                  />
+                </div>
+                <div className={styles.socialInputGroup}>
+                  <FaGithub className={styles.socialIcon} />
+                  <input
+                    type="url"
+                    value={userProfile.socials?.github || ""}
+                    onChange={(e) =>
+                      onInputChange("socials.github", e.target.value)
+                    }
+                    className={styles.socialInput}
+                    placeholder="https://github.com/yourusername"
+                  />
+                </div>
+              </div>
+            </div>
           </>
         ) : (
           <>
             <h1 className={styles.name}>{userProfile.name}</h1>
-            <p className={styles.title}>{userProfile.title}</p>
-            <p className={styles.bio}>{userProfile.bio}</p>
+            <p className={styles.title}>
+              {userProfile.title || "Professional"}
+            </p>
+            {userProfile.bio && <p className={styles.bio}>{userProfile.bio}</p>}
             <div className={styles.socialIcons}>
-              <FaLinkedin className={styles.linkedinIcon} />
+              {userProfile.socials?.linkedin && (
+                <a
+                  href={userProfile.socials.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.socialLink}
+                >
+                  <FaLinkedin className={styles.socialIcon} />
+                </a>
+              )}
+              {userProfile.socials?.twitter && (
+                <a
+                  href={userProfile.socials.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.socialLink}
+                >
+                  <FaTwitter className={styles.socialIcon} />
+                </a>
+              )}
+              {userProfile.socials?.github && (
+                <a
+                  href={userProfile.socials.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.socialLink}
+                >
+                  <FaGithub className={styles.socialIcon} />
+                </a>
+              )}
             </div>
           </>
         )}
       </div>
 
       <div className={styles.editSection}>
-        <button
-          className={styles.editBtn}
-          onClick={isEditing ? onSave : onEditToggle}
-        >
-          Edit <FaEdit className={styles.editIcon} />
-        </button>
+        {isEditing ? (
+          <div className={styles.editButtons}>
+            <button
+              className={styles.cancelBtn}
+              onClick={onCancel}
+              disabled={isSaving}
+            >
+              Cancel
+            </button>
+            <button
+              className={styles.saveBtn}
+              onClick={onSave}
+              disabled={isSaving}
+            >
+              {isSaving ? "Saving..." : "Save"}
+            </button>
+          </div>
+        ) : (
+          <button className={styles.editBtn} onClick={onEditToggle}>
+            Edit <FaEdit className={styles.editIcon} />
+          </button>
+        )}
       </div>
     </div>
   );

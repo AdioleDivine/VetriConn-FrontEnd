@@ -117,6 +117,23 @@
   color: #6b7280;
 }
 
+.location {
+  font-family: var(--font-open-sans), "Open Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 0.25rem;
+  color: #6b7280;
+}
+
+.salaryOffer {
+  font-family: var(--font-open-sans), "Open Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 1rem;
+}
+
 .tagsRow {
   display: flex;
   flex-wrap: wrap;

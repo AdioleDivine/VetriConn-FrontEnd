@@ -1,9 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./index.module.scss";
-import { FaBell, FaCog, FaUser } from "react-icons/fa";
+import { FaBell, FaCog, FaUserCircle } from "react-icons/fa";
 import Image from "next/image";
 
 interface NavLink {
@@ -20,7 +20,6 @@ const navLinks: NavLink[] = [
 
 const DashboardNavbar = () => {
   const pathname = usePathname();
-  const [avatarError, setAvatarError] = useState(false);
 
   return (
     <nav className={styles.navbar}>
@@ -60,23 +59,9 @@ const DashboardNavbar = () => {
           </button>
           <Link
             href="/dashboard/profile"
-            className={`${styles.profileButton} ${
-              avatarError ? styles.withPadding : styles.withoutPadding
-            }`}
+            className={`${styles.profileButton} ${styles.withPadding}`}
           >
-            {!avatarError ? (
-              <div className={styles.avatar}>
-                <Image
-                  src="/images/richmond.svg"
-                  alt="Richmond Adiole"
-                  width={32}
-                  height={32}
-                  onError={() => setAvatarError(true)}
-                />
-              </div>
-            ) : (
-              <FaUser />
-            )}
+            <FaUserCircle className={styles.avatarFallbackIcon} size={32} />
           </Link>
         </div>
       </div>

@@ -4,8 +4,113 @@
   margin: 0 auto;
 }
 
+// Loading skeleton styles
+.loading {
+  padding: 2rem 0;
+}
+
+.skeleton {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 2rem;
+  border: 1px solid #e9ecef;
+}
+
+.skeletonHeader {
+  margin-bottom: 2rem;
+}
+
+.skeletonTitle {
+  height: 32px;
+  background: linear-gradient(90deg, #e9ecef 25%, #f8f9fa 50%, #e9ecef 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.skeletonCompany {
+  height: 20px;
+  width: 40%;
+  background: linear-gradient(90deg, #e9ecef 25%, #f8f9fa 50%, #e9ecef 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeletonContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.skeletonLine {
+  height: 16px;
+  background: linear-gradient(90deg, #e9ecef 25%, #f8f9fa 50%, #e9ecef 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+
+  &:nth-child(2) {
+    width: 80%;
+  }
+
+  &:last-child {
+    width: 60%;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+// Error state styles
+.errorState {
+  text-align: center;
+  padding: 4rem 2rem;
+
+  h1 {
+    font-size: 2rem;
+    color: #dc3545;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin-bottom: 2rem;
+  }
+}
+
+.backLink {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: #0056b3;
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 1rem;
   }
-} 
+
+  .errorState {
+    padding: 2rem 1rem;
+
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+}

@@ -6,6 +6,7 @@ const jobs: Job[] = [
     role: "Café Manager",
     company_name: "Second Cup",
     company_logo: "/images/company-logo.jpg",
+    location: "Edmonton, AB",
     tags: [
       { name: "Part-time", color: "flutter" },
       { name: "On-site", color: "mobile" },
@@ -53,6 +54,7 @@ const jobs: Job[] = [
     role: "Administrative Assistant",
     company_name: "Westrich Construction Alberta Ltd",
     company_logo: "/images/mobile-tech.jpg",
+    location: "Edmonton, AB",
     tags: [
       { name: "Full-time", color: "flutter" },
       { name: "On-site", color: "mobile" },
@@ -100,11 +102,12 @@ const jobs: Job[] = [
     role: "Long Haul Truck Driver",
     company_name: "BIK-KEN TRUCKING LTD",
     company_logo: "/images/creative-studios.jpg",
+    location: "Edmonton, AB",
     tags: [
       { name: "Full-time", color: "flutter" },
       { name: "On-site", color: "mobile" },
       { name: "Edmonton, AB", color: "ios" },
-      { name: "Will Train", color: "android" },
+      // { name: "Will Train", color: "android" },
     ],
     full_description:
       "BIK-KEN TRUCKING LTD is seeking Long Haul Truck Drivers for our Edmonton location (T6H 2J7). This permanent, full-time position offers $35.40 hourly for 30-40 hours per week with flexible scheduling (early morning, morning, day, evening, night, weekend) starting as soon as possible. No education requirements and we will train the right candidates. Work must be completed at the physical location with no remote work options.",
@@ -147,6 +150,7 @@ const jobs: Job[] = [
     role: "Technical Service Sales Consultant",
     company_name: "Canada Copier Remarketing Corp.",
     company_logo: "/images/company-logo.jpg",
+    location: "Mississauga, ON",
     tags: [
       { name: "Full-time", color: "flutter" },
       { name: "On-site", color: "mobile" },
@@ -189,6 +193,7 @@ const jobs: Job[] = [
     role: "Digital Communications Specialist",
     company_name: "Andrew Law Office",
     company_logo: "/images/cloudnative.jpg",
+    location: "Edmonton, AB",
     tags: [
       { name: "Full-time", color: "flutter" },
       { name: "On-site", color: "mobile" },
@@ -236,6 +241,7 @@ const jobs: Job[] = [
     role: "Home Support Worker",
     company_name: "PALANDRA",
     company_logo: "/images/company-logo.jpg",
+    location: "North York, ON",
     tags: [
       { name: "Full-time", color: "flutter" },
       { name: "On-site", color: "mobile" },
@@ -284,6 +290,7 @@ const jobs: Job[] = [
     role: "Restaurant Manager",
     company_name: "Paratha Junction Inc",
     company_logo: "/images/company-logo.jpg",
+    location: "Windsor, ON",
     tags: [
       { name: "Full-time", color: "flutter" },
       { name: "On-site", color: "mobile" },
@@ -344,6 +351,7 @@ const jobs: Job[] = [
     role: "Hairstylist",
     company_name: "Est-ce qu'on te coiffe?",
     company_logo: "/images/company-logo.jpg",
+    location: "Quebec City, QC",
     tags: [
       { name: "Full-time", color: "flutter" },
       { name: "On-site", color: "mobile" },
