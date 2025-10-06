@@ -56,6 +56,27 @@
 }
 
 /* Responsive Design */
+
+// Large tablets
+@media (max-width: 1200px) {
+  .profileStats {
+    margin: 1.75rem 1.5rem;
+  }
+
+  .statItem {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .statNumber {
+    font-size: 1.75rem;
+  }
+
+  .statLabel {
+    font-size: 0.9375rem;
+  }
+}
+
+// Medium tablets
 @media (max-width: 1024px) {
   .profileStats {
     grid-template-columns: repeat(2, 1fr);
@@ -63,6 +84,8 @@
   }
 
   .statItem {
+    padding: 1.375rem 1rem;
+
     &:nth-child(2) {
       border-right: none;
     }
@@ -71,8 +94,17 @@
       border-right: 1px solid #e5e7eb;
     }
   }
+
+  .statNumber {
+    font-size: 1.625rem;
+  }
+
+  .statLabel {
+    font-size: 0.875rem;
+  }
 }
 
+// Small tablets and mobile landscape
 @media (max-width: 768px) {
   .profileStats {
     grid-template-columns: 1fr;
@@ -83,9 +115,56 @@
     border-right: none;
     border-bottom: 1px solid #e5e7eb;
     padding: 1.25rem 1rem;
+    text-align: center;
 
     &:last-child {
       border-bottom: none;
     }
+  }
+
+  .statNumber {
+    font-size: 1.5rem;
+  }
+
+  .statLabel {
+    font-size: 0.8125rem;
+  }
+}
+
+// Mobile portrait
+@media (max-width: 640px) {
+  .profileStats {
+    margin: 0.75rem;
+  }
+
+  .statItem {
+    padding: 1rem 0.75rem;
+  }
+
+  .statNumber {
+    font-size: 1.375rem;
+  }
+
+  .statLabel {
+    font-size: 0.75rem;
+  }
+}
+
+// Small mobile phones
+@media (max-width: 480px) {
+  .profileStats {
+    margin: 0.5rem;
+  }
+
+  .statItem {
+    padding: 0.875rem 0.5rem;
+  }
+
+  .statNumber {
+    font-size: 1.25rem;
+  }
+
+  .statLabel {
+    font-size: 0.6875rem;
   }
 }

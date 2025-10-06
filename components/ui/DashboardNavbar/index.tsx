@@ -9,6 +9,10 @@ import {
   FaUserCircle,
   FaBookmark,
   FaSignOutAlt,
+  FaBars,
+  FaTimes,
+  FaHome,
+  FaUser,
 } from "react-icons/fa";
 import Image from "next/image";
 import { logoutUser } from "@/lib/api";
@@ -17,13 +21,22 @@ import { useToaster } from "@/components/ui/Toaster";
 interface NavLink {
   name: string;
   href: string;
+  icon: React.ReactNode;
 }
 
 const navLinks: NavLink[] = [
-  { name: "Home", href: "/dashboard" },
-  // { name: "Community", href: "/dashboard/community" },
-  // { name: "Inbox", href: "/dashboard/inbox" },
-  { name: "Profile", href: "/dashboard/profile" },
+  {
+    name: "Home",
+    href: "/dashboard",
+    icon: <FaHome className={styles.navIcon} />,
+  },
+  // { name: "Community", href: "/dashboard/community", icon: <FaUsers /> },
+  // { name: "Inbox", href: "/dashboard/inbox", icon: <FaInbox /> },
+  {
+    name: "Profile",
+    href: "/dashboard/profile",
+    icon: <FaUser className={styles.navIcon} />,
+  },
 ];
 
 const DashboardNavbar = () => {
@@ -31,9 +44,11 @@ const DashboardNavbar = () => {
   const router = useRouter();
   const { showToast } = useToaster();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown when clicking outside
+  // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -42,11 +57,22 @@ const DashboardNavbar = () => {
       ) {
         setIsDropdownOpen(false);
       }
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target as Node)
+      ) {
+        setIsMobileMenuOpen(false);
+      }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
 
   const handleLogout = async () => {
     try {
@@ -88,9 +114,10 @@ const DashboardNavbar = () => {
               height={60}
             />
           </Link>
-        </div>{" "}
-        {/* Navigation Links */}
-        <div className={styles.navLinks}>
+        </div>
+
+        {/* Desktop Navigation Links */}
+        <div className={`${styles.navLinks} ${styles.desktopOnly}`}>
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -103,12 +130,16 @@ const DashboardNavbar = () => {
             </Link>
           ))}
         </div>
-        {/* Right Side - Profile, Settings, Notifications */}
+
+        {/* Right Side - Profile, Settings, Notifications, Mobile Menu */}
         <div className={styles.rightSection}>
-          <button className={styles.iconButton}>
+          <button className={`${styles.iconButton} ${styles.desktopOnly}`}>
             <FaBell />
           </button>
-          <Link href="/dashboard/settings" className={styles.iconButton}>
+          <Link
+            href="/dashboard/settings"
+            className={`${styles.iconButton} ${styles.desktopOnly}`}
+          >
             <FaCog />
           </Link>
           <div className={styles.profileDropdown} ref={dropdownRef}>
@@ -120,6 +151,25 @@ const DashboardNavbar = () => {
             </button>
             {isDropdownOpen && (
               <div className={styles.dropdownMenu}>
+                <button
+                  className={`${styles.dropdownItem} ${styles.mobileOnly}`}
+                  onClick={() => {
+                    // Handle notifications click - you can add notification logic here
+                    console.log("Notifications clicked");
+                    setIsDropdownOpen(false);
+                  }}
+                >
+                  <FaBell className={styles.dropdownIcon} />
+                  Notifications
+                </button>
+                <Link
+                  href="/dashboard/settings"
+                  className={`${styles.dropdownItem} ${styles.mobileOnly}`}
+                  onClick={() => setIsDropdownOpen(false)}
+                >
+                  <FaCog className={styles.dropdownIcon} />
+                  Settings
+                </Link>
                 <Link
                   href="/dashboard/saved-jobs"
                   className={styles.dropdownItem}
@@ -132,6 +182,38 @@ const DashboardNavbar = () => {
                   <FaSignOutAlt className={styles.dropdownIcon} />
                   Logout
                 </button>
+              </div>
+            )}
+          </div>
+
+          {/* Mobile Menu Button - positioned to the right of avatar */}
+          <div
+            className={`${styles.mobileMenuContainer} ${styles.mobileOnly}`}
+            ref={mobileMenuRef}
+          >
+            <button
+              className={styles.mobileMenuButton}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
+            </button>
+
+            {/* Mobile Menu Dropdown */}
+            {isMobileMenuOpen && (
+              <div className={styles.mobileMenu}>
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`${styles.mobileNavLink} ${
+                      pathname === link.href ? styles.active : ""
+                    }`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {link.icon}
+                    {link.name}
+                  </Link>
+                ))}
               </div>
             )}
           </div>

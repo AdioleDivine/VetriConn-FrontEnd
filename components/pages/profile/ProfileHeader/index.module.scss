@@ -299,6 +299,55 @@
 }
 
 /* Responsive Design */
+
+// Large tablets
+@media (max-width: 1200px) {
+  .profileHeader {
+    padding: 2rem;
+  }
+
+  .avatar {
+    width: 120px;
+    height: 120px;
+  }
+
+  .name {
+    font-size: 2rem;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+}
+
+// Medium tablets
+@media (max-width: 900px) {
+  .profileHeader {
+    padding: 1.75rem;
+    gap: 1.5rem;
+  }
+
+  .avatar {
+    width: 110px;
+    height: 110px;
+  }
+
+  .name {
+    font-size: 1.875rem;
+  }
+
+  .editButtons {
+    gap: 0.5rem;
+  }
+
+  .saveBtn,
+  .cancelBtn {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.8125rem;
+  }
+}
+
+// Mobile landscape and tablets
 @media (max-width: 768px) {
   .profileHeader {
     flex-direction: column;
@@ -322,6 +371,86 @@
   }
 
   .name {
+    font-size: 1.75rem;
+  }
+
+  .title {
+    font-size: 0.9375rem;
+  }
+
+  .avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .editButtons {
+    justify-content: center;
+    gap: 0.75rem;
+  }
+}
+
+// Mobile portrait
+@media (max-width: 640px) {
+  .profileHeader {
+    padding: 1.25rem;
+    gap: 1.25rem;
+  }
+
+  .avatar {
+    width: 90px;
+    height: 90px;
+  }
+
+  .name {
     font-size: 1.5rem;
+  }
+
+  .title {
+    font-size: 0.875rem;
+  }
+
+  .editButtons {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .saveBtn,
+  .cancelBtn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.75rem;
+  }
+}
+
+// Small mobile phones
+@media (max-width: 480px) {
+  .profileHeader {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .name {
+    font-size: 1.375rem;
+  }
+
+  .title {
+    font-size: 0.8125rem;
+  }
+
+  .editBtn {
+    padding: 0.625rem 1rem;
+    font-size: 0.8125rem;
+  }
+
+  .saveBtn,
+  .cancelBtn {
+    padding: 0.625rem;
+    font-size: 0.8125rem;
   }
 }
