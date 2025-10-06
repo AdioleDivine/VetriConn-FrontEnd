@@ -4,7 +4,7 @@ import LocationIcon from "@/public/images/location.svg";
 import CallCallingIcon from "@/public/images/call-calling.svg";
 import SmsIcon from "@/public/images/sms.svg";
 import SmsTrackingIcon from "@/public/images/sms-tracking.svg";
-import { LiaLinkedinIn } from "react-icons/lia";
+import { FiLinkedin } from "react-icons/fi";
 
 interface ContactSectionProps {
   id?: string;
@@ -70,7 +70,7 @@ const ContactSection = ({ id }: ContactSectionProps) => (
             href="https://www.linkedin.com/company/vetriconn-inc/?viewAsMember=true"
             aria-label="LinkedIn"
           >
-            <LiaLinkedinIn />
+            <FiLinkedin />
           </a>
           {/* <a href="#" aria-label="X">
             <XIcon />
