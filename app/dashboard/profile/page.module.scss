@@ -106,6 +106,8 @@
 }
 .profileContainer {
   width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
   padding: 2rem;
 }
 
@@ -113,6 +115,7 @@
   background: white;
   border-radius: 12px;
   overflow: hidden;
+  width: 100%;
 }
 
 .loadingState {
@@ -211,6 +214,11 @@
 @media (max-width: 768px) {
   .profileContainer {
     padding: 1rem;
+    width: 100%;
+  }
+
+  .profileCard {
+    width: 100%;
   }
 
   .skeletonSection {
@@ -292,6 +300,7 @@
 @media (max-width: 640px) {
   .profileContainer {
     padding: 0.75rem;
+    width: 100%;
   }
 
   .summarySection,
@@ -337,6 +346,7 @@
 @media (max-width: 480px) {
   .profileContainer {
     padding: 0.5rem;
+    width: 100%;
   }
 
   .summarySection,
