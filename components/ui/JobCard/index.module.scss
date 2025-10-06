@@ -221,3 +221,143 @@
   color: #bbb;
   transition: color 0.2s;
 }
+
+// Responsive styles
+@media (max-width: 900px) {
+  .sidebar {
+    min-width: 280px;
+    flex-shrink: 0;
+  }
+
+  .job {
+    min-width: 280px;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    min-width: 260px;
+  }
+
+  .job {
+    min-width: 260px;
+    padding: 12px;
+  }
+
+  .header {
+    margin-bottom: 8px;
+  }
+
+  .info {
+    h3 {
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+
+    p {
+      font-size: 12px;
+    }
+  }
+
+  .description {
+    font-size: 12px;
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+
+  .tags {
+    gap: 6px;
+  }
+
+  .tag {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+}
+
+@media (max-width: 640px) {
+  .sidebar {
+    min-width: 240px;
+  }
+
+  .job {
+    min-width: 240px;
+    padding: 10px;
+  }
+
+  .avatar {
+    width: 35px;
+    height: 35px;
+  }
+
+  .info {
+    h3 {
+      font-size: 13px;
+    }
+
+    p {
+      font-size: 11px;
+    }
+  }
+
+  .description {
+    font-size: 11px;
+    margin-bottom: 8px;
+  }
+
+  .tag {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    min-width: 220px;
+  }
+
+  .job {
+    min-width: 220px;
+    padding: 8px;
+  }
+
+  .avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .info {
+    margin-left: 8px;
+
+    h3 {
+      font-size: 12px;
+    }
+
+    p {
+      font-size: 10px;
+    }
+  }
+
+  .description {
+    font-size: 10px;
+    margin-bottom: 6px;
+  }
+
+  .tags {
+    gap: 4px;
+  }
+
+  .tag {
+    font-size: 9px;
+    padding: 2px 5px;
+  }
+
+  .arrowBtn {
+    padding: 6px;
+  }
+
+  .arrowIcon {
+    font-size: 16px;
+  }
+}

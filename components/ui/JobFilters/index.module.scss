@@ -175,21 +175,135 @@
   margin-left: 0.25rem;
 }
 
-@media (max-width: 768px) {
+// Tablet and below
+@media (max-width: 900px) {
   .filtersContainer {
     padding: 1rem 1rem 0.5rem 1rem;
   }
+
+  .filtersBar {
+    gap: 1rem;
+  }
+
+  .customSelect {
+    min-width: 120px;
+  }
+
+  .selectButton {
+    min-width: 100px;
+    font-size: 0.8125rem;
+    padding: 0.4rem 0.625rem;
+  }
+
+  .searchGroup input[type="text"] {
+    width: 120px;
+  }
 }
 
-@media (max-width: 700px) {
+// Mobile landscape and below
+@media (max-width: 768px) {
+  .filtersContainer {
+    padding: 1rem;
+  }
+
+  .filtersBar {
+    gap: 0.75rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .customSelect {
+    min-width: 100px;
+  }
+
+  .selectButton {
+    min-width: 90px;
+    font-size: 0.75rem;
+    padding: 0.375rem 0.5rem;
+  }
+
+  .searchGroup {
+    margin-left: auto;
+  }
+
+  .searchGroup input[type="text"] {
+    width: 100px;
+    font-size: 0.875rem;
+  }
+}
+
+// Mobile portrait
+@media (max-width: 640px) {
   .filtersBar {
     flex-wrap: wrap;
     gap: 0.5rem;
-    padding: 0.5rem;
+    padding: 0.75rem;
+    justify-content: center;
   }
+
+  .filterGroup {
+    flex: 1;
+    min-width: calc(50% - 0.25rem);
+    max-width: 140px;
+  }
+
+  .customSelect {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .selectButton {
+    width: 100%;
+    min-width: unset;
+    justify-content: space-between;
+  }
+
   .searchGroup {
     margin-left: 0;
     width: 100%;
     margin-top: 0.5rem;
+    order: 1;
+  }
+
+  .searchGroup input[type="text"] {
+    width: 100%;
+    flex: 1;
+  }
+}
+
+// Small mobile
+@media (max-width: 480px) {
+  .filtersContainer {
+    padding: 0.75rem;
+  }
+
+  .filtersBar {
+    padding: 0.5rem;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .filterGroup {
+    width: 100%;
+    max-width: none;
+    min-width: unset;
+  }
+
+  .customSelect {
+    width: 100%;
+  }
+
+  .selectButton {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .searchGroup {
+    width: 100%;
+    margin-top: 0;
   }
 }
