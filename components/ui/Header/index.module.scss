@@ -208,7 +208,7 @@
   }
 
   @media (max-width: vars.$mobile-breakpoint) {
-    display: none;
+    display: flex;
     flex-direction: column;
     position: static;
     gap: 1.5rem;
@@ -216,10 +216,6 @@
     align-items: center;
     margin-top: auto;
     margin-bottom: 4rem;
-
-    &.active {
-      display: flex;
-    }
 
     .loginLink {
       font-size: 1rem;

@@ -1,7 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
 import styles from "./index.module.scss";
 import DottedBox7 from "@/public/images/dotted_box_7.svg";
 import DottedBox4 from "@/public/images/dotted_box_4.svg";
@@ -11,6 +11,7 @@ import { useToaster } from "@/components/ui/Toaster";
 
 export default function MobileSignUp() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { showToast } = useToaster();
 
   const [role, setRole] = useState<string | null>("jobseeker");
@@ -22,8 +23,29 @@ export default function MobileSignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [terms, setTerms] = useState(false);
+  const [promotionalEmails, setPromotionalEmails] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  // Handle query params on component mount
+  useEffect(() => {
+    const emailParam = searchParams.get("email");
+    const promotionalParam = searchParams.get("promotional_emails");
+
+    if (emailParam || promotionalParam) {
+      if (emailParam) {
+        setEmail(emailParam);
+      }
+
+      if (promotionalParam === "true") {
+        setPromotionalEmails(true);
+      }
+
+      // Remove query parameters from URL after processing
+      const newUrl = window.location.pathname;
+      window.history.replaceState({}, "", newUrl);
+    }
+  }, [searchParams]);
 
   const handleContinue = () => {
     if (role) setStep("form");
@@ -70,6 +92,7 @@ export default function MobileSignUp() {
         email,
         password,
         role: role || "jobseeker",
+        promotionalEmails,
       });
 
       if (response.success && response.data) {
@@ -252,6 +275,19 @@ export default function MobileSignUp() {
               {errors.terms && (
                 <span className={styles.error}>{errors.terms}</span>
               )}
+            </div>
+
+            <div className={styles.checkbox}>
+              <input
+                type="checkbox"
+                id="promotional-emails"
+                checked={promotionalEmails}
+                onChange={(e) => setPromotionalEmails(e.target.checked)}
+                disabled={isSubmitting}
+              />
+              <label htmlFor="promotional-emails">
+                I would like to receive promotional emails from VetriConn Inc
+              </label>
             </div>
 
             <button

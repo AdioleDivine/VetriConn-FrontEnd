@@ -188,6 +188,22 @@
       font-size: 0.85rem; // Smaller font size
     }
 
+    .inputError {
+      border-color: #dc3545 !important;
+
+      &:focus {
+        border-color: #dc3545 !important;
+        box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+      }
+    }
+
+    .errorMessage {
+      color: #dc3545;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+      display: block;
+    }
+
     .newsletterBtn {
       background: vars.$primary-color; // Use the correct red
       color: #fff;
@@ -211,35 +227,34 @@
 
 .imageContainer {
   position: relative;
-  flex: 0 0 55%; // Give more space to image container
+  flex: 0 0 50%; // Give more space to image container
   display: flex;
-  width: 500px;
-  max-width: 680px;
+  width: 40vw;
   justify-content: center;
   align-items: center;
-  height: 500px; // Match the carousel height
+  height: 455px; // Match exact carousel height
 
   @media (max-width: vars.$mobile-breakpoint) {
     flex: none;
     width: 500px;
     display: flex; // Show on mobile instead of hiding
-    height: 320px; // Match mobile carousel height
+    height: 300px; // Match mobile carousel height
   }
 
   // Red background with same size as image wrapper
   &::before {
     content: "";
     position: absolute;
-    width: 94%; // Same as carouselContainer max-width
-
-    height: 90%; // half of carouselContainer height
-    bottom: -8px;
-    right: -16px;
+    width: 100%;
+    height: 455px; // Match exact carousel height
+    top: 0;
+    right: 0;
     border-radius: 10px;
     background: vars.$primary-color url("/favicon-white.svg") no-repeat center;
     background-size: 200px 200px;
     opacity: 1;
     z-index: 1;
+    transform: rotateX(15deg); // Match carousel tilt
 
     @media (max-width: vars.$mobile-breakpoint) {
       display: none; // Hide on mobile
@@ -274,7 +289,8 @@
 
   .carouselImage {
     position: absolute;
-    top: 0; // Reset to normal positioning
+    transform: rotateX(15deg);
+    top: 0;
     left: 0;
     width: 100%;
     height: 100%;
@@ -292,6 +308,8 @@
   }
 
   .heroImage {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     border-radius: 10px; // Match Figma border radius
   }
