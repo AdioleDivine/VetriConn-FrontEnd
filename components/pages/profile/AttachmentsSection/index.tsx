@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./index.module.scss";
 import { useAttachments } from "@/hooks/useAttachments";
 import { Skeleton } from "@/components/ui/Skeleton";
@@ -188,13 +188,13 @@ export const AttachmentsSection: React.FC<AttachmentsSectionProps> = () => {
 
 
   // Format file size
-  const formatFileSize = (bytes: number): string => {
-    if (bytes === 0) return "0 Bytes";
-    const k = 1024;
-    const sizes = ["Bytes", "KB", "MB"];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
-  };
+  // const formatFileSize = (bytes: number): string => {
+  //   if (bytes === 0) return "0 Bytes";
+  //   const k = 1024;
+  //   const sizes = ["Bytes", "KB", "MB"];
+  //   const i = Math.floor(Math.log(bytes) / Math.log(k));
+  //   return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+  // };
 
   // Show loading state
   if (isLoading) {
@@ -380,7 +380,7 @@ export const AttachmentsSection: React.FC<AttachmentsSectionProps> = () => {
             </div>
             <div className={styles.modalBody}>
               <p className={styles.modalMessage}>
-                Are you sure you want to delete "{deleteModalAttachment.name}"? This action cannot be undone.
+                Are you sure you want to delete &quot;{deleteModalAttachment.name}&quot;? This action cannot be undone.
               </p>
             </div>
             <div className={styles.modalFooter}>

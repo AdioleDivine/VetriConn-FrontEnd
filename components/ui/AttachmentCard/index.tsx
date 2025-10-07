@@ -74,7 +74,7 @@ export const AttachmentCard: React.FC<AttachmentCardProps> = ({
     }
   }, [isMenuOpen]);
 
-  const attachmentId = attachment.id || attachment._id || '';
+  // const attachmentId = attachment.id || attachment._id || '';
 
   return (
     <div className={styles.attachmentCard}>
