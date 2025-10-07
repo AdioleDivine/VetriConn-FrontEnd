@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import styles from "./index.module.scss";
 import { useAttachments } from "@/hooks/useAttachments";
 import { Skeleton } from "@/components/ui/Skeleton";
@@ -7,6 +7,8 @@ import { ErrorState } from "@/components/ui/ErrorState";
 import { Attachment } from "@/lib/api";
 import { FaPlus, FaTimes } from "react-icons/fa";
 import { useToaster } from "@/components/ui/Toaster";
+import { AttachmentCard } from "@/components/ui/AttachmentCard";
+import { FilePreview } from "@/components/ui/FilePreview";
 
 interface AttachmentsSectionProps {
   className?: string;
@@ -30,6 +32,11 @@ export const AttachmentsSection: React.FC<AttachmentsSectionProps> = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  
+  // Modal state for delete confirmation
+  const [deleteModalAttachment, setDeleteModalAttachment] = useState<Attachment | null>(null);
+
+
 
   // Validate file type
   const isValidFileType = (file: File): boolean => {
@@ -125,9 +132,31 @@ export const AttachmentsSection: React.FC<AttachmentsSectionProps> = () => {
     }
   };
 
+  // Handle delete modal
+  const handleDeleteModal = (attachment: Attachment) => {
+    setDeleteModalAttachment(attachment);
+  };
+
+  const closeDeleteModal = () => {
+    setDeleteModalAttachment(null);
+  };
+
+  // Handle download attachment
+  const handleDownloadAttachment = (attachment: Attachment) => {
+    const link = document.createElement('a');
+    link.href = attachment.url;
+    link.download = attachment.name || 'attachment';
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   // Handle attachment deletion
-  const handleDeleteAttachment = async (attachment: Attachment) => {
-    const attachmentId = attachment.id || attachment._id;
+  const handleDeleteAttachment = async () => {
+    if (!deleteModalAttachment) return;
+
+    const attachmentId = deleteModalAttachment.id || deleteModalAttachment._id;
     if (!attachmentId) {
       console.error("No attachment ID found");
       return;
@@ -135,6 +164,7 @@ export const AttachmentsSection: React.FC<AttachmentsSectionProps> = () => {
 
     try {
       await deleteAttachment(attachmentId);
+      closeDeleteModal();
 
       showToast({
         type: "success",
@@ -155,25 +185,7 @@ export const AttachmentsSection: React.FC<AttachmentsSectionProps> = () => {
     }
   };
 
-  // Get file icon based on file type
-  const getFileIcon = (file: File): string => {
-    if (
-      file.type === "application/pdf" ||
-      file.name.toLowerCase().endsWith(".pdf")
-    ) {
-      return "📄";
-    }
-    return "📝";
-  };
 
-  // Get file icon from URL/filename
-  const getFileIconFromUrl = (url: string): string => {
-    const filename = url.split("/").pop() || "";
-    if (filename.toLowerCase().endsWith(".pdf")) {
-      return "📄";
-    }
-    return "📝";
-  };
 
   // Format file size
   const formatFileSize = (bytes: number): string => {
@@ -198,7 +210,7 @@ export const AttachmentsSection: React.FC<AttachmentsSectionProps> = () => {
         </div>
         <div className={styles.attachmentsGrid}>
           {[1, 2, 3].map((i) => (
-            <div key={i} className={styles.attachmentCard}>
+            <div key={i} className={styles.skeletonCard}>
               <Skeleton width="120px" height="90px" />
               <Skeleton width="80%" height="16px" />
             </div>
@@ -233,14 +245,6 @@ export const AttachmentsSection: React.FC<AttachmentsSectionProps> = () => {
     <div className={styles.attachmentsSection}>
       <div className={styles.attachmentsHeader}>
         <h3 className={styles.attachmentsTitle}>Attachments</h3>
-        {attachments.length > 0 && (
-          <button
-            className={styles.attachmentsUploadBtn}
-            onClick={handleUploadClick}
-          >
-            Upload <span style={{ fontSize: "1.2em", marginLeft: 4 }}>+</span>
-          </button>
-        )}
       </div>
 
       {/* Hidden file input */}
@@ -277,56 +281,19 @@ export const AttachmentsSection: React.FC<AttachmentsSectionProps> = () => {
         ) : (
           <>
             {/* Existing attachments */}
-            {attachments.map((attachment: Attachment) => (
-              <div
-                key={attachment.id || attachment._id}
-                className={styles.attachmentCard}
-              >
-                <div className={styles.attachmentPreview}>
-                  <div className={styles.fileIcon}>
-                    {getFileIconFromUrl(attachment.url)}
-                  </div>
-                  <button
-                    className={styles.deleteAttachmentBtn}
-                    onClick={() => handleDeleteAttachment(attachment)}
-                    title="Delete attachment"
-                  >
-                    <FaTimes />
-                  </button>
-                </div>
-                <div className={styles.attachmentLabel}>{attachment.name}</div>
-                <div className={styles.attachmentSize}>
-                  {attachment.size || attachment.file_size
-                    ? formatFileSize(
-                        attachment.size || attachment.file_size || 0
-                      )
-                    : ""}
-                </div>
-              </div>
-            ))}
+            {attachments.map((attachment: Attachment) => {
+              const attachmentId = attachment.id || attachment._id || '';
+              return (
+                <AttachmentCard
+                  key={attachmentId}
+                  attachment={attachment}
+                  onDelete={handleDeleteModal}
+                  onDownload={handleDownloadAttachment}
+                />
+              );
+            })}
 
-            {/* Selected files waiting for upload */}
-            {selectedFiles.map((file, index) => (
-              <div
-                key={`selected-${index}`}
-                className={styles.selectedFileCard}
-              >
-                <div className={styles.fileIcon}>{getFileIcon(file)}</div>
-                <div className={styles.fileInfo}>
-                  <div className={styles.fileName}>{file.name}</div>
-                  <div className={styles.fileSize}>
-                    {formatFileSize(file.size)}
-                  </div>
-                </div>
-                <button
-                  className={styles.removeFileBtn}
-                  onClick={() => removeSelectedFile(index)}
-                  disabled={isUploading}
-                >
-                  ×
-                </button>
-              </div>
-            ))}
+
 
             {/* Add more files button */}
             <div
@@ -341,11 +308,28 @@ export const AttachmentsSection: React.FC<AttachmentsSectionProps> = () => {
               <div className={styles.uploadIcon}>
                 <FaPlus />
               </div>
-              <p className={styles.addMoreText}>Add more</p>
+              <p className={styles.addMoreText}>Upload more</p>
             </div>
           </>
         )}
       </div>
+
+      {/* Selected files waiting for upload - separate container */}
+      {selectedFiles.length > 0 && (
+        <div className={styles.selectedFilesContainer}>
+          <h4 className={styles.selectedFilesTitle}>Files ready to upload:</h4>
+          <div className={styles.selectedFilesGrid}>
+            {selectedFiles.map((file, index) => (
+              <FilePreview
+                key={`selected-${index}`}
+                file={file}
+                onRemove={() => removeSelectedFile(index)}
+                disabled={isUploading}
+              />
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Upload button for selected files */}
       {selectedFiles.length > 0 && (
@@ -378,6 +362,42 @@ export const AttachmentsSection: React.FC<AttachmentsSectionProps> = () => {
             className={styles.progressBar}
             style={{ width: `${uploadProgress}%` }}
           />
+        </div>
+      )}
+
+      {/* Delete confirmation modal */}
+      {deleteModalAttachment && (
+        <div className={styles.modalOverlay} onClick={closeDeleteModal}>
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.modalHeader}>
+              <h3 className={styles.modalTitle}>Delete Attachment</h3>
+              <button
+                className={styles.modalCloseBtn}
+                onClick={closeDeleteModal}
+              >
+                <FaTimes />
+              </button>
+            </div>
+            <div className={styles.modalBody}>
+              <p className={styles.modalMessage}>
+                Are you sure you want to delete "{deleteModalAttachment.name}"? This action cannot be undone.
+              </p>
+            </div>
+            <div className={styles.modalFooter}>
+              <button
+                className={styles.modalCancelBtn}
+                onClick={closeDeleteModal}
+              >
+                Cancel
+              </button>
+              <button
+                className={styles.modalDeleteBtn}
+                onClick={handleDeleteAttachment}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
