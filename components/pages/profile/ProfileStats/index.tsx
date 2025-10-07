@@ -23,7 +23,7 @@ interface ProfileStatsProps {
       twitter: string;
       github: string;
     };
-    professionalSummary: string;
+    professionalSummary?: string;
   } | null;
   isEditing: boolean;
   onInputChange: (field: string, value: string | string[]) => void;

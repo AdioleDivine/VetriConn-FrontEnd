@@ -175,21 +175,154 @@
   margin-left: 0.25rem;
 }
 
-@media (max-width: 768px) {
+// Tablet and below
+@media (max-width: 900px) {
   .filtersContainer {
     padding: 1rem 1rem 0.5rem 1rem;
   }
+
+  .filtersBar {
+    gap: 1rem;
+  }
+
+  .customSelect {
+    min-width: 120px;
+  }
+
+  .selectButton {
+    min-width: 100px;
+    font-size: 0.8125rem;
+    padding: 0.4rem 0.625rem;
+  }
+
+  .searchGroup input[type="text"] {
+    width: 120px;
+  }
 }
 
-@media (max-width: 700px) {
-  .filtersBar {
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    padding: 0.5rem;
+// Mobile landscape and below
+@media (max-width: 768px) {
+  .filtersContainer {
+    padding: 1rem;
   }
-  .searchGroup {
-    margin-left: 0;
+
+  .filtersBar {
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    flex-wrap: wrap;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .filterGroup {
+    flex: 1;
+    min-width: 0;
+    max-width: none;
+  }
+
+  .customSelect {
     width: 100%;
+    min-width: 80px;
+  }
+
+  .selectButton {
+    width: 100%;
+    min-width: 80px;
+    font-size: 0.75rem;
+    padding: 0.375rem 0.5rem;
+    justify-content: space-between;
+  }
+
+  .searchGroup {
+    width: 100%;
+    margin-left: 0;
     margin-top: 0.5rem;
+    order: 4;
+  }
+
+  .searchGroup input[type="text"] {
+    width: 100%;
+    flex: 1;
+    font-size: 0.875rem;
+  }
+}
+
+// Keep 3 filters on same line until 640px
+@media (max-width: 640px) {
+  .filtersBar {
+    gap: 0.375rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .filterGroup {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .customSelect {
+    min-width: 70px;
+  }
+
+  .selectButton {
+    min-width: 70px;
+    font-size: 0.6875rem;
+    padding: 0.3125rem 0.4375rem;
+  }
+
+  .selectArrow {
+    font-size: 0.625rem;
+    margin-left: 0.25rem;
+  }
+}
+
+// Individual lines for filters at 480px and below
+@media (max-width: 480px) {
+  .filtersContainer {
+    padding: 0.75rem;
+  }
+
+  .filtersBar {
+    padding: 0.5rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: stretch;
+  }
+
+  .filterGroup {
+    width: 100%;
+    max-width: none;
+    min-width: unset;
+    flex: none;
+  }
+
+  .customSelect {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .selectButton {
+    width: 100%;
+    min-width: unset;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    justify-content: space-between;
+  }
+
+  .selectArrow {
+    font-size: 0.75rem;
+    margin-left: 0.5rem;
+  }
+
+  .searchGroup {
+    width: 100%;
+    margin-top: 0;
+    order: unset;
+  }
+
+  .searchGroup input[type="text"] {
+    font-size: 1rem;
+    padding: 0.375rem 0.5rem;
   }
 }

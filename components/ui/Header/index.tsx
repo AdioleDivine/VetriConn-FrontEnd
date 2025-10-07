@@ -86,14 +86,11 @@ export const Header = () => {
       </div>
 
       {/* Account section for desktop */}
-      {/* <div className={styles.accountSection}>
-        <Link href="/signin" className={styles.loginLink}>
-          Already have an account?
-        </Link>
+      <div className={styles.accountSection}>
         <Link href="/signin" className={styles.signInBtn}>
-          Sign In
+          Login
         </Link>
-      </div> */}
+      </div>
 
       {/* Mobile menu container */}
       <div
@@ -120,33 +117,44 @@ export const Header = () => {
           >
             About
           </a>
-         <Link
-          href="#faq-section"
-          className={styles.scrollLink}
-          onClick={(e) => {
-            e.preventDefault();
+          <Link
+            href="#faq-section"
+            className={styles.scrollLink}
+            onClick={(e) => {
+              e.preventDefault();
               setIsMenuOpen(false);
-            document.getElementById("faq-section")?.scrollIntoView({
-              behavior: "smooth",
-            });
-          }}
-        >
-          FAQ
-        </Link>
+              document.getElementById("faq-section")?.scrollIntoView({
+                behavior: "smooth",
+              });
+            }}
+          >
+            FAQ
+          </Link>
 
-        <Link
-          href="#contact-section"
-          className={styles.scrollLink}
-          onClick={(e) => {
-            e.preventDefault();
+          <Link
+            href="#contact-section"
+            className={styles.scrollLink}
+            onClick={(e) => {
+              e.preventDefault();
               setIsMenuOpen(false);
-            document.getElementById("contact-section")?.scrollIntoView({
-              behavior: "smooth",
-            });
-          }}
-        >
-          Contact Us
-        </Link>
+              document.getElementById("contact-section")?.scrollIntoView({
+                behavior: "smooth",
+              });
+            }}
+          >
+            Contact Us
+          </Link>
+        </div>
+
+        {/* Mobile account section */}
+        <div className={styles.mobileAccountSection}>
+          <Link
+            href="/signin"
+            className={styles.signInBtn}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Login
+          </Link>
         </div>
       </div>
 

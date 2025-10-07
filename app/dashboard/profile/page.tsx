@@ -3,10 +3,11 @@ import React, { useState, useEffect } from "react";
 import styles from "./page.module.scss";
 import { ProfileHeader } from "@/components/pages/profile/ProfileHeader";
 import { ProfileStats } from "@/components/pages/profile/ProfileStats";
+import { EditActions } from "@/components/pages/profile/EditActions";
 
-import { ProfessionalSummary } from "@/components/pages/profile/ProfessionalSummary";
+// import { ProfessionalSummary } from "@/components/pages/profile/ProfessionalSummary";
 import { AttachmentsSection } from "@/components/pages/profile/AttachmentsSection";
-import { ExperienceEducationSection } from "@/components/pages/profile/ExperienceEducationSection";
+// import { ExperienceEducationSection } from "@/components/pages/profile/ExperienceEducationSection";
 import { updateUserProfile } from "@/lib/api";
 import { useUserProfile } from "@/hooks/useUserProfile";
 import { useToaster } from "@/components/ui/Toaster";
@@ -30,7 +31,7 @@ interface EditingProfile {
     twitter: string;
     github: string;
   };
-  professionalSummary: string;
+  // professionalSummary: string;
 }
 
 const ProfilePage = () => {
@@ -57,7 +58,7 @@ const ProfilePage = () => {
           twitter: userProfile.socials?.twitter || "",
           github: userProfile.socials?.github || "",
         },
-        professionalSummary: userProfile.professionalSummary,
+        // professionalSummary: userProfile.professionalSummary,
       });
     }
   }, [isEditing, userProfile, editingData]);
@@ -179,13 +180,13 @@ const ProfilePage = () => {
         }
       }
 
-      if (
-        editingData.professionalSummary &&
-        editingData.professionalSummary.trim()
-      ) {
-        profileUpdateData.professional_summary =
-          editingData.professionalSummary.trim();
-      }
+      // if (
+      //   editingData.professionalSummary &&
+      //   editingData.professionalSummary.trim()
+      // ) {
+      //   profileUpdateData.professional_summary =
+      //     editingData.professionalSummary.trim();
+      // }
 
       // Debug: Log what we're sending to the backend
 
@@ -299,9 +300,16 @@ const ProfilePage = () => {
         />
       </div>
 
-      <ProfessionalSummary />
+      <EditActions
+        isEditing={isEditing}
+        isSaving={isSaving}
+        onSave={handleSave}
+        onCancel={handleCancel}
+      />
+
+      {/* <ProfessionalSummary /> */}
       <AttachmentsSection />
-      <ExperienceEducationSection />
+      {/* <ExperienceEducationSection /> */}
     </div>
   );
 };

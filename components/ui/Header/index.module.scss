@@ -102,6 +102,7 @@
       z-index: 10;
       padding-top: 80px;
       padding-bottom: 60px;
+      justify-content: space-between;
     }
   }
 }
@@ -181,15 +182,17 @@
     align-items: center;
     justify-content: flex-start;
     margin: 0;
-    padding: 2rem;
+    padding: 2rem 2rem 1rem 2rem;
+    flex: 1;
 
     &.active {
       display: flex;
     }
 
     a {
-      padding: 1rem 0;
+      padding: 1.2rem 0;
       font-size: 1.25rem;
+      font-weight: 500;
     }
   }
 }
@@ -198,8 +201,6 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  // display: none;
-  //remove this section probably
 
   .loginLink {
     @include typo.base-text;
@@ -208,22 +209,21 @@
   }
 
   @media (max-width: vars.$mobile-breakpoint) {
-    display: none;
+    display: none; // Hide desktop account section on mobile
+  }
+}
+
+.mobileAccountSection {
+  display: none;
+
+  @media (max-width: vars.$mobile-breakpoint) {
+    display: flex;
     flex-direction: column;
-    position: static;
-    gap: 1.5rem;
-    padding: 2rem;
     align-items: center;
+    justify-content: center;
     margin-top: auto;
-    margin-bottom: 4rem;
-
-    &.active {
-      display: flex;
-    }
-
-    .loginLink {
-      font-size: 1rem;
-    }
+    margin-bottom: 2rem;
+    padding: 0 2rem;
   }
 }
 
@@ -237,6 +237,9 @@
   cursor: pointer;
   transition: all 0.2s;
   display: inline-block;
+  text-decoration: none;
+  text-align: center;
+
   &:hover {
     background-color: color.adjust(vars.$primary-color, $lightness: -10%);
   }
@@ -244,5 +247,7 @@
   @media (max-width: vars.$mobile-breakpoint) {
     padding: 0.75rem 2rem;
     width: 200px;
+    font-size: 1.1rem;
+    font-weight: 600;
   }
 }
