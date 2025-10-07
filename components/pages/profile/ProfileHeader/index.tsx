@@ -33,10 +33,7 @@ interface ProfileHeaderProps {
 export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   userProfile,
   isEditing,
-  isSaving = false,
   onEditToggle,
-  onSave,
-  onCancel,
   onInputChange,
 }) => {
   const [imageError, setImageError] = useState(false);
