@@ -630,9 +630,7 @@ export function normalizeAttachments(
 }
 
 // Upload single attachment
-export async function uploadSingleAttachment(
-  file: File
-): Promise<{
+export async function uploadSingleAttachment(file: File): Promise<{
   success: boolean;
   message: string;
   data?: { attachment: Attachment };
@@ -939,19 +937,19 @@ export async function deleteAttachment(
 
 // Message/Contact form types
 export interface ContactMessage {
-  name: string;
+  full_name: string;
   email: string;
-  message: string;
+  description: string;
 }
 
 export interface MessageResponse {
   success: boolean;
-  message: string;
+  description: string;
   data?: {
     id: string;
-    name: string;
+    full_name: string;
     email: string;
-    message: string;
+    description: string;
     createdAt: string;
   };
   error?: string;

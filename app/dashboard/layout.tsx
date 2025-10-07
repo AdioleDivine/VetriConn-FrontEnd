@@ -12,7 +12,7 @@ const layout = ({ children }: LayoutProps) => {
   return (
     <div>
       <DashboardNavbar />
-      <div className="container">
+      <div>
         {/* This is where the main content will be rendered */}
         {children}
       </div>

@@ -16,9 +16,9 @@ interface ContactSectionProps {
 
 const ContactSection = ({ id }: ContactSectionProps) => {
   const [formData, setFormData] = useState<ContactMessage>({
-    name: "",
+    full_name: "",
     email: "",
-    message: "",
+    description: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{
@@ -31,7 +31,13 @@ const ContactSection = ({ id }: ContactSectionProps) => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (name === "name") {
+      setFormData((prev) => ({ ...prev, full_name: value }));
+    } else if (name === "message") {
+      setFormData((prev) => ({ ...prev, description: value }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
     // Clear status when user starts typing
     if (submitStatus.type) {
       setSubmitStatus({ type: null, message: "" });
@@ -43,9 +49,9 @@ const ContactSection = ({ id }: ContactSectionProps) => {
 
     // Basic validation
     if (
-      !formData.name.trim() ||
+      !formData.full_name.trim() ||
       !formData.email.trim() ||
-      !formData.message.trim()
+      !formData.description.trim()
     ) {
       setSubmitStatus({
         type: "error",
@@ -81,7 +87,7 @@ const ContactSection = ({ id }: ContactSectionProps) => {
       });
 
       // Reset form
-      setFormData({ name: "", email: "", message: "" });
+      setFormData({ full_name: "", email: "", description: "" });
     } catch (error) {
       console.error("Contact form error:", error);
       const errorMessage =
@@ -129,7 +135,7 @@ const ContactSection = ({ id }: ContactSectionProps) => {
             name="name"
             placeholder="Full name"
             className={styles.input}
-            value={formData.name}
+            value={formData.full_name}
             onChange={handleInputChange}
             disabled={isSubmitting}
             required
@@ -149,7 +155,7 @@ const ContactSection = ({ id }: ContactSectionProps) => {
             placeholder="Description"
             className={styles.textarea}
             rows={6}
-            value={formData.message}
+            value={formData.description}
             onChange={handleInputChange}
             disabled={isSubmitting}
             required
