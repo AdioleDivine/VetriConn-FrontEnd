@@ -64,69 +64,73 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
         <div className={styles.profileInfo}>
           {isEditing ? (
             <div className={styles.editForm}>
-              <div className={styles.basicInfoSection}>
-                <input
-                  type="text"
-                  value={userProfile.name}
-                  onChange={(e) => onInputChange("name", e.target.value)}
-                  className={styles.editInput}
-                  placeholder="Enter your full name"
-                />
-                <input
-                  type="text"
-                  value={userProfile.title}
-                  onChange={(e) => onInputChange("title", e.target.value)}
-                  className={styles.editInput}
-                  placeholder="Enter your profession"
-                />
-                <textarea
-                  value={userProfile.bio || ""}
-                  onChange={(e) => onInputChange("bio", e.target.value)}
-                  className={styles.editTextarea}
-                  placeholder="Tell others about yourself..."
-                  rows={3}
-                />
-              </div>
+              <div className={styles.editFormRow}>
+                <div className={styles.basicInfoSection}>
+                  <h4 className={styles.basicInfoTitle}>Personal Details</h4>
+                  <div className={styles.basicInfoRow}>
+                    <input
+                      type="text"
+                      value={userProfile.name}
+                      onChange={(e) => onInputChange("name", e.target.value)}
+                      className={styles.editInput}
+                      placeholder="Enter your full name"
+                    />
+                    <input
+                      type="text"
+                      value={userProfile.title}
+                      onChange={(e) => onInputChange("title", e.target.value)}
+                      className={styles.editInput}
+                      placeholder="Enter your profession"
+                    />
+                  </div>
+                  <textarea
+                    value={userProfile.bio || ""}
+                    onChange={(e) => onInputChange("bio", e.target.value)}
+                    className={styles.editTextarea}
+                    placeholder="Tell others about yourself..."
+                  />
+                </div>
 
-              {/* Social Links Edit Section */}
-              <div className={styles.socialEditSection}>
-                <h4 className={styles.socialEditTitle}>Social Links</h4>
-                <div className={styles.socialInputs}>
-                  <div className={styles.socialInputGroup}>
-                    <FaLinkedin className={styles.socialIcon} />
-                    <input
-                      type="url"
-                      value={userProfile.socials?.linkedin || ""}
-                      onChange={(e) =>
-                        onInputChange("socials.linkedin", e.target.value)
-                      }
-                      className={styles.socialInput}
-                      placeholder="https://linkedin.com/in/yourprofile"
-                    />
-                  </div>
-                  <div className={styles.socialInputGroup}>
-                    <FaTwitter className={styles.socialIcon} />
-                    <input
-                      type="url"
-                      value={userProfile.socials?.twitter || ""}
-                      onChange={(e) =>
-                        onInputChange("socials.twitter", e.target.value)
-                      }
-                      className={styles.socialInput}
-                      placeholder="https://x.com/yourusername"
-                    />
-                  </div>
-                  <div className={styles.socialInputGroup}>
-                    <FaGithub className={styles.socialIcon} />
-                    <input
-                      type="url"
-                      value={userProfile.socials?.github || ""}
-                      onChange={(e) =>
-                        onInputChange("socials.github", e.target.value)
-                      }
-                      className={styles.socialInput}
-                      placeholder="https://github.com/yourusername"
-                    />
+                {/* Social Links Edit Section */}
+                <div className={styles.socialEditSection}>
+                  <h4 className={styles.socialEditTitle}>Social Links</h4>
+                  <div className={styles.socialInputs}>
+                    <div className={styles.socialInputGroup}>
+                      <FaLinkedin className={styles.socialIcon} />
+                      <input
+                        type="url"
+                        value={userProfile.socials?.linkedin || ""}
+                        onChange={(e) =>
+                          onInputChange("socials.linkedin", e.target.value)
+                        }
+                        className={styles.socialInput}
+                        placeholder="https://linkedin.com/in/yourprofile"
+                      />
+                    </div>
+                    <div className={styles.socialInputGroup}>
+                      <FaTwitter className={styles.socialIcon} />
+                      <input
+                        type="url"
+                        value={userProfile.socials?.twitter || ""}
+                        onChange={(e) =>
+                          onInputChange("socials.twitter", e.target.value)
+                        }
+                        className={styles.socialInput}
+                        placeholder="https://x.com/yourusername"
+                      />
+                    </div>
+                    <div className={styles.socialInputGroup}>
+                      <FaGithub className={styles.socialIcon} />
+                      <input
+                        type="url"
+                        value={userProfile.socials?.github || ""}
+                        onChange={(e) =>
+                          onInputChange("socials.github", e.target.value)
+                        }
+                        className={styles.socialInput}
+                        placeholder="https://github.com/yourusername"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
