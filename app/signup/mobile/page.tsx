@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import styles from "../../page.module.css";
-import MobileSignUp from "@/components/pages/auth/MobileSignUp";
+import { MobileSignUp } from "@/components/pages/auth/MobileSignUp";
 
 export default function MobileSignUpPage() {
   const router = useRouter();

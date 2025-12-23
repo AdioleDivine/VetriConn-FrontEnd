@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import styles from "../page.module.css";
-import DesktopSignIn from "@/components/pages/auth/DesktopSignIn";
+import { DesktopSignIn } from "@/components/pages/auth/DesktopSignIn";
 
 export default function SignIn() {
   const router = useRouter();
