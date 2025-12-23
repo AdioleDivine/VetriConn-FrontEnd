@@ -195,18 +195,19 @@ const ContactSection = ({ id }: ContactSectionProps) => {
             <a
               href="https://www.facebook.com/profile.php?id=61580233844003"
               aria-label="Facebook"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <FacebookIcon />
             </a>
             <a
               href="https://www.linkedin.com/company/vetriconn-inc/?viewAsMember=true"
               aria-label="LinkedIn"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <FiLinkedin />
             </a>
-            {/* <a href="#" aria-label="X">
-            <XIcon />
-          </a> */}
           </div>
         </div>
       </div>

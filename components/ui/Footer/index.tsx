@@ -49,18 +49,19 @@ const Footer = () => {
           Vetriconn © 2025 All rights Reserved.
         </div>
         <div className={styles.socials}>
-          {/* <a href="#" aria-label="Instagram">
-            <FaInstagram />
-          </a> */}
           <a
             href="https://www.facebook.com/profile.php?id=61580233844003"
             aria-label="Facebook"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <LiaFacebookF />
           </a>
           <a
             href="https://www.linkedin.com/company/vetriconn-inc/?viewAsMember=true"
             aria-label="LinkedIn"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <FiLinkedin />
           </a>

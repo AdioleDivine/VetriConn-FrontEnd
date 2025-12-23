@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VetriConn Frontend
+
+A job board platform connecting Canadian retirees and veterans with meaningful work opportunities.
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Language:** TypeScript
+- **Styling:** SCSS Modules
+- **Animations:** Framer Motion
+- **Data Fetching:** SWR
+- **Validation:** Zod
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 20+
+- pnpm (recommended)
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000](http://localhost:3000) to view the app.
 
-## Learn More
+### Build
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+pnpm build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Production
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+pnpm start
+```
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+app/                  # Next.js App Router pages
+├── dashboard/        # User dashboard
+├── jobs/             # Job listings
+├── signin/           # Authentication
+└── signup/
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+components/
+├── pages/            # Page-specific components
+└── ui/               # Reusable UI components
+
+hooks/                # Custom React hooks
+lib/                  # API client & utilities
+types/                # TypeScript definitions
+styles/               # Global SCSS variables & mixins
+```
+
+## Environment Variables
+
+Create a `.env.local` file:
+
+```
+NEXT_PUBLIC_API_URL=your_api_url
+```

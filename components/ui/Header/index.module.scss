@@ -16,6 +16,8 @@
 .logo {
   width: 180px;
   height: auto;
+  display: block;
+  overflow: visible;
 
   @media (max-width: vars.$mobile-breakpoint) {
     width: 140px;

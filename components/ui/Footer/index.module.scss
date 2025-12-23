@@ -116,8 +116,9 @@
 
 .logo {
   width: 162px;
-  height: 74px;
+  height: auto;
   display: block;
+  overflow: visible;
 }
 
 @media (max-width: 700px) {

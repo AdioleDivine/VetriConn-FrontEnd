@@ -5,11 +5,10 @@ import DottedBox from "@/public/images/dotted_box.svg";
 import { Header } from "@/components/ui/Header";
 import Advert from "@/components/ui/Advert";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef, memo } from "react";
 import { useRouter } from "next/navigation";
 
-// Carousel images array - using the same image 8 times for now
-const carouselImages = [
+const CAROUSEL_IMAGES = [
   "/images/Hero/4.svg",
   "/images/Hero/5.svg",
   "/images/Hero/6.svg",
@@ -18,78 +17,125 @@ const carouselImages = [
   "/images/Hero/1.svg",
   "/images/Hero/2.svg",
   "/images/Hero/3.svg",
-];
+] as const;
+
+const CAROUSEL_INTERVAL = 5000;
+const TRANSITION_DURATION = 1.8;
+
+const imageVariants = {
+  enter: { opacity: 0 },
+  center: { opacity: 1 },
+  exit: { opacity: 0 },
+} as const;
+
+const transition = { opacity: { duration: TRANSITION_DURATION, ease: "easeInOut" } } as const;
+
+// Custom hook with ref-based pause to avoid re-renders
+const useCarousel = (imageCount: number, interval: number) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const isPausedRef = useRef(false);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (!isPausedRef.current) {
+        setCurrentIndex((prev) => (prev + 1) % imageCount);
+      }
+    }, interval);
+
+    return () => clearInterval(timer);
+  }, [imageCount, interval]);
+
+  const pause = useCallback(() => { isPausedRef.current = true; }, []);
+  const resume = useCallback(() => { isPausedRef.current = false; }, []);
+
+  return { currentIndex, pause, resume };
+};
+
+// Memoized carousel to prevent re-renders from parent state changes
+const HeroCarousel = memo(function HeroCarousel() {
+  const { currentIndex, pause, resume } = useCarousel(
+    CAROUSEL_IMAGES.length,
+    CAROUSEL_INTERVAL
+  );
+
+  // Preload next image for smoother transitions
+  const nextIndex = (currentIndex + 1) % CAROUSEL_IMAGES.length;
+
+  return (
+    <div
+      className={styles.carouselContainer}
+      onMouseEnter={pause}
+      onMouseLeave={resume}
+    >
+      {/* Hidden preload for next image */}
+      <link rel="preload" as="image" href={CAROUSEL_IMAGES[nextIndex]} />
+      
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentIndex}
+          variants={imageVariants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={transition}
+          className={styles.carouselImage}
+        >
+          <div className={styles.imageWrapper}>
+            <Image
+              src={CAROUSEL_IMAGES[currentIndex]}
+              alt={`Hero image ${currentIndex + 1}`}
+              fill
+              className={styles.heroImage}
+              priority={currentIndex === 0}
+              loading={currentIndex === 0 ? "eager" : "lazy"}
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+});
 
 export const HeroSection = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
   const [email, setEmail] = useState("");
   const [promotionalEmails, setPromotionalEmails] = useState(false);
   const [emailError, setEmailError] = useState("");
   const router = useRouter();
 
-  // Auto-switch images every 10 seconds, pause on hover
-  useEffect(() => {
-    if (isHovered) return; // Don't start interval when hovered
-
-    const interval = setInterval(() => {
-      setCurrentImageIndex(
-        (prevIndex) => (prevIndex + 1) % carouselImages.length
-      );
-    }, 5000); // Increased to 5 seconds for better morphing appreciation
-
-    return () => clearInterval(interval);
-  }, [isHovered]);
-
-  // Email validation
-  const validateEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  // Handle form submission
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleEmailChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
     setEmailError("");
+  }, []);
 
-    if (!email.trim()) {
+  const handleCheckboxChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setPromotionalEmails(e.target.checked);
+  }, []);
+
+  const handleSubmit = useCallback((e: React.FormEvent) => {
+    e.preventDefault();
+
+    const trimmedEmail = email.trim();
+    if (!trimmedEmail) {
       setEmailError("Email is required");
       return;
     }
 
-    if (!validateEmail(email)) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
       setEmailError("Please enter a valid email address");
       return;
     }
 
-    // Navigate to signup page with query params
-    const params = new URLSearchParams();
-    params.set("email", email);
-    if (promotionalEmails) {
-      params.set("promotional_emails", "true");
-    }
+    const params = new URLSearchParams({ email: trimmedEmail });
+    if (promotionalEmails) params.set("promotional_emails", "true");
 
     router.push(`/signup?${params.toString()}`);
-  };
+  }, [email, promotionalEmails, router]);
 
-  // Animation variants for seamless crossfade
-  const imageVariants = {
-    enter: {
-      opacity: 0,
-    },
-    center: {
-      opacity: 1,
-    },
-    exit: {
-      opacity: 0,
-    },
-  };
   return (
     <header className={styles.hero}>
-      {/* Navigation */}
       <Header />
       <Advert />
-      {/* Hero Content */}
       <div className={styles.heroContent}>
         <div className={styles.textContent}>
           <DottedBox className={styles.dottedBoxTop} />
@@ -100,13 +146,6 @@ export const HeroSection = () => {
           </p>
 
           <div className={styles.ctaButtons}>
-            {/* Commented out due to design changes that may be temporary */}
-            {/*
-            <button className={styles.primaryBtn}>I&apos;m here to work</button>
-            <button className={styles.secondaryBtn}>
-              I&apos;m here to hire
-            </button>
-            */}
             <form className={styles.newsletterForm} onSubmit={handleSubmit}>
               <label
                 htmlFor="newsletter-email"
@@ -117,15 +156,9 @@ export const HeroSection = () => {
               <input
                 id="newsletter-email"
                 type="email"
-                placeholder=""
-                className={`${styles.newsletterInput} ${
-                  emailError ? styles.inputError : ""
-                }`}
+                className={`${styles.newsletterInput} ${emailError ? styles.inputError : ""}`}
                 value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  if (emailError) setEmailError(""); // Clear error on input
-                }}
+                onChange={handleEmailChange}
                 required
               />
               {emailError && (
@@ -137,7 +170,7 @@ export const HeroSection = () => {
                   type="checkbox"
                   className={styles.newsletterCheckbox}
                   checked={promotionalEmails}
-                  onChange={(e) => setPromotionalEmails(e.target.checked)}
+                  onChange={handleCheckboxChange}
                 />
                 <label
                   htmlFor="newsletter-checkbox"
@@ -155,35 +188,7 @@ export const HeroSection = () => {
 
         <div className={styles.imageContainer}>
           <DottedBox className={styles.dottedBoxBottom} />
-          <div
-            className={styles.carouselContainer}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            <AnimatePresence>
-              <motion.div
-                key={currentImageIndex}
-                variants={imageVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{
-                  opacity: { duration: 1.8, ease: "easeInOut" },
-                }}
-                className={styles.carouselImage}
-              >
-                <div className={styles.imageWrapper}>
-                  <Image
-                    src={carouselImages[currentImageIndex]}
-                    alt={`Hero image ${currentImageIndex + 1}`}
-                    fill
-                    className={styles.heroImage}
-                    priority={currentImageIndex === 0}
-                  />
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+          <HeroCarousel />
         </div>
       </div>
     </header>
