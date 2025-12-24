@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import DottedBox from "@/public/images/dotted_box.svg";
-import { Header } from "@/components/ui/Header";
 import Advert from "@/components/ui/Advert";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useCallback, useRef, memo } from "react";
@@ -55,7 +54,7 @@ const HeroCarousel = memo(function HeroCarousel() {
 
   return (
     <div
-      className="relative w-full max-w-[650px] h-[455px] rounded-[10px] overflow-hidden z-[2] mobile:max-w-[450px] mobile:h-[300px]"
+      className="relative w-[650px] max-w-[650px] min-w-[650px] h-[455px] rounded-[10px] overflow-hidden z-[2] mobile:w-full mobile:max-w-full mobile:min-w-0 mobile:h-[250px]"
       onMouseEnter={pause}
       onMouseLeave={resume}
     >
@@ -119,16 +118,15 @@ export const HeroSection = () => {
   }, [email, promotionalEmails, router]);
 
   return (
-    <header className="px-[5%] py-8 pb-0 bg-white relative overflow-hidden mobile:px-[5%] mobile:py-1.5 mobile:pb-4 mobile:min-h-auto">
-      <Header />
+    <header className="px-[5%] py-4 pb-0 bg-white relative overflow-hidden mobile:px-[5%] mobile:py-1.5 mobile:pb-4 mobile:min-h-auto ">
       <Advert />
-      <div className="flex items-center justify-between gap-8 relative max-w-container mx-auto p-8 mobile:flex-col mobile:text-center mobile:gap-6 mobile:mt-16 mobile:p-4">
+      <div className="flex items-center justify-between gap-8 relative max-w-container mx-auto p-8 mobile:flex-col mobile:text-center mobile:gap-6 mobile:mt-4 mobile:p-4 mobile:pt-8">
         <div className="flex-[0_0_45%] max-w-[500px] relative mobile:flex-none mobile:w-full mobile:mx-auto mobile:max-w-full">
           <DottedBox className="absolute top-0 -left-[150px] z-0 w-[100px] h-auto pointer-events-none mobile:w-[70px] mobile:-top-10 mobile:left-0" />
-          <h1 className="font-lato text-heading-1 text-text mb-6 leading-tight mobile:text-[2.5rem] mobile:mb-4 mobile:leading-tight">
+          <h1 className="heading-1 mb-6 mobile:mb-4">
             Reconnecting retirees and veterans through purposeful work
           </h1>
-          <p className="font-open-sans text-subtitle text-text-muted mb-2 max-w-[80%] text-base mobile:text-[0.95rem] mobile:mb-2 mobile:max-w-full">
+          <p className="font-open-sans text-subtitle text-text-muted mb-2 max-w-[80%] text-base mobile:text-sm mobile:mb-2 mobile:max-w-full">
             From careers to causes, we connect you to purposeful opportunities quickly, easily, and on your terms
           </p>
 
@@ -168,7 +166,7 @@ export const HeroSection = () => {
           </div>
         </div>
 
-        <div className="relative flex-[0_0_50%] flex w-[40vw] justify-center items-center h-[455px] mobile:flex-none mobile:w-[500px] mobile:flex mobile:h-[300px] before:content-[''] before:absolute before:w-full before:h-[455px] before:top-5 before:-right-5 before:rounded-[10px] before:bg-primary before:bg-[url('/favicon-white.svg')] before:bg-no-repeat before:bg-center before:bg-[length:200px_200px] before:opacity-100 before:z-[1] before:[transform:rotateX(15deg)] mobile:before:hidden">
+        <div className="relative flex-[0_0_auto] flex w-[650px] max-w-[650px] justify-center items-center h-[455px] mobile:flex-none mobile:w-full mobile:max-w-full mobile:h-[250px] before:content-[''] before:absolute before:w-full before:max-w-[650px] before:h-[455px] before:top-5 before:-right-5 before:rounded-[10px] before:bg-primary before:bg-[url('/favicon-white.svg')] before:bg-no-repeat before:bg-center before:bg-[length:200px_200px] before:opacity-100 before:z-[1] before:[transform:rotateX(15deg)] mobile:before:hidden">
           <DottedBox className="absolute -bottom-[30px] -right-[70px] z-[3] w-[100px] h-auto pointer-events-none" />
           <HeroCarousel />
         </div>

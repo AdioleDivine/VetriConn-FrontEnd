@@ -54,47 +54,47 @@ export const ContactSection = ({ id }: ContactSectionProps) => {
   };
 
   return (
-    <section className="w-full max-w-[1200px] mx-auto py-12 px-4 pb-16" id={id}>
-      <h1 className="font-lato text-heading-1 text-text text-center mb-10">Get In Touch</h1>
-      <div className="flex gap-12 items-start justify-center mobile:flex-col mobile:gap-10 mobile:items-stretch mobile:justify-center mobile:w-full">
-        <form className="flex-1 flex flex-col gap-6 max-w-[500px] mobile:mx-auto mobile:min-w-[90%]" onSubmit={handleSubmit}>
-          <h2 className="font-lato text-heading-2 text-text mb-2">
+    <section className="w-full py-12 px-[5%] pb-16 mobile:py-8 mobile:pb-10" id={id}>
+      <h1 className="heading-1 text-center mb-10 mobile:mb-6">Get In Touch</h1>
+      <div className="flex gap-16 items-start justify-between mobile:flex-col mobile:gap-8 mobile:items-stretch">
+        <form className="flex-1 flex flex-col gap-6 mobile:gap-4 mobile:w-full" onSubmit={handleSubmit}>
+          <h2 className="heading-2 mb-2 mobile:mb-1">
             Send a message{" "}
-            <span className="inline-flex items-center justify-center align-middle relative top-0.5 ml-1 [&_svg]:w-6 [&_svg]:h-6 [&_svg]:block">
+            <span className="inline-flex items-center justify-center align-middle relative top-0.5 ml-1 [&_svg]:w-6 [&_svg]:h-6 [&_svg]:block mobile:[&_svg]:w-5 mobile:[&_svg]:h-5">
               <SmsTrackingIcon />
             </span>
           </h2>
           {submitStatus.type && (
-            <div className={clsx("p-4 rounded-lg font-open-sans font-medium text-center mb-2", submitStatus.type === "success" && "bg-green-100 text-green-800 border border-green-200", submitStatus.type === "error" && "bg-red-100 text-red-800 border border-red-200")}>
+            <div className={clsx("p-4 rounded-lg font-open-sans font-medium text-center mb-2 mobile:p-3 mobile:text-sm", submitStatus.type === "success" && "bg-green-100 text-green-800 border border-green-200", submitStatus.type === "error" && "bg-red-100 text-red-800 border border-red-200")}>
               {submitStatus.message}
             </div>
           )}
-          <input type="text" name="name" placeholder="Full name" className="w-full py-4 px-5 border border-gray-200 rounded-2xl font-open-sans text-base outline-none transition-colors focus:border-primary focus:border-[1.5px]" value={formData.full_name} onChange={handleInputChange} disabled={isSubmitting} required />
-          <input type="email" name="email" placeholder="Email address" className="w-full py-4 px-5 border border-gray-200 rounded-2xl font-open-sans text-base outline-none transition-colors focus:border-primary focus:border-[1.5px]" value={formData.email} onChange={handleInputChange} disabled={isSubmitting} required />
-          <textarea name="message" placeholder="Description" className="w-full py-4 px-5 border border-gray-200 rounded-2xl font-open-sans text-base outline-none transition-colors min-h-[120px] resize-y focus:border-primary focus:border-[1.5px]" rows={6} value={formData.description} onChange={handleInputChange} disabled={isSubmitting} required />
-          <button type="submit" className="bg-primary text-white font-open-sans font-semibold border-none rounded-2xl py-4 mt-2 cursor-pointer transition-colors hover:bg-primary-hover disabled:bg-gray-300 disabled:cursor-not-allowed" disabled={isSubmitting}>
+          <input type="text" name="name" placeholder="Full name" className="w-full py-4 px-5 border border-gray-200 rounded-2xl font-open-sans text-base outline-none transition-colors focus:border-primary focus:border-[1.5px] mobile:py-3 mobile:px-4 mobile:text-sm mobile:rounded-xl" value={formData.full_name} onChange={handleInputChange} disabled={isSubmitting} required />
+          <input type="email" name="email" placeholder="Email address" className="w-full py-4 px-5 border border-gray-200 rounded-2xl font-open-sans text-base outline-none transition-colors focus:border-primary focus:border-[1.5px] mobile:py-3 mobile:px-4 mobile:text-sm mobile:rounded-xl" value={formData.email} onChange={handleInputChange} disabled={isSubmitting} required />
+          <textarea name="message" placeholder="Description" className="w-full py-4 px-5 border border-gray-200 rounded-2xl font-open-sans text-base outline-none transition-colors min-h-[120px] resize-y focus:border-primary focus:border-[1.5px] mobile:py-3 mobile:px-4 mobile:text-sm mobile:rounded-xl mobile:min-h-[100px]" rows={6} value={formData.description} onChange={handleInputChange} disabled={isSubmitting} required />
+          <button type="submit" className="bg-primary text-white font-open-sans font-semibold border-none rounded-2xl py-4 mt-2 cursor-pointer transition-colors hover:bg-primary-hover disabled:bg-gray-300 disabled:cursor-not-allowed mobile:py-3 mobile:mt-1 mobile:rounded-xl mobile:text-sm" disabled={isSubmitting}>
             {isSubmitting ? "Sending..." : "Submit"}
           </button>
         </form>
-        <div className="flex-1 bg-[#fcfcfc] rounded-3xl w-full py-10 px-8 max-w-[420px] flex flex-col gap-6 mobile:max-w-[90%] mobile:mx-auto mobile:py-8 mobile:px-4">
-          <h2 className="font-lato text-heading-2 text-primary mb-5">Contact information</h2>
-          <div className="flex items-start gap-4 font-open-sans text-base text-gray-900 mb-3">
-            <span className="text-primary text-xl mt-0.5"><LocationIcon /></span>
+        <div className="flex-1 bg-[#fcfcfc] rounded-3xl w-full py-10 px-8 flex flex-col gap-6 mobile:py-6 mobile:px-5 mobile:rounded-2xl mobile:gap-4">
+          <h2 className="heading-2 text-primary mb-5 mobile:mb-3">Contact information</h2>
+          <div className="flex items-start gap-4 font-open-sans text-base text-gray-900 mb-3 mobile:text-sm mobile:gap-3 mobile:mb-2">
+            <span className="text-primary text-xl mt-0.5 mobile:text-lg"><LocationIcon /></span>
             <span>Ottawa, Ontario.</span>
           </div>
-          <div className="flex items-start gap-4 font-open-sans text-base text-gray-900 mb-3">
-            <span className="text-primary text-xl mt-0.5"><CallCallingIcon /></span>
+          <div className="flex items-start gap-4 font-open-sans text-base text-gray-900 mb-3 mobile:text-sm mobile:gap-3 mobile:mb-2">
+            <span className="text-primary text-xl mt-0.5 mobile:text-lg"><CallCallingIcon /></span>
             <span>English - 1(647)-889-9542 <br /><br /> French - 1(613)-501-9162</span>
           </div>
-          <div className="flex items-start gap-4 font-open-sans text-base text-gray-900 mb-3">
-            <span className="text-primary text-xl mt-0.5"><SmsIcon /></span>
+          <div className="flex items-start gap-4 font-open-sans text-base text-gray-900 mb-3 mobile:text-sm mobile:gap-3 mobile:mb-2">
+            <span className="text-primary text-xl mt-0.5 mobile:text-lg"><SmsIcon /></span>
             <span>richmonda@vetriconn.ca</span>
           </div>
-          <div className="flex gap-9 mt-10 justify-start">
-            <a href="https://www.facebook.com/profile.php?id=61580233844003" aria-label="Facebook" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-14 h-14 rounded-full border-none shadow-[0_-2px_4px_0_#f1f0f0,0_2px_6px_0_#757373] text-primary text-3xl bg-white transition-shadow hover:shadow-[0_-2px_4px_0_#ebe9e9,0_3px_10px_0_#646363]">
+          <div className="flex gap-9 mt-10 justify-start mobile:gap-6 mobile:mt-6">
+            <a href="https://www.facebook.com/profile.php?id=61580233844003" aria-label="Facebook" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-14 h-14 rounded-full border-none shadow-[0_-2px_4px_0_#f1f0f0,0_2px_6px_0_#757373] text-primary text-3xl bg-white transition-shadow hover:shadow-[0_-2px_4px_0_#ebe9e9,0_3px_10px_0_#646363] mobile:w-12 mobile:h-12 mobile:text-2xl">
               <FacebookIcon />
             </a>
-            <a href="https://www.linkedin.com/company/vetriconn-inc/?viewAsMember=true" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-14 h-14 rounded-full border-none shadow-[0_-2px_4px_0_#f1f0f0,0_2px_6px_0_#757373] text-primary text-3xl bg-white transition-shadow hover:shadow-[0_-2px_4px_0_#ebe9e9,0_3px_10px_0_#646363]">
+            <a href="https://www.linkedin.com/company/vetriconn-inc/?viewAsMember=true" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-14 h-14 rounded-full border-none shadow-[0_-2px_4px_0_#f1f0f0,0_2px_6px_0_#757373] text-primary text-3xl bg-white transition-shadow hover:shadow-[0_-2px_4px_0_#ebe9e9,0_3px_10px_0_#646363] mobile:w-12 mobile:h-12 mobile:text-2xl">
               <FiLinkedin />
             </a>
           </div>

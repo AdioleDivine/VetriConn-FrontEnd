@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import styles from "../page.module.css";
 import { DesktopSignUp } from "@/components/pages/auth/DesktopSignUp";
 
 export default function SignUp() {
@@ -44,7 +43,7 @@ export default function SignUp() {
   // Render desktop signup only on desktop path
   if (pathname === "/signup") {
     return (
-      <main className={styles.Container}>
+      <main className="max-w-[1920px] min-w-[320px] mx-auto overflow-x-hidden">
         <DesktopSignUp />
       </main>
     );

@@ -40,14 +40,14 @@ interface AboutSectionProps {
 
 export const AboutSection = ({ id }: AboutSectionProps) => (
   <div
-    className="bg-[#fcfcfc] rounded-2xl py-12 px-8 shadow-sm w-full max-w-[600px] min-w-[450px] m-0 flex-[1_1_50%] xl:max-w-full xl:min-w-auto xl:flex-none mobile:max-w-full mobile:min-w-auto mobile:py-10 mobile:px-6 mobile:flex-none"
+    className="bg-[#fcfcfc] rounded-2xl py-12 px-8 shadow-sm mobile:py-6 mobile:px-5 mobile:rounded-xl"
     id={id}
   >
-    <h1 className="font-lato text-heading-1 text-text mb-8">About VetriConn</h1>
+    <h1 className="heading-1 mb-8 mobile:mb-5">About VetriConn</h1>
     {aboutContent.map((block, index) => {
       if (block.type === "paragraph") {
         return (
-          <p key={index} className="font-open-sans text-base text-text-muted leading-relaxed mb-5">
+          <p key={index} className="font-open-sans text-base text-text-muted leading-relaxed mb-5 mobile:text-sm mobile:mb-4">
             {block.text}
           </p>
         );
@@ -57,7 +57,7 @@ export const AboutSection = ({ id }: AboutSectionProps) => (
         return (
           <ListTag
             key={index}
-            className={`font-open-sans text-base text-text-muted leading-relaxed mb-5 m-0 pl-6 ${
+            className={`font-open-sans text-base text-text-muted leading-relaxed mb-5 m-0 pl-6 mobile:text-sm mobile:pl-5 mobile:mb-4 ${
               block.ordered ? "list-decimal" : "list-disc"
             }`}
           >

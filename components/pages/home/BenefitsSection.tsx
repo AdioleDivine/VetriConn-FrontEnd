@@ -19,16 +19,16 @@ const benefits = [
 ];
 
 export const BenefitsSection = () => (
-  <div className="min-w-[640px] max-w-[720px] m-0 py-12 px-10 flex-[1_1_50%] xl:max-w-full xl:min-w-auto xl:flex-none mobile:max-w-full mobile:min-w-auto mobile:py-10 mobile:px-6 mobile:flex-none">
-    <h1 className="font-lato text-heading-1 text-text mb-8">Benefits of Using VetriConn</h1>
+  <div className="py-12 px-10 mobile:py-6 mobile:px-5">
+    <h1 className="heading-1 mb-8 mobile:mb-5">Benefits of Using VetriConn</h1>
     {benefits.map((benefit, idx) => (
-      <div key={idx} className="flex items-start gap-5 mb-9 mobile:flex-row mobile:gap-4">
-        <span className="text-3xl mt-0.5 text-gray-900">
+      <div key={idx} className="flex items-start gap-5 mb-9 mobile:gap-3 mobile:mb-6">
+        <span className="text-2xl mt-0.5 text-gray-900 shrink-0 mobile:text-xl">
           <CircleCheckIcon />
         </span>
         <div>
-          <strong className="font-lato text-heading-2 text-text block mb-2">{benefit.title}</strong>
-          <p className="font-open-sans text-base text-text-muted leading-relaxed m-0">
+          <strong className="heading-3 block mb-2 mobile:mb-1">{benefit.title}</strong>
+          <p className="font-open-sans text-base text-text-muted leading-relaxed m-0 mobile:text-sm">
             {benefit.description.split("\n").map((line, i) => (
               <span key={i}>
                 {line}

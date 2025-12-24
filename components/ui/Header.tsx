@@ -31,7 +31,7 @@ export const Header = () => {
   };
 
   return (
-    <nav className="flex justify-between items-center mb-2 py-2 shadow-header relative z-10">
+    <nav className="flex justify-between items-center py-2 mx-[5%] shadow-[0_6px_4px_-4px_#e8e8e8]">
       <Logo className="w-[180px] h-auto block overflow-visible mobile:w-[140px]" />
       <button className={clsx("hidden mobile:block bg-transparent border-none cursor-pointer z-20 py-4 px-2.5 relative")} onClick={toggleMenu} aria-label="Toggle menu">
         <span className={clsx("block w-[25px] h-[3px] bg-text rounded-sm relative transition-all duration-300", "before:content-[''] before:absolute before:w-[25px] before:h-[3px] before:bg-text before:rounded-sm before:transition-all before:duration-300 before:left-0 before:-top-2", "after:content-[''] after:absolute after:w-[25px] after:h-[3px] after:bg-text after:rounded-sm after:transition-all after:duration-300 after:left-0 after:-bottom-2", isMenuOpen && "bg-transparent before:rotate-45 before:top-0 after:-rotate-45 after:bottom-0")} />
@@ -45,15 +45,15 @@ export const Header = () => {
       <div className="flex items-center gap-4 mobile:hidden">
         <Link href="/signin" className="font-open-sans text-[17px] bg-primary text-white border-none py-2 px-6 rounded-md cursor-pointer transition-all hover:bg-primary-hover inline-block text-center">Login</Link>
       </div>
-      <div className={clsx("hidden", isMenuOpen && "mobile:flex mobile:flex-col mobile:fixed mobile:inset-0 mobile:w-full mobile:h-screen mobile:bg-white mobile:z-10 mobile:pt-20 mobile:pb-15 mobile:justify-between")}>
-        <div className={clsx("hidden", isMenuOpen && "mobile:flex mobile:flex-col mobile:items-center mobile:justify-start mobile:m-0 mobile:p-8 mobile:pt-8 mobile:pb-4 mobile:flex-1")}>
-          <Link href="/" className={clsx(navLinkClass(pathname === "/"), "mobile:py-5 mobile:text-xl mobile:font-medium")} onClick={() => setIsMenuOpen(false)}>Home</Link>
-          <a href="#about-section" className={clsx(navLinkClass(false), "mobile:py-5 mobile:text-xl mobile:font-medium")} onClick={(e) => { e.preventDefault(); handleScrollTo("about-section"); }}>About</a>
-          <a href="#faq-section" className={clsx(navLinkClass(false), "mobile:py-5 mobile:text-xl mobile:font-medium")} onClick={(e) => { e.preventDefault(); handleScrollTo("faq-section"); }}>FAQ</a>
-          <a href="#contact-section" className={clsx(navLinkClass(false), "mobile:py-5 mobile:text-xl mobile:font-medium")} onClick={(e) => { e.preventDefault(); handleScrollTo("contact-section"); }}>Contact Us</a>
+      <div className={clsx("hidden", isMenuOpen && "mobile:flex mobile:flex-col mobile:fixed mobile:inset-0 mobile:w-full mobile:h-screen mobile:bg-white mobile:z-10 mobile:pt-24 mobile:pb-15 mobile:justify-between")}>
+        <div className={clsx("hidden", isMenuOpen && "mobile:flex mobile:flex-col mobile:items-center mobile:justify-start mobile:m-0 mobile:px-8 mobile:pt-4 mobile:pb-4 mobile:flex-1 mobile:gap-2")}>
+          <Link href="/" className={clsx(navLinkClass(pathname === "/"), "mobile:py-6 mobile:text-2xl mobile:font-semibold")} onClick={() => setIsMenuOpen(false)}>Home</Link>
+          <a href="#about-section" className={clsx(navLinkClass(false), "mobile:py-6 mobile:text-2xl mobile:font-semibold")} onClick={(e) => { e.preventDefault(); handleScrollTo("about-section"); }}>About</a>
+          <a href="#faq-section" className={clsx(navLinkClass(false), "mobile:py-6 mobile:text-2xl mobile:font-semibold")} onClick={(e) => { e.preventDefault(); handleScrollTo("faq-section"); }}>FAQ</a>
+          <a href="#contact-section" className={clsx(navLinkClass(false), "mobile:py-6 mobile:text-2xl mobile:font-semibold")} onClick={(e) => { e.preventDefault(); handleScrollTo("contact-section"); }}>Contact Us</a>
         </div>
-        <div className={clsx("hidden", isMenuOpen && "mobile:flex mobile:flex-col mobile:items-center mobile:justify-center mobile:mt-auto mobile:mb-8 mobile:px-8")}>
-          <Link href="/signin" className="font-open-sans text-[17px] bg-primary text-white border-none py-3 px-8 rounded-md cursor-pointer transition-all hover:bg-primary-hover inline-block text-center mobile:w-[200px] mobile:text-lg mobile:font-semibold" onClick={() => setIsMenuOpen(false)}>Login</Link>
+        <div className={clsx("hidden", isMenuOpen && "mobile:flex mobile:flex-col mobile:items-center mobile:justify-center mobile:mt-auto mobile:mb-12 mobile:px-8")}>
+          <Link href="/signin" className="font-open-sans text-lg bg-primary text-white border-none py-4 px-10 rounded-xl cursor-pointer transition-all hover:bg-primary-hover inline-block text-center mobile:w-[220px] mobile:font-semibold shadow-lg" onClick={() => setIsMenuOpen(false)}>Login</Link>
         </div>
       </div>
       {isMenuOpen && <div className="hidden mobile:block mobile:fixed mobile:inset-0 mobile:bg-black/50 mobile:z-[9]" onClick={toggleMenu} />}

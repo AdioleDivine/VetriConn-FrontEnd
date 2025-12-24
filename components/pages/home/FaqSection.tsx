@@ -39,39 +39,39 @@ export const FaqSection = ({ id }: FaqSectionProps) => {
   };
 
   return (
-    <section className="w-full max-w-full overflow-x-hidden py-16 px-4 pb-20" id={id}>
-      <h2 className="font-lato text-heading-1 text-text text-center mb-10">
+    <section className="w-full py-16 px-[5%] pb-20 mobile:py-10 mobile:pb-12" id={id}>
+      <h2 className="heading-1 text-center mb-10 mobile:mb-6">
         Got Questions?
         <br />
         We&apos;ve Got Answers
       </h2>
-      <div className="w-full max-w-[1200px] mx-auto flex gap-10 items-start justify-center px-8 mobile:flex-col mobile:gap-6 mobile:px-16">
-        <div className="flex-1 flex flex-col gap-6 min-w-0 max-w-full items-center mobile:w-full mobile:min-w-full mobile:max-w-full">
-          {leftFaqs.map((faq, idx) => (
-            <Accordion
-              key={idx}
-              className="bg-gray-50 rounded-2xl shadow-sm p-0 transition-shadow w-full hover:shadow-md"
-              title={faq.question}
-              symbol={openIndexes[0] === idx ? <FaMinus /> : <FaPlus />}
-              content={faq.answer}
-              open={openIndexes[0] === idx}
-              onToggle={() => handleToggle(0, idx)}
-            />
-          ))}
-        </div>
-        <div className="flex-1 flex flex-col gap-6 min-w-0 max-w-full items-center mobile:w-full mobile:min-w-full mobile:max-w-full">
-          {rightFaqs.map((faq, idx) => (
-            <Accordion
-              key={idx + 4}
-              className="bg-gray-50 rounded-2xl shadow-sm p-0 transition-shadow w-full hover:shadow-md"
-              title={faq.question}
-              symbol={openIndexes[0] === idx + 4 ? <FaMinus /> : <FaPlus />}
-              content={faq.answer}
-              open={openIndexes[0] === idx + 4}
-              onToggle={() => handleToggle(0, idx + 4)}
-            />
-          ))}
-        </div>
+      <div className="w-full flex gap-8 items-start justify-center mobile:flex-col mobile:gap-4">
+          <div className="flex-1 flex flex-col gap-6 min-w-0 mobile:w-full mobile:gap-4">
+            {leftFaqs.map((faq, idx) => (
+              <Accordion
+                key={idx}
+                className="bg-gray-50 rounded-2xl shadow-sm p-0 transition-shadow w-full hover:shadow-md"
+                title={faq.question}
+                symbol={openIndexes[0] === idx ? <FaMinus /> : <FaPlus />}
+                content={faq.answer}
+                open={openIndexes[0] === idx}
+                onToggle={() => handleToggle(0, idx)}
+              />
+            ))}
+          </div>
+          <div className="flex-1 flex flex-col gap-6 min-w-0 mobile:w-full mobile:gap-4">
+            {rightFaqs.map((faq, idx) => (
+              <Accordion
+                key={idx + 4}
+                className="bg-gray-50 rounded-2xl shadow-sm p-0 transition-shadow w-full hover:shadow-md"
+                title={faq.question}
+                symbol={openIndexes[0] === idx + 4 ? <FaMinus /> : <FaPlus />}
+                content={faq.answer}
+                open={openIndexes[0] === idx + 4}
+                onToggle={() => handleToggle(0, idx + 4)}
+              />
+            ))}
+          </div>
       </div>
     </section>
   );

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import styles from "../../page.module.css";
 import { MobileSignIn } from "@/components/pages/auth/MobileSignIn";
 
 export default function MobileSignInPage() {
@@ -29,7 +28,7 @@ export default function MobileSignInPage() {
   if (!checked) return null;
 
   return (
-    <main className={styles.Container}>
+    <main className="max-w-[1920px] min-w-[320px] mx-auto overflow-x-hidden">
       <MobileSignIn />
     </main>
   );
