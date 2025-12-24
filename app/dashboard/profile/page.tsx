@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import styles from "./page.module.scss";
 import { ProfileHeader } from "@/components/pages/profile/ProfileHeader";
 import { ProfileStats } from "@/components/pages/profile/ProfileStats";
 import { EditActions } from "@/components/pages/profile/EditActions";
@@ -251,8 +250,8 @@ const ProfilePage = () => {
 
   if (isLoading) {
     return (
-      <div className={styles.profileContainer}>
-        <div className={styles.profileCard}>
+      <div className="w-full max-w-[1400px] mx-auto p-8 tablet:p-4 mobile:p-2">
+        <div className="bg-white rounded-xl overflow-hidden w-full">
           <ProfileHeaderSkeleton />
           <ProfileStatsSkeleton />
         </div>
@@ -262,7 +261,7 @@ const ProfilePage = () => {
 
   if (isError || !userProfile) {
     return (
-      <div className={styles.profileContainer}>
+      <div className="w-full max-w-[1400px] mx-auto p-8 tablet:p-4 mobile:p-2">
         <ErrorState
           title="Failed to Load Profile"
           message="We couldn't load your profile data. This might be due to a network issue or the server being unavailable."
@@ -276,8 +275,8 @@ const ProfilePage = () => {
   const displayProfile = isEditing && editingData ? editingData : userProfile;
 
   return (
-    <div className={styles.profileContainer}>
-      <div className={styles.profileCard}>
+    <div className="w-full max-w-[1400px] mx-auto p-8 tablet:p-4 mobile:p-2">
+      <div className="bg-white rounded-xl overflow-hidden w-full">
         <ProfileHeader
           userProfile={displayProfile}
           isEditing={isEditing}
