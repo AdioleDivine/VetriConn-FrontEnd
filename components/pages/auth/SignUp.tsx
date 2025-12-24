@@ -8,10 +8,10 @@ import DottedBox4 from "@/public/images/dotted_box_4.svg";
 import DottedBox3 from "@/public/images/dotted_box_3.svg";
 import { signUpSchema, type SignUpFormData } from "@/lib/validation";
 import { useToaster } from "@/components/ui/Toaster";
-import { ZodError, ZodIssue } from "zod";
+import { ZodError } from "zod";
 import { signupUser, storeAuthToken } from "@/lib/api";
 
-export const DesktopSignUp = () => {
+export const SignUp = () => {
   const [role, setRole] = useState<"jobseeker" | "employer" | "">("jobseeker");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -61,7 +61,7 @@ export const DesktopSignUp = () => {
       if (error instanceof Error && "issues" in error) {
         const zodError = error as ZodError;
         const errorMessages: Record<string, string> = {};
-        zodError.issues?.forEach((err: ZodIssue) => {
+        zodError.issues?.forEach((err) => {
           if (err.path?.length > 0) errorMessages[String(err.path[0])] = err.message;
         });
         setErrors(errorMessages);
@@ -76,13 +76,16 @@ export const DesktopSignUp = () => {
 
   return (
     <div className="flex min-h-screen font-open-sans">
-      <div className="flex-1 bg-gray-100 flex items-center justify-center p-8 text-left bg-[linear-gradient(70deg,rgba(0,0,0,0.6),rgba(0,0,0,0.3)),url('/images/Hero/1.svg')] bg-left bg-cover">
+      {/* Desktop: Left side with image */}
+      <div className="flex-1 bg-gray-100 items-center justify-center p-8 text-left bg-[linear-gradient(70deg,rgba(0,0,0,0.6),rgba(0,0,0,0.3)),url('/images/Hero/1.svg')] bg-left bg-cover hidden md:flex">
         <DottedBox9 className="absolute top-[40rem] left-[13rem] w-[120px] h-auto z-0 opacity-60" />
         <h1 className="font-lato text-heading-2 mb-4 text-white text-[2.5rem] font-semibold leading-tight">Join the <br /> <span className="text-primary">VetriConn</span> community</h1>
         <DottedBox7 className="absolute top-[15rem] left-[24rem] w-[120px] h-auto z-0 opacity-60" />
       </div>
-      <div className="flex-1 flex items-center justify-center p-16 bg-white">
-        <DottedBox4 className="absolute top-8 left-[72rem] h-auto z-0 opacity-60" />
+
+      {/* Desktop Form */}
+      <div className="flex-1 relative items-center justify-center p-16 bg-white hidden md:flex">
+        <DottedBox4 className="absolute top-8 left-8 h-auto z-0 opacity-60" />
         <div className="w-full max-w-[500px]">
           <h2 className="text-3xl mb-4">Sign up</h2>
           <p className="text-sm mb-4"><b>Already have an account? <a href="/signin" className="text-primary no-underline font-bold">Sign in</a></b></p>
@@ -131,7 +134,51 @@ export const DesktopSignUp = () => {
             <button type="submit" className="bg-primary text-white py-3 px-7 border-none rounded-[10px] font-bold text-sm cursor-pointer transition-colors ml-auto mt-2 inline-block hover:bg-red-700 disabled:bg-gray-300 disabled:text-text-muted disabled:cursor-not-allowed" disabled={isButtonDisabled}>{isSubmitting ? "Creating Account..." : "Create account"}</button>
           </form>
         </div>
-        <DottedBox3 className="absolute top-[40rem] left-[74rem] h-auto z-0 opacity-60" />
+        <DottedBox3 className="absolute bottom-12 right-8 h-auto z-0 opacity-60" />
+      </div>
+
+      {/* Mobile Form */}
+      <div className="p-6 w-full box-border md:hidden">
+        <a href="/signin" className="absolute top-9 right-4 left-auto bg-primary text-white border-none rounded-[20px] py-2.5 px-5 text-sm font-medium cursor-pointer z-10 transition-colors hover:bg-primary-hover no-underline">Login</a>
+        <DottedBox7 className="absolute top-32 right-0 w-[120px] h-auto z-0 opacity-60" />
+        <div className="flex flex-col gap-6">
+          <h1 className="text-2xl font-bold mt-[120px] mb-0 text-black text-left">Sign Up</h1>
+          <p className="text-base text-text-muted text-left m-0 mb-4">Let&apos;s get you started</p>
+          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+            <div className="flex flex-col gap-2">
+              <label className="text-sm text-text-muted font-semibold">First name</label>
+              <input type="text" className={clsx("py-3 px-4 border border-gray-200 rounded-lg text-base outline-none transition-colors focus:border-primary", errors.firstName && "border-red-500")} value={firstName} onChange={(e) => setFirstName(e.target.value)} disabled={isSubmitting} />
+              {errors.firstName && <span className="text-red-500 text-xs mt-1">{errors.firstName}</span>}
+            </div>
+            <div className="flex flex-col gap-2">
+              <label className="text-sm text-text-muted font-semibold">Last name</label>
+              <input type="text" className={clsx("py-3 px-4 border border-gray-200 rounded-lg text-base outline-none transition-colors focus:border-primary", errors.lastName && "border-red-500")} value={lastName} onChange={(e) => setLastName(e.target.value)} disabled={isSubmitting} />
+              {errors.lastName && <span className="text-red-500 text-xs mt-1">{errors.lastName}</span>}
+            </div>
+            <div className="flex flex-col gap-2">
+              <label className="text-sm text-text-muted font-semibold">Email</label>
+              <input type="email" className={clsx("py-3 px-4 border border-gray-200 rounded-lg text-base outline-none transition-colors focus:border-primary", errors.email && "border-red-500")} value={email} onChange={(e) => setEmail(e.target.value)} disabled={isSubmitting} />
+              {errors.email && <span className="text-red-500 text-xs mt-1">{errors.email}</span>}
+            </div>
+            <div className="flex flex-col gap-2">
+              <label className="text-sm text-text-muted font-semibold">Password</label>
+              <input type="password" className={clsx("py-3 px-4 border border-gray-200 rounded-lg text-base outline-none transition-colors focus:border-primary", errors.password && "border-red-500")} value={password} onChange={(e) => setPassword(e.target.value)} disabled={isSubmitting} />
+              {errors.password && <span className="text-red-500 text-xs mt-1">{errors.password}</span>}
+            </div>
+            <div className="flex items-start gap-2 text-sm mb-2">
+              <input type="checkbox" id="terms-mobile" checked={terms} onChange={(e) => setTerms(e.target.checked)} disabled={isSubmitting} className="appearance-none w-5 h-5 border-2 border-primary rounded cursor-pointer relative checked:before:content-[''] checked:before:absolute checked:before:top-0.5 checked:before:left-1 checked:before:w-1 checked:before:h-2 checked:before:border-primary checked:before:border-r-2 checked:before:border-b-2 checked:before:rotate-45" />
+              <label htmlFor="terms-mobile">I agree to the <a href="#" className="text-primary no-underline">Terms of Service</a> and <a href="#" className="text-primary no-underline">Privacy Policy</a></label>
+            </div>
+            {errors.terms && <span className="text-red-500 text-xs -mt-1 mb-2">{errors.terms}</span>}
+            <div className="flex items-start gap-2 text-sm mb-2">
+              <input type="checkbox" id="promotional-emails-mobile" checked={promotionalEmails} onChange={(e) => setPromotionalEmails(e.target.checked)} disabled={isSubmitting} className="appearance-none w-5 h-5 border-2 border-primary rounded cursor-pointer relative checked:before:content-[''] checked:before:absolute checked:before:top-0.5 checked:before:left-1 checked:before:w-1 checked:before:h-2 checked:before:border-primary checked:before:border-r-2 checked:before:border-b-2 checked:before:rotate-45" />
+              <label htmlFor="promotional-emails-mobile">I would like to receive promotional emails from VetriConn Inc</label>
+            </div>
+            <button type="submit" className="bg-primary text-white border-none rounded-lg py-4 px-8 text-base font-semibold cursor-pointer w-full mt-4 transition-colors hover:bg-primary-hover disabled:bg-gray-200 disabled:cursor-not-allowed disabled:text-gray-400" disabled={isButtonDisabled}>{isSubmitting ? "Creating Account..." : "Sign Up"}</button>
+          </form>
+        </div>
+        <DottedBox4 className="absolute bottom-20 -left-8 h-auto z-0 opacity-60" />
+        <DottedBox3 className="absolute bottom-20 right-0 h-auto z-0 opacity-60" />
       </div>
     </div>
   );
