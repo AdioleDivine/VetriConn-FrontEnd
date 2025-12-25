@@ -82,7 +82,7 @@ export const SignIn = () => {
             </div>
             <button type="submit" className="bg-primary text-white py-3 px-7 border-none rounded-[10px] font-bold text-sm cursor-pointer transition-colors ml-auto mt-2 inline-block hover:bg-red-700 disabled:bg-gray-300 disabled:text-text-muted disabled:cursor-not-allowed" disabled={isButtonDisabled}>{isSubmitting ? "Signing In..." : "Sign In"}</button>
           </form>
-        </div>
+        </div>  
         <DottedBox3 className="absolute bottom-15 right-8 h-auto z-0 opacity-60" />
       </div>
 

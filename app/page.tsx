@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { HeroSection } from "@/components/pages/home/HeroSection";
 import Footer from "@/components/ui/Footer";
 import { AboutSection } from "@/components/pages/home/AboutSection";
@@ -6,6 +7,14 @@ import { ContactSection } from "@/components/pages/home/ContactSection";
 import { HowItWorksStepsSection } from "@/components/pages/home/HowItWorksStepsSection";
 import { FaqSection } from "@/components/pages/home/FaqSection";
 import { Header } from "@/components/ui/Header";
+import { generateMetadata as generateSeoMetadata, METADATA_TEMPLATES } from "@/lib/seo";
+
+export const metadata: Metadata = generateSeoMetadata({
+  title: METADATA_TEMPLATES.homepage.title,
+  description: METADATA_TEMPLATES.homepage.description,
+  path: "/",
+  keywords: ["jobs for retirees", "veterans", "Canada", "senior employment"],
+});
 
 export default function Home() {
   return (
@@ -15,11 +24,8 @@ export default function Home() {
       </div> 
       <div>
         <HeroSection />
-        <div className="py-8 px-[5%] pb-16 flex flex-row gap-16 justify-center items-stretch my-16 w-full mobile:flex-col mobile:gap-8 mobile:my-8 mobile:py-6 mobile:pb-8 [&>*]:flex-1 [&>*]:min-w-0">
-          <AboutSection id="about-section" />
-          <BenefitsSection />
-        </div>
-
+        <BenefitsSection />
+        <AboutSection id="about-section" />
         <HowItWorksStepsSection />
         <FaqSection id="faq-section" />
         <ContactSection id="contact-section" />
