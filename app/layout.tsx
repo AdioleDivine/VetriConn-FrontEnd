@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Lato, Open_Sans } from "next/font/google";
+import { Geist, Geist_Mono, Lato, Open_Sans, Outfit } from "next/font/google";
 import "./globals.css";
 import { ToasterProvider } from "@/components/ui/Toaster";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -31,6 +31,12 @@ const openSans = Open_Sans({
   weight: ["300", "400", "600", "700"],
   subsets: ["latin"],
   variable: "--font-open-sans",
+});
+
+const outfit = Outfit({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-outfit",
 });
 
 export const metadata: Metadata = {
@@ -98,7 +104,7 @@ export default function RootLayout({
         <JsonLd data={webSiteSchema} />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${lato.variable} ${openSans.variable}`}
+        className={`${geistSans.variable} ${geistMono.variable} ${lato.variable} ${openSans.variable} ${outfit.variable}`}
       >
         <ToasterProvider>{children}</ToasterProvider>
       </body>

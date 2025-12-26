@@ -55,7 +55,9 @@ export const ContactSection = ({ id }: ContactSectionProps) => {
 
   return (
     <section className="w-full py-12 px-[5%] pb-16 mobile:py-8 mobile:pb-10" id={id}>
-      <h1 className="heading-1 text-center mb-10 mobile:mb-6">Get In Touch</h1>
+      <h1 className="heading-1 text-center mb-10 mobile:mb-6">
+        Get In <span className="text-primary">Touch</span>
+      </h1>
       <div className="flex gap-16 items-start justify-between mobile:flex-col mobile:gap-8 mobile:items-stretch">
         <form className="flex-1 flex flex-col gap-6 mobile:gap-4 mobile:w-full" onSubmit={handleSubmit}>
           <h2 className="heading-2 mb-2 mobile:mb-1">

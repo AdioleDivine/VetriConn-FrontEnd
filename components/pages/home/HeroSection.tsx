@@ -123,8 +123,9 @@ export const HeroSection = () => {
       <div className="flex items-center justify-between gap-8 relative max-w-container mx-auto p-8 mobile:flex-col mobile:text-center mobile:gap-6 mobile:mt-4 mobile:p-4 mobile:pt-8">
         <div className="flex-[0_0_45%] max-w-[500px] relative mobile:flex-none mobile:w-full mobile:mx-auto mobile:max-w-full">
           <DottedBox className="absolute top-0 -left-[150px] z-0 w-[100px] h-auto pointer-events-none mobile:w-[70px] mobile:-top-10 mobile:left-0" />
-          <h1 className="heading-1 mb-6 mobile:mb-4">
-            Reconnecting retirees and veterans through purposeful work
+          <h1 className="font-lato text-[52px] leading-[1.1] font-bold text-text mb-6 mobile:text-[32px] mobile:mb-4">
+            Reconnecting <span className="italic font-[var(--font-outfit)] text-[0.85em] underline decoration-primary decoration-2 underline-offset-4">retirees</span> and <span className="italic font-[var(--font-outfit)] text-[0.85em] underline decoration-primary decoration-2 underline-offset-4">veterans</span> through{" "}
+            <span className="text-primary">purposeful work</span>
           </h1>
           <p className="font-open-sans text-subtitle text-text-muted mb-2 max-w-[80%] text-base mobile:text-sm mobile:mb-2 mobile:max-w-full">
             From careers to causes, we connect you to purposeful opportunities quickly, easily, and on your terms

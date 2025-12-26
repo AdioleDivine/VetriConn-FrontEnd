@@ -18,12 +18,12 @@ const aboutContent = {
   },
 };
 
-// Decorative images positioned around the content
+// Decorative images positioned closer to content with rotation
 const decorativeImages = [
-  { src: "/images/Hero/1.svg", alt: "Professional working at desk", position: "top-left" },
-  { src: "/images/Hero/2.svg", alt: "Team collaboration", position: "top-right" },
-  { src: "/images/Hero/3.svg", alt: "Career growth", position: "bottom-left" },
-  { src: "/images/Hero/4.svg", alt: "Community connection", position: "bottom-right" },
+  { src: "/images/Hero/1.svg", alt: "Professional working at desk", rotation: "rotate-[32deg]" },
+  { src: "/images/Hero/2.svg", alt: "Team collaboration", rotation: "-rotate-[38deg]" },
+  { src: "/images/Hero/3.svg", alt: "Career growth", rotation: "-rotate-[35deg]" },
+  { src: "/images/Hero/4.svg", alt: "Community connection", rotation: "rotate-[42deg]" },
 ];
 
 interface AboutSectionProps {
@@ -36,10 +36,10 @@ export const AboutSection = ({ id }: AboutSectionProps) => (
     className="py-20 bg-gray-light relative overflow-hidden mobile:py-12"
     aria-labelledby="about-heading"
   >
-    {/* Decorative images - hidden on mobile */}
-    <div className="absolute inset-0 pointer-events-none mobile:hidden">
+    {/* Decorative images - hidden on screens smaller than 1200px to prevent overlap */}
+    <div className="absolute inset-0 pointer-events-none hidden xl:block">
       {/* Top left image */}
-      <div className="absolute top-8 left-8 w-32 h-32 rounded-xl overflow-hidden opacity-60">
+      <div className={`absolute top-12 left-[5%] w-36 h-36 rounded-xl overflow-hidden shadow-lg ${decorativeImages[0].rotation}`}>
         <Image
           src={decorativeImages[0].src}
           alt={decorativeImages[0].alt}
@@ -48,7 +48,7 @@ export const AboutSection = ({ id }: AboutSectionProps) => (
         />
       </div>
       {/* Top right image */}
-      <div className="absolute top-12 right-12 w-28 h-28 rounded-xl overflow-hidden opacity-60">
+      <div className={`absolute top-8 right-[5%] w-32 h-32 rounded-xl overflow-hidden shadow-lg ${decorativeImages[1].rotation}`}>
         <Image
           src={decorativeImages[1].src}
           alt={decorativeImages[1].alt}
@@ -57,7 +57,7 @@ export const AboutSection = ({ id }: AboutSectionProps) => (
         />
       </div>
       {/* Bottom left image */}
-      <div className="absolute bottom-12 left-16 w-24 h-24 rounded-xl overflow-hidden opacity-60">
+      <div className={`absolute bottom-12 left-[3%] w-32 h-32 rounded-xl overflow-hidden shadow-lg ${decorativeImages[2].rotation}`}>
         <Image
           src={decorativeImages[2].src}
           alt={decorativeImages[2].alt}
@@ -66,7 +66,7 @@ export const AboutSection = ({ id }: AboutSectionProps) => (
         />
       </div>
       {/* Bottom right image */}
-      <div className="absolute bottom-8 right-8 w-32 h-32 rounded-xl overflow-hidden opacity-60">
+      <div className={`absolute bottom-8 right-[3%] w-36 h-36 rounded-xl overflow-hidden shadow-lg ${decorativeImages[3].rotation}`}>
         <Image
           src={decorativeImages[3].src}
           alt={decorativeImages[3].alt}

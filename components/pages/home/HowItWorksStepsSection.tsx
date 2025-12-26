@@ -23,7 +23,9 @@ const steps = [
 export const HowItWorksStepsSection = () => (
   <section className="bg-gray-50 py-14 w-full px-[5%] mobile:py-10">
     <div className="max-w-[1400px] mx-auto">
-      <h2 className="heading-1 text-center mb-10 mobile:mb-8">How it works</h2>
+      <h2 className="heading-1 text-center mb-10 mobile:mb-8">
+        How it <span className="text-primary">works</span>
+      </h2>
       <div className="flex justify-between items-start gap-12 mobile:flex-col mobile:items-center mobile:gap-8">
         {steps.map((step, idx) => (
           <div key={idx} className="flex-1 flex flex-col items-center text-center py-8 px-6 pb-10 max-w-[400px] mobile:py-4 mobile:px-4 mobile:pb-6">
