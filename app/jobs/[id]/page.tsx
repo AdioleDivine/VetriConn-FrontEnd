@@ -1,48 +1,86 @@
-"use client";
-import React from "react";
-import { useParams } from "next/navigation";
-import Link from "next/link";
-import JobDescriptor from "@/components/ui/JobDescriptor";
-import { useJob } from "@/hooks/useJob";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { getJobById, JobsResponse } from "@/lib/api";
+import { generateJobMetadata, generateJobPostingSchema } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { Job } from "@/types/job";
+import JobDetailClient from "./JobDetailClient";
 
-export default function JobDetailPage() {
-  const params = useParams();
-  const jobId = params.id as string;
-  const { job, isLoading, isError } = useJob(jobId);
+interface JobDetailPageProps {
+  params: Promise<{ id: string }>;
+}
 
-  if (isLoading) {
-    return (
-      <main className="max-w-[1000px] mx-auto p-8 tablet:p-4">
-        <div className="bg-white rounded-xl p-8 border border-gray-200">
-          <div className="mb-6">
-            <div className="h-8 w-2/3 bg-gray-200 rounded animate-shimmer mb-3" />
-            <div className="h-5 w-1/3 bg-gray-200 rounded animate-shimmer" />
-          </div>
-          <div className="space-y-3">
-            <div className="h-4 w-full bg-gray-200 rounded animate-shimmer" />
-            <div className="h-4 w-full bg-gray-200 rounded animate-shimmer" />
-            <div className="h-4 w-3/4 bg-gray-200 rounded animate-shimmer" />
-          </div>
-        </div>
-      </main>
-    );
+// Transform backend job data to frontend format
+function transformJob(data: JobsResponse): Job {
+  return {
+    id: data._id || data.id,
+    role: data.role,
+    company_name: data.company_name,
+    company_logo: data.company_logo || "/images/company-logo.jpg",
+    location: data.location || "",
+    salary: data.salary,
+    salary_range: data.salary_range,
+    tags: data.tags
+      ? data.tags.map((tag, index) => ({
+          name: tag,
+          color: [
+            "flutter",
+            "dart",
+            "mobile",
+            "ios",
+            "android",
+            "react",
+            "web",
+          ][index % 7] as "flutter" | "dart" | "mobile" | "ios" | "android" | "react" | "web",
+        }))
+      : [],
+    full_description: data.full_description || data.description || "",
+    responsibilities: data.responsibilities || [],
+    qualifications: data.qualifications || [],
+    applicationLink: data.applicationLink,
+  };
+}
+
+// Fetch job data for metadata generation
+async function getJob(id: string): Promise<Job | null> {
+  try {
+    const data = await getJobById(id);
+    return transformJob(data);
+  } catch {
+    return null;
+  }
+}
+
+export async function generateMetadata({
+  params,
+}: JobDetailPageProps): Promise<Metadata> {
+  const { id } = await params;
+  const job = await getJob(id);
+
+  if (!job) {
+    return {
+      title: "Job Not Found | VetriConn",
+      description: "The job you're looking for doesn't exist or has been removed.",
+    };
   }
 
-  if (isError || !job) {
-    return (
-      <main className="max-w-[1000px] mx-auto p-8 tablet:p-4">
-        <div className="bg-white rounded-xl p-12 text-center border border-gray-200">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Job Not Found</h1>
-          <p className="text-gray-500 mb-6">The job you&apos;re looking for doesn&apos;t exist or has been removed.</p>
-          <Link href="/jobs" className="text-primary font-medium hover:underline">← Back to Jobs</Link>
-        </div>
-      </main>
-    );
+  return generateJobMetadata(job);
+}
+
+export default async function JobDetailPage({ params }: JobDetailPageProps) {
+  const { id } = await params;
+  const job = await getJob(id);
+
+  if (!job) {
+    notFound();
   }
+
+  const jobPostingSchema = generateJobPostingSchema(job);
 
   return (
-    <main className="max-w-[1000px] mx-auto p-8 tablet:p-4">
-      <JobDescriptor {...job} />
-    </main>
+    <>
+      <JsonLd data={jobPostingSchema} />
+      <JobDetailClient jobId={id} initialJob={job} />
+    </>
   );
 }

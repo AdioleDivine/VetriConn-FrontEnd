@@ -41,9 +41,9 @@ export const FaqSection = ({ id }: FaqSectionProps) => {
   return (
     <section className="w-full py-16 px-[5%] pb-20 mobile:py-10 mobile:pb-12" id={id}>
       <h2 className="heading-1 text-center mb-10 mobile:mb-6">
-        Got Questions?
+        Got <span className="text-primary">Questions</span>?
         <br />
-        We&apos;ve Got Answers
+        We&apos;ve Got <span className="text-primary">Answers</span>
       </h2>
       <div className="w-full flex gap-8 items-start justify-center mobile:flex-col mobile:gap-4">
           <div className="flex-1 flex flex-col gap-6 min-w-0 mobile:w-full mobile:gap-4">
